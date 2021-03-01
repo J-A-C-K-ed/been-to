@@ -1,0 +1,61 @@
+{
+  "name": "BeenTo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production nodemon server/server.ts",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open --hot\" \"nodemon --config nodemon.json ./server/server.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Claudiohbsantos/been-to.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Claudiohbsantos/been-to/issues"
+  },
+  "homepage": "https://github.com/Claudiohbsantos/been-to#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/plugin-transform-typescript": "^7.13.0",
+    "@babel/preset-env": "^7.13.8",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-refresh": "^0.9.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.17",
+    "ts-node": "^9.1.1",
+    "type-fest": "^0.21.2",
+    "typescript": "^4.2.2",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "concurrently": "^6.0.0",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "styled-components": "^5.2.1"
+  }
+}
