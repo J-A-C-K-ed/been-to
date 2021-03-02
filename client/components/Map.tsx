@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Datamap from 'react-datamaps';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 const MapContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-
   & .datamap path {
     cursor: pointer;
   }
@@ -49,29 +47,29 @@ const toggleCountryVisited = (mapData: Record<string, countryData>, country: str
   return dataCopy;
 };
 
-const calculateWidth = (winWidth: number, winHeight: number, mapRatio: number) => {
-  if (winHeight > winWidth) return winWidth * mapRatio;
-  return winHeight * mapRatio
-};
+// const calculateWidth = (winWidth: number, winHeight: number, mapRatio: number) => {
+//   if (winHeight > winWidth) return winWidth * mapRatio;
+//   return winHeight * mapRatio;
+// };
 
 const Map = () => {
   const [mapData, setMapData] = useState({});
-  const [winHeight, setHeight] = useState(window.innerHeight);
-  const [winWidth, setWidth] = useState(window.innerWidth);
+  // const [winHeight, setHeight] = useState(window.innerHeight);
+  // const [winWidth, setWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  });
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setWidth(window.innerWidth);
+  //     setHeight(window.innerHeight);
+  //   };
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // });
 
   const projection = 'mercator';
-  const mapRatios = {
-    mercator: 568 / 360.94,
-  };
+  // const mapRatios = {
+  //   mercator: 568 / 360.94,
+  // };
 
   const handleClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -81,20 +79,28 @@ const Map = () => {
   };
 
   return (
-    <MapContainer onClick={handleClick}>
-      <Datamap
-        projection={projection}
-        style={{ width: 'auto', height: '100vh' }}
-        fills={{
-          defaultFill: '#ABDDA4',
-          visited: '#ff0000',
-        }}
-        data={mapData}
-        updateChoroplethOptions={{ reset: true }}
-        height={winHeight}
-        width={calculateWidth(winWidth, winHeight, mapRatios[projection])}
-      />
-    </MapContainer>
+    <TransformWrapper wheel={{ step: 100 }} >
+      <TransformComponent>
+        <MapContainer
+          onClick={handleClick}
+          style={{
+            width: "100vw",
+            height: "100vh"
+          }}
+        >
+          <Datamap
+            projection={projection}
+            fills={{
+              defaultFill: '#ABDDA4',
+              visited: '#ff0000',
+            }}
+            data={mapData}
+            updateChoroplethOptions={{ reset: true }}
+            geographyConfig={{popupOnHover: false}}
+          />
+        </MapContainer>
+      </TransformComponent>
+    </TransformWrapper>
   );
 };
 
