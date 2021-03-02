@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const variables = require('../../settings.ts');
+
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
 const myURI = variables.postgres;
 

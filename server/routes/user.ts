@@ -13,3 +13,5 @@ router.post('/createuser', userController.addUser, (req, res) =>
 router.get('/getuser', userController.getUser, (req, res) =>
   res.status(200).json(res.locals)
 );
+
+module.exports = router;
