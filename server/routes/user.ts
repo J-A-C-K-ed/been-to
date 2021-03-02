@@ -1,5 +1,15 @@
+import express from 'express';
+
+const userController = require('../controllers/userController');
+
+const router = express();
+
 // create new user
-app.post('/createuser', (req, res) => res.status(200).json());
+router.post('/createuser', userController.addUser, (req, res) =>
+  res.status(200).json(res.locals)
+);
 
 // get user
-app.get('/getuser', (req, res) => res.status(200).json());
+router.get('/getuser', userController.getUser, (req, res) =>
+  res.status(200).json(res.locals)
+);
