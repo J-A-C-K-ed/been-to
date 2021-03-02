@@ -4,6 +4,9 @@ import Datamap from 'react-datamaps';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 const MapContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+
   & .datamap path {
     cursor: pointer;
   }
@@ -47,29 +50,29 @@ const toggleCountryVisited = (mapData: Record<string, countryData>, country: str
   return dataCopy;
 };
 
-// const calculateWidth = (winWidth: number, winHeight: number, mapRatio: number) => {
-//   if (winHeight > winWidth) return winWidth * mapRatio;
-//   return winHeight * mapRatio;
-// };
-
 const Map = () => {
   const [mapData, setMapData] = useState({});
-  // const [winHeight, setHeight] = useState(window.innerHeight);
-  // const [winWidth, setWidth] = useState(window.innerWidth);
+  const [winHeight, setHeight] = useState(window.innerHeight);
+  const [winWidth, setWidth] = useState(window.innerWidth);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setWidth(window.innerWidth);
-  //     setHeight(window.innerHeight);
-  //   };
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // });
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  });
 
   const projection = 'mercator';
-  // const mapRatios = {
-  //   mercator: 568 / 360.94,
-  // };
+  const mapRatios = {
+    mercator: 568 / 360.94,
+  };
+
+  const calculateWidth = () => {
+    if (winHeight > winWidth) return winWidth * mapRatios[projection];
+    return winHeight * mapRatios[projection] * 0.9;
+  };
 
   const handleClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -79,15 +82,17 @@ const Map = () => {
   };
 
   return (
-    <TransformWrapper wheel={{ step: 100 }} >
+    <TransformWrapper
+      wheel={{ step: 100 }}
+      // scale={calculateWidth() / winWidth}
+      // defaultPositionX={-winWidth / 2}
+      // positionX={-winWidth / 2}
+      // defaultPositionY={-winHeight / 2}
+      // positionY={-winHeight / 2}
+      options={{ limitToBounds: false }}
+    >
       <TransformComponent>
-        <MapContainer
-          onClick={handleClick}
-          style={{
-            width: "100vw",
-            height: "100vh"
-          }}
-        >
+        <MapContainer onClick={handleClick}>
           <Datamap
             projection={projection}
             fills={{
@@ -96,7 +101,9 @@ const Map = () => {
             }}
             data={mapData}
             updateChoroplethOptions={{ reset: true }}
-            geographyConfig={{popupOnHover: false}}
+            geographyConfig={{ popupOnHover: false }}
+            height={winHeight}
+            width={calculateWidth()}
           />
         </MapContainer>
       </TransformComponent>
