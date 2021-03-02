@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.13.8",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/react-dom": "^17.0.1",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "babel-loader": "^8.2.2",
@@ -53,11 +54,11 @@
     "@types/react": "^17.0.2",
     "concurrently": "^6.0.0",
     "cross-env": "^7.0.3",
-    "datamaps": "^0.5.9",
     "express": "^4.17.1",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
     "react": "^17.0.1",
+    "react-datamaps": "^0.4.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"
   }
