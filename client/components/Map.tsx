@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import Datamap from 'react-datamaps';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
+const FullContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const MapContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -10,6 +18,19 @@ const MapContainer = styled.div`
   & .datamap path {
     cursor: pointer;
   }
+`;
+
+interface PositionerProps {
+  $mapWidth: number;
+}
+
+const Positioner = styled.div`
+  // TODO: magic number
+  transform: translateX(
+    ${({ $mapWidth }: PositionerProps) => (window.innerWidth - $mapWidth) / 2}px
+  );
+
+  display: flex;
 `;
 
 // TODO: check class against defined list of country codes
@@ -82,32 +103,30 @@ const Map = () => {
   };
 
   return (
-    <TransformWrapper
-      wheel={{ step: 100 }}
-      // scale={calculateWidth() / winWidth}
-      // defaultPositionX={-winWidth / 2}
-      // positionX={-winWidth / 2}
-      // defaultPositionY={-winHeight / 2}
-      // positionY={-winHeight / 2}
-      options={{ limitToBounds: false }}
-    >
-      <TransformComponent>
-        <MapContainer onClick={handleClick}>
-          <Datamap
-            projection={projection}
-            fills={{
-              defaultFill: '#ABDDA4',
-              visited: '#ff0000',
-            }}
-            data={mapData}
-            updateChoroplethOptions={{ reset: true }}
-            geographyConfig={{ popupOnHover: false }}
-            height={winHeight}
-            width={calculateWidth()}
-          />
-        </MapContainer>
-      </TransformComponent>
-    </TransformWrapper>
+    <FullContainer>
+      <TransformWrapper wheel={{ step: 100 }} options={{ limitToBounds: false }}>
+        {/* {({ setPositionY }: TransformWrapperReturns) => ( */}
+        <TransformComponent>
+          <MapContainer onClick={handleClick}>
+            <Positioner $mapWidth={calculateWidth()}>
+              <Datamap
+                projection={projection}
+                fills={{
+                  defaultFill: '#ABDDA4',
+                  visited: '#ff0000',
+                }}
+                data={mapData}
+                updateChoroplethOptions={{ reset: true }}
+                geographyConfig={{ popupOnHover: false }}
+                height={winHeight}
+                width={calculateWidth()}
+              />
+            </Positioner>
+          </MapContainer>
+        </TransformComponent>
+        {/* )} */}
+      </TransformWrapper>
+    </FullContainer>
   );
 };
 
