@@ -7,7 +7,7 @@ import SignUpModal from "./Login_and_SignUp/SignUpModal";
 import LoginModal from "./Login_and_SignUp/LoginModal";
 import styled from "styled-components";
 
-const UserIcon: React.FC = (props: any): any => {
+const UserIcon: React.FC<any> = ({ props }) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       typography: {
@@ -20,6 +20,10 @@ const UserIcon: React.FC = (props: any): any => {
     & .MuiPopover-paper {
       background-color: transparent;
       box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 1%;
     }
   `;
 
@@ -28,11 +32,11 @@ const UserIcon: React.FC = (props: any): any => {
     null
   );
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: any): void => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setAnchorEl(null);
   };
 

@@ -10,7 +10,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 
-const CountryListCardDropdownList = () => {
+const CountryListCardDropdownList: React.FC<any> = () => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {

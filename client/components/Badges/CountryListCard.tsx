@@ -31,8 +31,10 @@ const StyledCard = styled(Card)`
       }
     }
   `;
-
-const CountryListCard = ({ Country }: any) => {
+type CountryListCardProps = {
+  Country: string;
+};
+const CountryListCard: React.FC<CountryListCardProps> = ({ Country }) => {
   const classes = useStyles();
 
   return (

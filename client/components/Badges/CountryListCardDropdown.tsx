@@ -8,10 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styled from "styled-components";
 
-const CountryListCardDropdown = () => {
+const CountryListCardDropdown: React.FC<any> = () => {
   const StyledAccordion = styled(Accordion)`
   {
    box-shadow: none;
+   background-color: beige;
+
    }
  }
 `;
@@ -19,6 +21,7 @@ const CountryListCardDropdown = () => {
   const StyledAccordionDetails = styled(AccordionDetails)`
   {
    box-shadow: none;
+
    }
  }
 `;
@@ -37,6 +40,7 @@ const CountryListCardDropdown = () => {
       heading: {
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
+        color: "black",
       },
     })
   );

@@ -4,7 +4,7 @@ import Fab from "@material-ui/core/Fab";
 import React from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const UserModal = (props: any) => {
+const UserModal: React.FC<any> = (props) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       fab: {

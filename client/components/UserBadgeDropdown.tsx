@@ -6,7 +6,7 @@ import Popover from "@material-ui/core/Popover";
 import styled from "styled-components";
 import React from "react";
 
-const UserBadgeDropdown = (props: any) => {
+const UserBadgeDropdown: React.FC<any> = ({ props }) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -19,11 +19,11 @@ const UserBadgeDropdown = (props: any) => {
     }
   `;
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: any): void => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setAnchorEl(null);
   };
 

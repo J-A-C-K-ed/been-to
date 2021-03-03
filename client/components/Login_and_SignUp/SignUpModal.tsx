@@ -9,10 +9,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import styled from "styled-components";
 
-export default function SignUpModal() {
-  const [open, setOpen] = React.useState(false);
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+const SignUpModal: React.FC<any> = (props) => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [username, setUsername] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,7 +24,8 @@ export default function SignUpModal() {
 
   const StyledButton = styled(Button)`
      {
-      margin-top: 20%;
+      & .MuiButton-containedPrimary {
+        margin-top: 90%;
       }
     }
   `;
@@ -93,4 +94,6 @@ export default function SignUpModal() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default SignUpModal;

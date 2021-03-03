@@ -11,7 +11,7 @@ const StyledExploreIcon = styled(ExploreIcon)`
   }
 `;
 
-const UserBadges = (props: any) => {
+const UserBadges: React.FC<any> = (props) => {
   const StyledBadge = withStyles((theme: Theme) =>
     createStyles({
       badge: {

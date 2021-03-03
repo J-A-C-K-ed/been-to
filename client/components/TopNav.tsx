@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-const TopNav = () => {
+const TopNav: React.FC<any> = () => {
   const StyledAppBar = styled(AppBar)`
      {
       height: 30px;

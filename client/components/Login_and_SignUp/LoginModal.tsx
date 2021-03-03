@@ -9,10 +9,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import styled from "styled-components";
 
-export default function LoginModal() {
-  const [open, setOpen] = React.useState(false);
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+const LoginModal: React.FC<any> = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [username, setUsername] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,8 +24,6 @@ export default function LoginModal() {
 
   const StyledButton = styled(Button)`
      {
-      background-color: transparent;
-      box-shadow: none;
     }
   `;
 
@@ -71,4 +69,6 @@ export default function LoginModal() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default LoginModal;

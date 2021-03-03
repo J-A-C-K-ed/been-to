@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import FormInput from "./FormInput";
 
-const TripDetailsForm = () => {
+const TripDetailsForm: React.FC<any> = (props) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {

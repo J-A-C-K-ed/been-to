@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserIcon from "./components/UserIcon";
 import UserBadgeDropdown from "./components/UserBadgeDropdown";
 import styled from "styled-components";
-import TripDetailsForm from "./components/TripDetailsForm";
+import TripDetailsForm from "./components/TripDetailsForm/TripDetailsForm";
 import TopNav from "./components/TopNav";
 
 const StyledUserIcon = styled(UserIcon)`
@@ -11,8 +11,10 @@ const StyledUserIcon = styled(UserIcon)`
   }
 `;
 
-const App = (props: any) => {
-  const [showForm, setShowForm] = useState(false);
+interface AppProps {}
+
+const App: React.FC<any> = () => {
+  const [showForm, setShowForm] = useState<boolean>(false);
   if (showForm === false) {
     return (
       <div>

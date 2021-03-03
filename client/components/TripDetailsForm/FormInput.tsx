@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   createStyles,
   fade,
@@ -18,12 +18,21 @@ import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-const FormInput = () => {
+const FormInput: React.FC<any> = (props) => {
+  const [formPhotos, setFormPhotos] = useState<string>("");
+  const [formRestaurants, setFormRestaurants] = useState<string>("");
+  const [formFriends, setFormFriends] = useState<string>("");
+  const [formNotes, setFormNotes] = useState<string>("");
+
   const StyledInput = styled(TextField)`
      {
       margin-top: "10%";
     }
   `;
+
+  // const handleSubmit = () => {
+  //   fetch();
+  // };
 
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -75,6 +84,7 @@ const FormInput = () => {
         variant='outlined'
         defaultValue='My photos link'
         id='validation-outlined-input'
+        onChange={(event) => setFormPhotos(event.target.value)}
       />
       <StyledInput
         className={classes.margin}
@@ -83,6 +93,7 @@ const FormInput = () => {
         variant='outlined'
         defaultValue='Chipotle'
         id='validation-outlined-input'
+        onChange={(event) => setFormRestaurants(event.target.value)}
       />
       <StyledInput
         className={classes.margin}
@@ -91,6 +102,7 @@ const FormInput = () => {
         variant='outlined'
         defaultValue='Kanye'
         id='validation-outlined-input'
+        onChange={(event) => setFormFriends(event.target.value)}
       />
       <StyledInput
         className={classes.margin}
@@ -99,6 +111,7 @@ const FormInput = () => {
         variant='outlined'
         defaultValue='My life is dope and I do dope shit '
         id='validation-outlined-input'
+        onChange={(event) => setFormNotes(event.target.value)}
       />
 
       <Button variant='contained' color='primary'>
