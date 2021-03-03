@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import Datamap from 'react-datamaps';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
@@ -41,7 +41,7 @@ const isCountryCode = (className: string) => className.length === 3;
  * Attemps to get country code from elements list of classNames.
  * Returns empty string if not found
  */
-const getCountry = (target: EventTarget) => {
+const getCountry = (target: EventTarget | null) => {
   if (!(target as Element)?.classList) return '';
 
   let country = '';
@@ -72,7 +72,17 @@ const toggleCountryVisited = (mapData: Record<string, countryData>, country: str
   return dataCopy;
 };
 
-const Map = () => {
+
+interface MapProps {
+  setHovered: (countryCode: string) => void;
+}
+
+const isSameMap = (prevProps:MapProps, nextProps: MapProps) => {
+  // TODO: until state is pulled out it should never rerender
+  return true
+}
+
+const Map = ({ setHovered }: MapProps) => {
   const [mapData, setMapData] = useState({});
   const [winHeight, setHeight] = useState(window.innerHeight);
   const [winWidth, setWidth] = useState(window.innerWidth);
@@ -84,6 +94,19 @@ const Map = () => {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  });
+
+  useEffect(() => {
+    const handleHover = (evt: MouseEvent) => {
+      const country = getCountry(evt.target);
+      setHovered(country);
+    };
+
+    const map = document.getElementById('mapcontainer');
+    if (map) {
+      map.addEventListener('mouseover', handleHover);
+    }
+    return () => map?.removeEventListener('mouseover', handleHover);
   });
 
   const projection = 'mercator';
@@ -119,7 +142,7 @@ const Map = () => {
       >
         {/* {({ setPositionY }: TransformWrapperReturns) => ( */}
         <TransformComponent>
-          <MapContainer onMouseUp={handleClick}>
+          <MapContainer onMouseUp={handleClick} id="mapcontainer">
             <Positioner $mapWidth={calculateWidth()}>
               <Datamap
                 projection={projection}
@@ -131,9 +154,9 @@ const Map = () => {
                 updateChoroplethOptions={{ reset: true }}
                 geographyConfig={{
                   popupOnHover: false,
-                  borderWidth:0.5,
+                  borderWidth: 0.5,
                   borderColor: '#739c7e',
-                  highlightBorderWidth:1
+                  highlightBorderWidth: 1,
                 }}
                 height={winHeight}
                 width={calculateWidth()}
@@ -147,4 +170,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default memo(Map,isSameMap);

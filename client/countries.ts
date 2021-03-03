@@ -1,4 +1,4 @@
-const countries = {
+const countries: Record<string, string | undefined> = {
   AFG: 'Afghanistan',
   ALB: 'Albania',
   DZA: 'Algeria',
