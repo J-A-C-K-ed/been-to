@@ -9,6 +9,7 @@ const FullContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #9cc0f9;
 `;
 
 const MapContainer = styled.div`
@@ -123,12 +124,17 @@ const Map = () => {
               <Datamap
                 projection={projection}
                 fills={{
-                  defaultFill: '#ABDDA4',
+                  defaultFill: '#94d2a5',
                   visited: '#ff0000',
                 }}
                 data={mapData}
                 updateChoroplethOptions={{ reset: true }}
-                geographyConfig={{ popupOnHover: false }}
+                geographyConfig={{
+                  popupOnHover: false,
+                  borderWidth:0.5,
+                  borderColor: '#739c7e',
+                  highlightBorderWidth:1
+                }}
                 height={winHeight}
                 width={calculateWidth()}
               />

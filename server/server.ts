@@ -6,7 +6,7 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.use(express.static('client'));
+app.use(express.static('build'));
 
 // serves index.html at root endpoint
 app.get('/', (req: any, res: { status: (arg0: number) => { (): any; new(): any; sendFile: { (arg0: any): any; new(): any; }; }; }) => res.status(200).sendFile(path.join(__dirname, '../client/index.html')));

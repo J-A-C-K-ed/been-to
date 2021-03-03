@@ -26,43 +26,39 @@ module.exports = {
   module: {
     rules: [
       {
-        rules: [
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
           {
-            test: /\.tsx?$/,
-            use: [
-              'babel-loader',
-              {
-                loader: 'ts-loader',
-                options: {
-                  transpileOnly: true,
-                },
-              },
-            ],
-            exclude: /node_modules/,
-          },
-          {
-            enforce: 'pre',
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'source-map-loader',
+            loader: 'file-loader',
           },
         ],
       },
       {
-        rules: [
-          {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
-          },
-        ],
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
       {
-        rules: [
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'source-map-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        use: [
+          'babel-loader',
           {
-            test: /\.s[ac]ss$/i,
-            use: ['style-loader', 'css-loader', 'sass-loader'],
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
           },
         ],
+        exclude: /node_modules/,
       },
     ],
   },
