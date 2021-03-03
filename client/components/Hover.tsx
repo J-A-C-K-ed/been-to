@@ -21,17 +21,18 @@ interface HoverProps {
 }
 
 const Hover = ({ country }: HoverProps) => {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+  // Initialize to negative space to prevent it from being visible before following the mouse
+  const [pos, setPos] = useState({ x: -1000, y: -1000 });
 
   const name = countryTable[country];
 
   useEffect(() => {
     const updatePos = (evt: MouseEvent) => {
-      const offset = 20
+      const offset = 20;
       setPos({
         x: evt.clientX + offset,
-        y: evt.clientY + offset
-      })
+        y: evt.clientY + offset,
+      });
     };
     if (name) {
       window.addEventListener('mousemove', updatePos);
@@ -41,7 +42,11 @@ const Hover = ({ country }: HoverProps) => {
 
   // if name not found
   if (!name) return null;
-  return <CursorTooltip $pos={pos} elevation={6}>{name}</CursorTooltip>;
+  return (
+    <CursorTooltip $pos={pos} elevation={6}>
+      {name}
+    </CursorTooltip>
+  );
 };
 
 export default Hover;
