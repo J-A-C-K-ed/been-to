@@ -27,13 +27,12 @@ const userController: userControllerType = {
     const postQuery = `
     INSERT INTO users (username, email, password)
     VALUES ($1, $2, $3)
+    RETURNING *
   `;
 
     const queryParams = [username, email, password];
-
     db.query(postQuery, queryParams)
       .then((data: any) => {
-        console.log('Successfully added to db!');
         res.locals.newUser = data.rows[0];
         return next();
       })
@@ -43,18 +42,17 @@ const userController: userControllerType = {
   },
 
   getUser: (req, res, next) => {
-    const postQuery = `
-      SELECT username FROM users
+    const { id } = req.query;
+    const getQuery = `
+      SELECT username, countrycodes 
+      FROM users
       WHERE id = $1
-      RETURNING id
     `;
 
-    const queryParams = [req.params.id];
-
-    db.query(postQuery, queryParams)
+    const queryParams = [id];
+    db.query(getQuery, queryParams)
       .then((data: any) => {
-        console.log('Successfully got user info from db!');
-        res.locals.user = data.rows[0];
+        res.locals.countryCodes = data.rows[0].countrycodes;
         return next();
       })
       .catch((err: any) => {

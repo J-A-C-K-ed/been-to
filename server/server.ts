@@ -1,13 +1,15 @@
 import express from 'express';
 import path from 'path';
 
-const userRouter = require('./routes/user.ts');
-const locationsRouter = require('./routes/locations.ts');
+// const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+const locationsRouter = require('./routes/locations');
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('client'));
 
@@ -18,9 +20,11 @@ app.get('/', (req, res) =>
 
 /* route handlers */
 
+// app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/locations', locationsRouter);
 
+console.log('after express routes');
 /* catch all */
 
 app.use('*', (req, res) => res.status(404).send('Oops! Wrong page!'));
@@ -47,7 +51,7 @@ app.use(
 );
 
 app.listen(PORT, () => {
-  console.log(`Getting J.A.C.K.ed on port: ${PORT}`);
+  console.log(`Getting serverd on port: ${PORT}`);
 });
 
 module.exports = app;

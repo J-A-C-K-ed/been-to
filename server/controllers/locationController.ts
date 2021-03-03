@@ -1,6 +1,6 @@
 import express from 'express';
 
-const db = require('../models/LocationModel.ts');
+const db = require('../models/UserModel.ts');
 
 interface locationControllerType {
   addLocation: (
@@ -18,19 +18,22 @@ interface locationControllerType {
 
 const locationController: locationControllerType = {
   addLocation: (req, res, next) => {
-    const { countryCode } = req.body;
-
+    const { id } = req.query;
+    const { countrycodes } = req.body;
+    console.log('id, countrycodes', id, countrycodes);
     const postQuery = `
-    INSERT INTO users (username, email, password)
-    VALUES ($1, $2, $3)
+    UPDATE users
+    SET countrycodes = $2
+    WHERE id = $1
+    RETURNING countrycodes
   `;
 
-    const queryParams = [countryCode];
+    const queryParams = [id, countrycodes];
 
     db.query(postQuery, queryParams)
       .then((data: any) => {
-        console.log('Successfully added to db!');
-        res.locals = data.rows[0];
+        console.log('Successfully added to db!', data.rows[0].countrycodes);
+        res.locals.countryCodes = data.rows[0].countrycodes;
         return next();
       })
       .catch((err: express.ErrorRequestHandler) => {
@@ -39,13 +42,13 @@ const locationController: locationControllerType = {
   },
 
   deleteLocation: (req, res, next) => {
-    const { countryCode } = req.body;
+    const { countryCodes } = req.body;
 
     const postQuery = `
       SELECT username FROM users
     `;
 
-    const queryParams = [countryCode];
+    const queryParams = [countryCodes];
 
     db.query(postQuery, queryParams)
       .then((data: any) => {

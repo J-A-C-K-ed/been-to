@@ -1,8 +1,19 @@
+import express from 'express';
+
+const locationController = require('../controllers/locationController');
+
+const router = express();
+
 // get all locations
-app.get('/locations', (req, res) => res.status(200).json());
+router.post('/addlocation', locationController.addLocation, (req, res) =>
+  res.status(200).json(res.locals.countryCodes)
+);
 
 // add a location
-app.post('/locations', (req, res) => res.status(200).json());
+router.delete(
+  '/deletelocation',
+  locationController.deleteLocation,
+  (req, res) => res.status(200).json(res.locals.countryCodes)
+);
 
-// add a location
-app.delete('/locations', (req, res) => res.status(200).json());
+module.exports = router;
