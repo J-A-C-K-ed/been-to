@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import UserIcon from './components/UserIcon';
 import UserBadgeDropdown from './components/UserBadgeDropdown';
 import TripDetailsForm from './components/TripDetailsForm/TripDetailsForm';
-import Map from './components/Map';
+// import Map from './components/Map';
+import ManualMap from './components/ManualMap/Map';
 import Hover from './components/Hover';
 
 // alternative: https://www.npmjs.com/package/react-device-detect
@@ -40,13 +41,14 @@ const App = () => {
   return (
     <>
       {/* <div style={{ marginLeft: '95%' }}> */}
-        <StyledUserIcon />
+      <StyledUserIcon />
       {/* </div> */}
       <div style={{ marginLeft: '95%', marginTop: '20%' }}>
         <UserBadgeDropdown />
       </div>
       {showForm ? <TripDetailsForm /> : null}
-      <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} />
+      {/* <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} /> */}
+      <ManualMap visited={visited} setVisited={setVisited} />
       {!isMobile() ? <Hover country={hoveredCountry} /> : null}
     </>
   );
