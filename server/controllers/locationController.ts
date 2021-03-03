@@ -3,7 +3,7 @@ import express from 'express';
 const db = require('../models/UserModel.ts');
 
 interface locationControllerType {
-  addLocation: (
+  updateLocations: (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
@@ -17,18 +17,17 @@ interface locationControllerType {
 }
 
 const locationController: locationControllerType = {
-  addLocation: (req, res, next) => {
-    const { id } = req.query;
-    const { countrycodes } = req.body;
-    console.log('id, countrycodes', id, countrycodes);
+  updateLocations: (req, res, next) => {
+    const { username, countrycodes } = req.body;
+    console.log('user, countrycodes', username, countrycodes);
     const postQuery = `
     UPDATE users
     SET countrycodes = $2
-    WHERE id = $1
+    WHERE username = $1
     RETURNING countrycodes
   `;
 
-    const queryParams = [id, countrycodes];
+    const queryParams = [username, countrycodes];
 
     db.query(postQuery, queryParams)
       .then((data: any) => {

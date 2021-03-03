@@ -1,6 +1,6 @@
 // TO ADD A USER
 // METHOD: Post
-// ROUTE: /user/createuser
+// ROUTE: /user/create
 
 // REQ.BODY:
 export interface AddUserType {
@@ -14,11 +14,11 @@ export interface AddUserType {
 
 // TO GET A USER'S COUNTRY CODES:
 // METHOD: Get
-// ROUTE: /user/getuser
+// ROUTE: /user/get
 
-// REQ.QUERY:
+// REQ.BODY:
 export interface GetUserType {
-  id: number;
+  username: string;
 }
 
 // RES.BODY:
@@ -26,14 +26,11 @@ export type GetAllCCType = string[];
 
 // TO UPDATE A USER'S COUNTRY CODES:
 // METHOD: POST
-// ROUTE: /locations/addlocation/
+// ROUTE: /locations/update
 
-// REQ
-export interface AddLocationQueryType {
-  id: number;
-}
 // REQ.BODY:
 export interface AddLocationBodyType {
+  username: string;
   countrycodes: string[];
 }
 
