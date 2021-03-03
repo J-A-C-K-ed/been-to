@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Datamap from 'react-datamaps';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
-import countries from '../countries'
+import countries from '../countries';
 
 const FullContainer = styled.div`
   width: 100vw;
@@ -35,7 +35,7 @@ const Positioner = styled.div`
   display: flex;
 `;
 
-const isCountryCode = (className: string) => !!countries[className]
+const isCountryCode = (className: string) => !!countries[className];
 
 /**
  * Attemps to get country code from elements list of classNames.
@@ -51,39 +51,40 @@ const getCountry = (target: EventTarget | null) => {
   return country;
 };
 
-interface countryData {
-  fillKey: 'visited' | 'defaultFill';
-}
-
 /**
  * adds or remove country to object with fillKey 'visited'.
  * Doesn't mutate object passed as first param.
  * @param mapData Map mapData state object
  * @param country Country code string
  */
-const toggleCountryVisited = (mapData: Record<string, countryData>, country: string) => {
-  const dataCopy = { ...mapData };
-  if (dataCopy[country]) {
-    delete dataCopy[country];
-    return dataCopy;
-  }
-
-  dataCopy[country] = { fillKey: 'visited' };
-  return dataCopy;
+const toggleCountryVisited = (visited: string[], country: string) => {
+  const newVisited = [...visited];
+  if (newVisited.includes(country)) return newVisited.filter((code) => code !== country);
+  return newVisited.concat(country);
 };
-
 
 interface MapProps {
   setHovered: (countryCode: string) => void;
+  visited: string[];
+  setVisited: (codes: string[]) => void;
 }
 
-const isSameMap = (prevProps:MapProps, nextProps: MapProps) => {
-  // TODO: until state is pulled out it should never rerender
-  return true
-}
+const isSameMap = (prevProps: MapProps, nextProps: MapProps) => {
+  if (prevProps.visited.length !== nextProps.visited.length) return false;
 
-const Map = ({ setHovered }: MapProps) => {
-  const [mapData, setMapData] = useState({});
+  const prev = [...prevProps.visited];
+  const next = [...nextProps.visited];
+
+  prev.sort();
+  next.sort();
+
+  for (let i = 0; i < prev.length; i += 1) {
+    if (prev[i] !== next[i]) return false;
+  }
+  return true;
+};
+
+const Map = ({ setHovered, visited, setVisited }: MapProps) => {
   const [winHeight, setHeight] = useState(window.innerHeight);
   const [winWidth, setWidth] = useState(window.innerWidth);
 
@@ -125,8 +126,14 @@ const Map = ({ setHovered }: MapProps) => {
     evt.preventDefault();
     const country = getCountry(evt.target);
     if (isDragging || !country) return;
-    setMapData(toggleCountryVisited(mapData, country));
+    setVisited(toggleCountryVisited(visited, country));
   };
+
+  const mapData = visited.reduce<Record<string, any>>((data, code) => {
+    // eslint-disable-next-line no-param-reassign
+    data[code] = { fillKey: 'visited' };
+    return data
+  }, {});
 
   return (
     <FullContainer>
@@ -170,4 +177,4 @@ const Map = ({ setHovered }: MapProps) => {
   );
 };
 
-export default memo(Map,isSameMap);
+export default memo(Map, isSameMap);

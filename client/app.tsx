@@ -27,10 +27,11 @@ const isMobile = (() => {
 
 const App = () => {
   const [hoveredCountry, setHoveredCountry] = useState('');
+  const [visited, setVisited] = useState<string[]>([]);
 
   return (
     <>
-      <Map setHovered={setHoveredCountry} />
+      <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} />
       {!isMobile() ? <Hover country={hoveredCountry} /> : null}
     </>
   );
