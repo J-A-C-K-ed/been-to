@@ -42,14 +42,14 @@ const userController: userControllerType = {
   },
 
   getUser: (req, res, next) => {
-    const { id } = req.query;
+    const { userName } = req.body;
     const getQuery = `
-      SELECT username, countrycodes 
+      SELECT countrycodes 
       FROM users
-      WHERE id = $1
+      WHERE username = $1
     `;
 
-    const queryParams = [id];
+    const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
         res.locals.countryCodes = data.rows[0].countrycodes;
