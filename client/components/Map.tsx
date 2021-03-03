@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Datamap from 'react-datamaps';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
+import countries from '../countries'
+
 const FullContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -26,7 +28,6 @@ interface PositionerProps {
 }
 
 const Positioner = styled.div`
-  // TODO: magic number
   transform: translateX(
     ${({ $mapWidth }: PositionerProps) => (window.innerWidth - $mapWidth) / 2}px
   );
@@ -34,8 +35,7 @@ const Positioner = styled.div`
   display: flex;
 `;
 
-// TODO: check class against defined list of country codes
-const isCountryCode = (className: string) => className.length === 3;
+const isCountryCode = (className: string) => !!countries[className]
 
 /**
  * Attemps to get country code from elements list of classNames.
