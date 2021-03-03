@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import Map from './components/Map';
-import Hover from './components/Hover';
+import UserIcon from './components/UserIcon';
+import UserBadgeDropdown from './components/UserBadgeDropdown';
+import styled from 'styled-components';
+import TripDetailsForm from './components/TripDetailsForm/TripDetailsForm';
+// import TopNav from './components/TopNav';
+// import Map from './components/Map';
+// import Hover from './components/Hover';
 
 // alternative: https://www.npmjs.com/package/react-device-detect
 // https://medium.com/simplejs/detect-the-users-device-type-with-a-simple-javascript-check-4fc656b735e1
@@ -24,17 +29,49 @@ const isMobile = (() => {
     return check;
   };
 })();
+const StyledUserIcon = styled(UserIcon)`
+  margin-bottom: 30%;
+`;
 
-const App = () => {
+interface AppProps {}
+
+const App: React.FC<any> = () => {
+  const [showForm, setShowForm] = useState<boolean>(false);
   const [hoveredCountry, setHoveredCountry] = useState('');
   const [visited, setVisited] = useState<string[]>([]);
 
-  return (
-    <>
-      <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} />
-      {!isMobile() ? <Hover country={hoveredCountry} /> : null}
-    </>
-  );
+  // map
+  // return (
+  //   <>
+  //     <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} />
+  //     {!isMobile() ? <Hover country={hoveredCountry} /> : null}
+  //   </>
+  // );
+
+  if (showForm === false) {
+    return (
+      <div>
+        <div style={{ marginLeft: '95%' }}>
+          <StyledUserIcon />
+        </div>
+        <div style={{ marginLeft: '95%', marginTop: '20%' }}>
+          <UserBadgeDropdown />
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div style={{ marginLeft: '95%' }}>
+          <StyledUserIcon />
+        </div>
+        <div style={{ marginLeft: '95%', marginTop: '20%' }}>
+          <UserBadgeDropdown />
+        </div>
+        <TripDetailsForm />
+      </div>
+    );
+  }
 };
 
 export default App;

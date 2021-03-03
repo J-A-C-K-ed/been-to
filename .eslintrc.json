@@ -7,9 +7,9 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
+    // "plugin:import/errors",
+    // "plugin:import/warnings",
+    // "plugin:import/typescript",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -36,9 +36,13 @@
     "no-dupe-class-members": "off",
     "@typescript-eslint/no-dupe-class-members": ["error"],
     "lines-between-class-members": "off",
-    "@typescript-eslint/lines-between-class-members": ["error", { "exceptAfterSingleLine": true }],
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      { "exceptAfterSingleLine": true }
+    ],
     "react/jsx-curly-newline": "off",
     "react/require-default-props": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/no-unresolved": "off"
   }
 }

@@ -1,38 +1,57 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+
+// const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+const locationsRouter = require('./routes/locations');
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('build'));
 
 // serves index.html at root endpoint
-app.get('/', (req: any, res: { status: (arg0: number) => { (): any; new(): any; sendFile: { (arg0: any): any; new(): any; }; }; }) => res.status(200).sendFile(path.join(__dirname, '../client/index.html')));
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
+);
 
+/* route handlers */
+
+// app.use('/auth', authRouter);
+app.use('/user', userRouter);
+app.use('/locations', locationsRouter);
+
+console.log('after express routes');
 /* catch all */
 
-// app.use('*', (req, res) => {
-//   return res.status(404).send('Oops! Wrong page!');
-// });
+app.use('*', (req, res) => res.status(404).send('Oops! Wrong page!'));
 
-// /* global error handler */
+/* global error handler */
 
-// app.use((err, req, res, next) => {
-//   const defaultErr = {
-//     log: 'Express error handler caught unknown middleware error',
-//     status: 500,
-//     message: { err: 'Internal Server Error' },
-//   };
+app.use(
+  (
+    err: express.ErrorRequestHandler,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    const defaultErr = {
+      log: 'Express error handler caught unknown middleware error',
+      status: 500,
+      message: { err: 'Internal Server Error' },
+    };
 
-//   const errorObj = Object.assign(defaultErr, err);
-//   console.log('Error message from global err handler: ', errorObj.log);
-//   return res.status(errorObj.status).send(errorObj.message);
-// });
+    const errorObj = Object.assign(defaultErr, err);
+    console.log('Error message from global err handler: ', errorObj.log);
+    return res.status(errorObj.status).send(errorObj.message);
+  }
+);
 
 app.listen(PORT, () => {
-  console.log(`Getting J.A.C.K.ed on port: ${PORT}`);
+  console.log(`Getting serverd on port: ${PORT}`);
 });
 
 module.exports = app;
