@@ -95,19 +95,30 @@ const Map = () => {
     return winHeight * mapRatios[projection] * 0.9;
   };
 
+  // variable used to track whether click is part of a drag or not
+  let isDragging = false;
   const handleClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
     const country = getCountry(evt.target);
-    if (!country) return;
+    if (isDragging || !country) return;
     setMapData(toggleCountryVisited(mapData, country));
   };
 
   return (
     <FullContainer>
-      <TransformWrapper wheel={{ step: 100 }} options={{ limitToBounds: false }}>
+      <TransformWrapper
+        wheel={{ step: 100 }}
+        options={{ limitToBounds: false }}
+        onPanningStop={() => {
+          isDragging = false;
+        }}
+        onPanning={() => {
+          isDragging = true;
+        }}
+      >
         {/* {({ setPositionY }: TransformWrapperReturns) => ( */}
         <TransformComponent>
-          <MapContainer onClick={handleClick}>
+          <MapContainer onMouseUp={handleClick}>
             <Positioner $mapWidth={calculateWidth()}>
               <Datamap
                 projection={projection}
