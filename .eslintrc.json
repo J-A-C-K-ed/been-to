@@ -43,6 +43,7 @@
     "react/jsx-curly-newline": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }
