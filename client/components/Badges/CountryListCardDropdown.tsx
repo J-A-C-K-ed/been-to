@@ -56,7 +56,7 @@ const CountryListCardDropdown: React.FC<any> = () => {
           id='panel1a-header'
         >
           <Typography className={classes.heading}>
-            Check out some detail!
+            Check out some details!
           </Typography>
         </StyledAccordionSummary>
         <StyledAccordionDetails>
