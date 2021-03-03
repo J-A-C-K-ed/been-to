@@ -11,7 +11,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static('client'));
+app.use(express.static('build'));
 
 // serves index.html at root endpoint
 app.get('/', (req, res) =>

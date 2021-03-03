@@ -3,4 +3,5 @@ cache
 clientJS
 serverJS
 node_modules
+build
 settings.ts

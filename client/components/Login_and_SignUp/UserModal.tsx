@@ -9,11 +9,9 @@ const UserModal: React.FC<any> = (props) => {
     createStyles({
       fab: {
         margin: theme.spacing(2),
-      },
-      absolute: {
-        position: "absolute",
-        bottom: theme.spacing(2),
-        right: theme.spacing(3),
+        position: 'fixed',
+        top: "15px",
+        right:"15px"
       },
     })
   );
