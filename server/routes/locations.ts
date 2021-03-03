@@ -5,13 +5,13 @@ const locationController = require('../controllers/locationController');
 const router = express();
 
 // get all locations
-router.post('/addlocation', locationController.addLocation, (req, res) =>
+router.post('/update', locationController.updateLocations, (req, res) =>
   res.status(200).json(res.locals.countryCodes)
 );
 
-// add a location
+// delete a location
 router.delete(
-  '/deletelocation',
+  '/delete',
   locationController.deleteLocation,
   (req, res) => res.status(200).json(res.locals.countryCodes)
 );
