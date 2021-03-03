@@ -1,3 +1,12 @@
 * {
   color: lightpink;
 }
+
+.user-option {
+  margin-top: 20%;
+  margin-bottom: 20%;
+}
+
+body {
+  background-image: url("https://www.nationsonline.org/maps/Physical-World-Map-3360.jpg");
+}
