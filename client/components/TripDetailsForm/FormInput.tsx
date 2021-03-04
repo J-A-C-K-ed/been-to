@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   createStyles,
   fade,
@@ -7,40 +7,34 @@ import {
   withStyles,
   makeStyles,
   createMuiTheme,
-} from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
-import InputLabel from "@material-ui/core/InputLabel";
-import TextField, { TextFieldProps } from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import { green } from "@material-ui/core/colors";
-import { OutlinedInputProps } from "@material-ui/core/OutlinedInput";
-import styled from "styled-components";
-import { Button } from "@material-ui/core";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+} from '@material-ui/core/styles';
+import InputBase from '@material-ui/core/InputBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import { green } from '@material-ui/core/colors';
+import { OutlinedInputProps } from '@material-ui/core/OutlinedInput';
+import styled from 'styled-components';
+import { Button } from '@material-ui/core';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-const FormInput: React.FC<any> = ({
-  currentUser,
-  setShowForm,
-  clickedCountry,
-}) => {
-  const [formPhotos, setFormPhotos] = useState<string>("");
-  const [formRestaurants, setFormRestaurants] = useState<string>("");
-  const [formFriends, setFormFriends] = useState<string>("");
-  const [formNotes, setFormNotes] = useState<string>("");
+const FormInput: React.FC<any> = ({ currentUser, setShowForm, clickedCountry }) => {
+  const [formPhotos, setFormPhotos] = useState<string>('');
+  const [formRestaurants, setFormRestaurants] = useState<string>('');
+  const [formFriends, setFormFriends] = useState<string>('');
+  const [formNotes, setFormNotes] = useState<string>('');
 
   const StyledInput = styled(TextField)`
-     {
-      margin-top: "10%";
-    }
+    margin-top: '10%';
   `;
 
-  const fakeCountry = "USA";
+  const fakeCountry = 'USA';
 
   const handleSubmit = () => {
-    fetch("", {
-      method: "POST",
+    fetch('', {
+      method: 'POST',
       headers: {
-        "Content-Type": "Application/JSON",
+        'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify({
         userName: currentUser,
@@ -53,16 +47,13 @@ const FormInput: React.FC<any> = ({
     })
       .then((data) => data.json())
       .then((res) => {
-        console.log("this is the res", res);
+        console.log('this is the res', res);
         setShowForm(false);
       })
       .catch((err) => {
-        window.alert("Houston we have a problem");
+        window.alert('Houston we have a problem');
         setShowForm(false);
-        console.log(
-          "this is the error from trying to submit trip details",
-          err
-        );
+        console.log('this is the error from trying to submit trip details', err);
       });
   };
 
@@ -73,12 +64,12 @@ const FormInput: React.FC<any> = ({
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        display: "flex",
-        flexDirection: "column",
-        flexWrap: "wrap",
-        marginTop: "10%",
-        alignItems: "center",
-        justifyContent: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        marginTop: '10%',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       margin: {
         margin: theme.spacing(1),
@@ -88,17 +79,17 @@ const FormInput: React.FC<any> = ({
 
   const ValidationTextField = withStyles({
     root: {
-      "& input:valid + fieldset": {
-        borderColor: "green",
+      '& input:valid + fieldset': {
+        borderColor: 'green',
         borderWidth: 2,
       },
-      "& input:invalid + fieldset": {
-        borderColor: "red",
+      '& input:invalid + fieldset': {
+        borderColor: 'red',
         borderWidth: 2,
       },
-      "& input:valid:focus + fieldset": {
+      '& input:valid:focus + fieldset': {
         borderLeftWidth: 6,
-        padding: "4px !important", // override inline-style
+        padding: '4px !important', // override inline-style
       },
     },
   })(TextField);
@@ -115,42 +106,42 @@ const FormInput: React.FC<any> = ({
     <form className={classes.root} noValidate>
       <StyledInput
         className={classes.margin}
-        label='Photos'
+        label="Photos"
         required
-        variant='outlined'
-        defaultValue='My photos link'
-        id='validation-outlined-input'
+        variant="outlined"
+        defaultValue="My photos link"
+        id="validation-outlined-input"
         onChange={(event) => setFormPhotos(event.target.value)}
       />
       <StyledInput
         className={classes.margin}
-        label='Restaurants'
+        label="Restaurants"
         required
-        variant='outlined'
-        defaultValue='Chipotle'
-        id='validation-outlined-input'
+        variant="outlined"
+        defaultValue="Chipotle"
+        id="validation-outlined-input"
         onChange={(event) => setFormRestaurants(event.target.value)}
       />
       <StyledInput
         className={classes.margin}
-        label='Travel Buddies'
+        label="Travel Buddies"
         required
-        variant='outlined'
-        defaultValue='Kanye'
-        id='validation-outlined-input'
+        variant="outlined"
+        defaultValue="Kanye"
+        id="validation-outlined-input"
         onChange={(event) => setFormFriends(event.target.value)}
       />
       <StyledInput
         className={classes.margin}
-        label='Notes'
+        label="Notes"
         required
-        variant='outlined'
-        defaultValue='My life is dope and I do dope shit '
-        id='validation-outlined-input'
+        variant="outlined"
+        defaultValue="My life is dope and I do dope shit "
+        id="validation-outlined-input"
         onChange={(event) => setFormNotes(event.target.value)}
       />
 
-      <Button variant='contained' color='primary' onClick={handleSubmit}>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
         Submit
       </Button>
     </form>
