@@ -9,7 +9,6 @@ const App = () => {
   const [visited, setVisited] = useState<string[]>([]);
   const [currentUser, setCurrentUser] = useState<string>("");
 
-
   return (
     <>
       {}
