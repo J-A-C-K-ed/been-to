@@ -12,7 +12,9 @@ router.post(
   "/get",
   verifyController.verifyUser,
   userController.getUser,
-  (req, res) => res.status(200).json(res.locals.userObj)
+  (req, res) => {
+    res.status(200).json(res.locals.userObj)
+  }
 );
 
 router.post(

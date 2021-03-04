@@ -41,6 +41,7 @@ const LoginModal: React.FC<any> = ({
   };
 
   const handleSubmit = () => {
+    console.log('start submit')
     setOpen(false);
     fetch('/user/get', {
       method: 'POST',
@@ -53,6 +54,7 @@ const LoginModal: React.FC<any> = ({
       }),
     })
       .then((res) => {
+        console.log(res)
         if (!res.ok) {
           setWarnUser(true)
           throw new Error('Failed to log in');

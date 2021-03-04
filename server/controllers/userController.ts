@@ -58,7 +58,7 @@ const userController: userControllerType = {
     const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        res.locals.countryCodes = data.rows[0];
+        res.locals.userObj = data.rows[0];
         return next();
       })
       .catch((err: any) => {
