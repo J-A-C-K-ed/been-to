@@ -1,14 +1,19 @@
-import React from "react";
-import Badge from "@material-ui/core/Badge";
-import { Theme, withStyles, createStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import ExploreIcon from "@material-ui/icons/Explore";
-import styled from "styled-components";
+import React from 'react';
+import Badge from '@material-ui/core/Badge';
+import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import ExploreIcon from '@material-ui/icons/Explore';
+import styled from 'styled-components';
+
+const StyledButton = styled(IconButton)`
+  position: fixed;
+  z-index: 10;
+  left: 15px;
+  top: 15px;
+`;
 
 const StyledExploreIcon = styled(ExploreIcon)`
-   {
-    /* fontsize: 50px; */
-  }
+  fontsize: 50px;
 `;
 
 const UserBadges: React.FC<any> = ({ handleClick, visited }) => {
@@ -17,9 +22,9 @@ const UserBadges: React.FC<any> = ({ handleClick, visited }) => {
       badge: {
         right: -3,
         top: 13,
-        fontSize: "15px",
+        fontSize: '15px',
         border: `2px solid ${theme.palette.background.paper}`,
-        padding: "0 4px",
+        padding: '0 4px',
       },
     })
   )(Badge);
@@ -32,7 +37,7 @@ const UserBadges: React.FC<any> = ({ handleClick, visited }) => {
           onClick={(event: any) => handleClick(event)}
         />
       </StyledBadge>
-    </IconButton>
+    </StyledButton>
   );
 };
 
