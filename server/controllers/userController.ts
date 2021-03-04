@@ -22,7 +22,7 @@ interface userControllerType {
 
 const userController: userControllerType = {
   addUser: (req, res, next) => {
-    const { userName, email, passWord } = req.body;
+    const { username, email, password } = req.body;
 
     const postQuery = `
     INSERT INTO users (username, email, password)
@@ -30,9 +30,10 @@ const userController: userControllerType = {
     RETURNING *
   `;
 
-    const queryParams = [userName, email, passWord];
+    const queryParams = [username, email, password];
     db.query(postQuery, queryParams)
       .then((data: any) => {
+        console.log(data.rows[0])
         res.locals.newUser = data.rows[0];
         return next();
       })
@@ -44,7 +45,7 @@ const userController: userControllerType = {
   getUser: (req, res, next) => {
     const { userName } = req.body;
     const getQuery = `
-      SELECT countrycodes 
+      SELECT * 
       FROM users
       WHERE username = $1
     `;
@@ -52,7 +53,8 @@ const userController: userControllerType = {
     const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        res.locals.countryCodes = data.rows[0].countrycodes;
+        console.log(data.rows[0])
+        res.locals.countryCodes = data.rows[0];
         return next();
       })
       .catch((err: any) => {
