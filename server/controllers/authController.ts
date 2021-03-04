@@ -1,52 +1,68 @@
-// import express from 'express';
-// const passport = require('passport');
-// const util = require('util');
-// const InstagramStrategy = require('passport-instagram').Strategy;
 
-// const db = require('../models/UserModel.ts');
+import express from 'express';
+
+const db = require('../models/UserModel.ts');
 // const variables = require('../../settings.ts');
 
 // const router = express();
 
 // interface authControllerType {
-//   addUser: (
-//     req: express.Request,
-//     res: express.Response,
+//   findOrCreate: (
+//     req: string | number,
+//     res: any,
 //     next: express.NextFunction
 //   ) => void;
 
-//   getUser: (
-//     req: express.Request,
-//     res: express.Response,
-//     next: express.NextFunction
-//   ) => void;
+//   // getUser: (
+//   //   req: express.Request,
+//   //   res: express.Response,
+//   //   next: express.NextFunction
+//   // ) => void;
 // }
 
-// passport.serializeUser(function (user, done) {
-//   done(null, user);
-// });
+const authController = {
+  findOrCreate: (body: { userName: any; accessToken: any; facebookId: any; }) => {
+    console.log('findorcreate', body)
+    const { userName, accessToken, facebookId } = body;
+    
+    const postQuery = `
+      INSERT INTO users (username, password, facebook_id)
+      VALUES ($1, $2, $3)
+      ON CONFLICT (password)
+      DO NOTHING;
+  `;
 
-// passport.deserializeUser(function (obj, done) {
-//   done(null, obj);
-// });
+    const queryParams = [facebookId, userName, accessToken ];
+    db.query(postQuery, queryParams)
+      .then((data: any) => data
+        // res.locals.newUser = data.rows[0];
+        // return next();
+        
+      )
+      .catch((err: any) => 
+         err
+        // next({ log: `userController.addUser ERROR: ${err}` });
+      );
+  },
 
-// passport.use(
-//   new InstagramStrategy(
-//     {
-//       clientID: variables.INSTAGRAM_CLIENT_ID,
-//       clientSecret: variables.INSTAGRAM_CLIENT_SECRET,
-//       callbackURL: 'http://localhost:3000/auth/instagram/callback',
-//     },
+//   getUser: (req, res, next) => {
+//     const { userName } = req.body;
+//     const getQuery = `
+//       SELECT countrycodes 
+//       FROM users
+//       WHERE username = $1
+//     `;
 
-// router.get('/auth/instagram', passport.authenticate('instagram'));
+//     const queryParams = [userName];
+//     db.query(getQuery, queryParams)
+//       .then((data: any) => {
+//         res.locals.countryCodes = data.rows[0].countrycodes;
+//         return next();
+//       })
+//       .catch((err: any) => {
+//         next({ log: `userController.getUser ERROR: ${err}` });
+//       });
+//   },
+};
 
-// router.get(
-//   '/auth/instagram/callback',
-//   passport.authenticate('instagram', { failureRedirect: '/login' }),
-//   function (req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   }
-// );
-
-// module.exports = userController;
+module.exports = authController;

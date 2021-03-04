@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import express from 'express';
 import path from 'path';
 
-// const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const locationsRouter = require('./routes/locations');
 
@@ -20,15 +21,15 @@ app.get('/', (req, res) =>
 
 /* route handlers */
 
-// app.use('/auth', authRouter);
+app.use('/', authRouter);
 app.use('/user', userRouter);
 app.use('/locations', locationsRouter);
 
-console.log('after express routes');
 /* catch all */
 
 app.use('*', (req, res) => res.status(404).send('Oops! Wrong page!'));
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 /* global error handler */
 
 app.use(
@@ -36,6 +37,7 @@ app.use(
     err: express.ErrorRequestHandler,
     req: express.Request,
     res: express.Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: express.NextFunction
   ) => {
     const defaultErr = {

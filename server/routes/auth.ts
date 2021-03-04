@@ -1,67 +1,104 @@
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback */
 import express from 'express';
 
 const passport = require('passport');
 
-const InstagramStrategy = require('passport-instagram').Strategy;
+const session = require('express-session');
+
+
+// const InstagramStrategy = require('passport-instagram').Strategy;
+
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 const db = require('../models/UserModel.ts');
 
 const variables = require('../../settings.ts');
 
-const router = express();
+const app = express();
 
-interface authControllerType {
-  addUser: (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => void;
+app.use(express.json());
 
-  getUser: (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => void;
-}
-
-passport.serializeUser(function (user: any, done: any) {
+passport.serializeUser(function (user: any, done: (arg0: null, arg1: any) => void) {
   done(null, user);
 });
-
-passport.deserializeUser(function (obj: any, done: any) {
+passport.deserializeUser(function (obj: any, done: (arg0: null, arg1: any) => void) {
   done(null, obj);
 });
 
-router.use(passport.initialize());
-router.use(passport.session());
 
-passport.use(
-  new InstagramStrategy(
-    {
-      clientID: variables.INSTAGRAM_CLIENT_ID,
-      clientSecret: variables.INSTAGRAM_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/instagram/callback',
-    },
-    function (accessToken: any, refreshToken: any, profile: any, done: any) {
-      User.findOrCreate(
-        { instagramId: profile.id },
-        function (err: express.ErrorRequestHandler, user: any) {
-          return done(err, user);
-        }
-      );
-    }
-  )
-);
+app.use(session({ 
+  secret: 'Lets get JACKed',
+  resave: true,
+  saveUninitialized: true
+ }));
 
-router.get('/auth/instagram', passport.authenticate('instagram'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-router.get(
-  '/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/login' }),
-  function (req: express.Request, res: express.Response) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+app.get("/user/get", function (req, res) {
+  res.render("account", { user: req.user });
+});
+
+app.get('/user', (req: express.Request, res, next) => {
+  console.log('in /user');
+  if (!req.user) {
+    console.log('error ocurred')
+    res.status(300).send('no user found');
+  } else {
+    console.log('no error')
+    res.status(200).json(req.user)
   }
-);
+});
 
-module.exports = router;
+passport.use(new FacebookStrategy({
+  clientID: variables.FACEBOOK_APP_ID,
+  clientSecret: variables.FACEBOOK_APP_SECRET,
+  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'email']
+}, async function (accessToken: string, refreshToken: any, profile: { id: any; displayName: string }, done: (arg0: null, arg1: any) => any) {
+  // asynchronous verification, for effect...
+  const findUser = "SELECT * FROM users WHERE facebook_id = $1";
+  const params = [profile.id];
+  let user = await db
+    .query(findUser, params)
+    .then((data: { rows: any[]; }) => data.rows[0])
+    .catch((err: string | undefined) => {
+      throw new Error(err);
+    });
+  if (!user) {
+  const postQuery = `
+          INSERT INTO users (facebook_id, username, password)
+          VALUES ($1, $2, $3)
+          RETURNING *
+        `;
+
+    const createUserParams = [
+      profile.id,
+      profile.displayName,
+      accessToken
+    ];
+     user = await db
+      .query(postQuery, createUserParams)
+      .then((data: { rows: any[]; }) => data.rows[0])
+      .catch((err: string | undefined) => {
+        throw new Error(err);
+      });
+  } 
+  return done(null, user);
+  }
+  )
+  );
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+  app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res: express.Response) {
+    // Successful authentication, redirect home.
+    console.log('req user', req.user)
+    res.redirect('/');
+  });
+
+module.exports = app;
