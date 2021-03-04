@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Tooltip } from '@material-ui/core';
 
-import countryNames from '../../countries'
+import countryNames from '../../countries';
 
 const StyledPath = styled.path<{ $isVisited: boolean }>`
   fill: ${({ $isVisited }) => ($isVisited ? 'orange' : 'rgb(148, 210, 165)')};
@@ -16,10 +16,12 @@ const StyledPath = styled.path<{ $isVisited: boolean }>`
   }
 `;
 
-const countryPaths: Record<
-  string,
-  (isVisited: boolean, clickHandler: () => void) => JSX.Element
-> = {
+type PathComponent = (
+  isVisited: boolean,
+  clickHandler: (evt: React.MouseEvent<SVGPathElement>) => void
+) => JSX.Element;
+
+const countryPaths: Record<string, PathComponent> = {
   ALB: (isVisited, clickHandler) => (
     <Tooltip title={countryNames.ALB || ''}>
       <StyledPath

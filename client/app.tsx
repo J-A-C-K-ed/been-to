@@ -32,19 +32,15 @@ const StyledUserIcon = styled(UserIcon)`
 `;
 
 const App = () => {
-  const [showForm, setShowForm] = useState<boolean>(false);
+  const [currentSel, setCurrentSel] = useState('');
   const [visited, setVisited] = useState<string[]>([]);
 
   return (
     <>
-      {/* <div style={{ marginLeft: '95%' }}> */}
       <StyledUserIcon />
-      {/* </div> */}
-      {/* <div style={{ marginLeft: '95%', marginTop: '20%' }}> */}
       <UserBadgeDropdown />
-      {/* </div> */}
-      {showForm ? <TripDetailsForm /> : null}
-      <MapWrapper visited={visited} setVisited={setVisited} />
+      {currentSel ? <TripDetailsForm /> : null}
+      <MapWrapper visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
     </>
   );
 };

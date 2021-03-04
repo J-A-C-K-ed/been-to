@@ -17,11 +17,16 @@ const FullContainer = styled.div`
 
 interface MapContainerProps {
   visited: string[];
+  setCurrentSel: (code: string) => void;
   setVisited: (codes: string[]) => void;
 }
 
-const MapContainer = ({ visited, setVisited }: MapContainerProps) => (
-    <FullContainer>
+const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps) => {
+  const handleOceanClick = (evt: React.MouseEvent) => {
+    setCurrentSel('')
+  };
+  return (
+    <FullContainer onClick={handleOceanClick}>
       <TransformWrapper
         wheel={{ step: 100 }}
         options={{ limitToBounds: false }}
@@ -33,10 +38,11 @@ const MapContainer = ({ visited, setVisited }: MapContainerProps) => (
         // }}
       >
         <TransformComponent>
-              <Map visited={visited} setVisited={setVisited} />
+          <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
         </TransformComponent>
       </TransformWrapper>
     </FullContainer>
   );
+};
 
 export default MapContainer;
