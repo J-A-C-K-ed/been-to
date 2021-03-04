@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ButtonGroup, Button } from '@material-ui/core';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
@@ -36,4 +36,4 @@ const MapTools = ({ zoomIn, zoomOut, resetTransform }: MapToolsProps) => (
   </Toolbar>
 );
 
-export default MapTools;
+export default memo(MapTools);

@@ -3,6 +3,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import styled from 'styled-components';
 import Map from './ManualMap/Map';
 import MapTools, { MapToolsProps } from './ManualMap/MapTools';
+import SearchBar, { SearchBarProps, ZPPState } from './ManualMap/SearchBar';
 
 const FullContainer = styled.div`
   position: fixed;
@@ -39,12 +40,19 @@ const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps)
         //   isDragging = true;
         // }}
       >
-        {({ zoomIn, zoomOut,resetTransform }: MapToolsProps) => (
+        {({
+          zoomIn,
+          zoomOut,
+          resetTransform,
+          setTransform,
+          ...rest
+        }: MapToolsProps & Pick<SearchBarProps, 'setTransform'> & ZPPState) => (
           <>
             <TransformComponent>
               <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
             </TransformComponent>
             <MapTools zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+            <SearchBar setTransform={setTransform} coords={rest} />
           </>
         )}
       </TransformWrapper>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components';
 import countryPaths from './Countries';
 
@@ -54,4 +54,4 @@ const Map = ({ visited, setVisited, setCurrentSel }: MapProps) => {
   );
 };
 
-export default Map;
+export default memo(Map);
