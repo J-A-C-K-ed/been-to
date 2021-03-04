@@ -27,7 +27,7 @@ const fuse = new Fuse(countryObjects, fuseOptions);
 const BarPaper = styled(Paper)`
   position: fixed;
   z-index: 10;
-  top: 45px;
+  top: 35px;
   opacity: 0.5;
   transition: opacity 0.3s ease;
 
