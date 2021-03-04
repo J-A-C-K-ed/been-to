@@ -56,6 +56,7 @@ app.use(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: express.NextFunction
   ) => {
+    console.log('got and error', err)
     const defaultErr = {
       log: "Express error handler caught unknown middleware error",
       status: 500,

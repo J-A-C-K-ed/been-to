@@ -25,17 +25,18 @@ app.use('/*', function (req, res, next) {
   next();
 });
 
-passport.serializeUser(function (
-  user: any,
-  done: (arg0: null, arg1: any) => void
-) {
-  done(null, user);
+passport.serializeUser(function (user: any, done: (arg0: null, arg1: any) => void) {
+  done(null, user.facebook_id);
 });
-passport.deserializeUser(function (
-  obj: any,
-  done: (arg0: null, arg1: any) => void
-) {
-  done(null, obj);
+
+passport.deserializeUser(function (facebookId: any, done: (arg0: null, arg1: any) => void) {
+  // done(null, obj);
+  const getUserQuery = 'SELECT * FROM users WHERE facebook_id = $1';
+  db.query(getUserQuery, [facebookId])
+    .then((data: { rows: any[] }) => done(null, data.rows[0]))
+    .catch(() => {
+      done(null, false)
+    });
 });
 
 app.use(

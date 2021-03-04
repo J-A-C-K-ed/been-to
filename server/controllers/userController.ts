@@ -39,7 +39,6 @@ const userController: userControllerType = {
     const queryParams = [username, email, password];
     db.query(postQuery, queryParams)
       .then((data: any) => {
-        console.log(data.rows[0]);
         res.locals.newUser = data.rows[0];
         return next();
       })
@@ -59,7 +58,6 @@ const userController: userControllerType = {
     const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        console.log("in get user", data.rows[0]);
         res.locals.userObj = data.rows[0];
         return next();
       })
@@ -70,18 +68,20 @@ const userController: userControllerType = {
   },
 
   getFBUser: (req, res, next) => {
-    if (!(req as any)?.sessioniD) return next(res.status(418))
-    const { userName } = req.body;
+    if (!req.user) return res.sendStatus(418)
+
+    // const { userName } = req.body;
     const getQuery = `
       SELECT * 
       FROM users
-      WHERE username = $1
+      WHERE facebook_id = $1
     `;
 
-    const queryParams = [userName];
+    const queryParams = [(req.user as any)?.facebook_id];
+
+
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        console.log('in get user', data.rows[0]);
         res.locals.countryCodes = data.rows[0];
         return next();
       })
@@ -89,6 +89,7 @@ const userController: userControllerType = {
         console.log(err);
         next({ log: `userController.getUser ERROR: ${err}` });
       });
+
   }
 };
 
