@@ -68,6 +68,7 @@ const CountryListCardDropdown: React.FC<any> = ({
     })
       .then((data) => data.json())
       .then((res) => {
+        console.log("this is the res from countryListCard dropdown", res);
         setPhotos(res.photos);
         setRestaurants(res.restaurants);
         setBuddies(res.buddies);
@@ -96,7 +97,7 @@ const CountryListCardDropdown: React.FC<any> = ({
         <StyledAccordionDetails>
           <CountryListCardDropdownList
             photos={photos}
-            restautants={restaurants}
+            restaurants={restaurants}
             notes={notes}
             buddies={buddies}
           />
