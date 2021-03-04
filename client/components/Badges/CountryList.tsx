@@ -5,7 +5,7 @@ import styled from "styled-components";
 import countriesKey from "../../countries";
 
 interface CountryListProps {
-  countries: [];
+  visited: string[];
 }
 
 const StyledButton = styled(Button)`
@@ -13,8 +13,8 @@ const StyledButton = styled(Button)`
     margin-left: 10%;
   }
 `;
-console.log(countriesKey);
-const CountryList: React.FC<any> = ({ visited }) => {
+
+const CountryList: React.FC<any> = ({ visited }: CountryListProps) => {
   let fakeState = ["England", "Japan", "Germany", "Canada"];
   const [countries, setCountries] = useState<any>(fakeState);
   const [filtered, setFiltered] = useState<string>("");

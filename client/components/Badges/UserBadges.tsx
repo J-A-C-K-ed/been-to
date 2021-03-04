@@ -16,7 +16,15 @@ const StyledExploreIcon = styled(ExploreIcon)`
   fontsize: 50px;
 `;
 
-const UserBadges: React.FC<any> = ({ handleClick, visited }) => {
+interface UserBadgesProps {
+  handleClick: (code: any) => void;
+  visited: string[];
+}
+
+const UserBadges: React.FC<any> = ({
+  handleClick,
+  visited,
+}: UserBadgesProps) => {
   const StyledBadge = withStyles((theme: Theme) =>
     createStyles({
       badge: {
