@@ -1,13 +1,9 @@
-import express from "express";
+import express from 'express';
 
-const db = require("../models/UserModel.ts");
+const db = require('../models/UserModel.ts');
 
 interface verifyControllerType {
-  verifyUser: (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => void;
+  verifyUser: (req: express.Request, res: express.Response, next: express.NextFunction) => void;
 }
 
 // defining our verifyController object
@@ -26,13 +22,11 @@ const verifyController: verifyControllerType = {
 
     // const queryParams = [userName, passWord];
     db.query(getQuery, [userName])
-      .then((data: any) => data.rows[0].password)
-      .then((pass: string) => {
-        if (!passWord || passWord !== pass)
-          return next({
-            log:
-              "ERROR in authController.verifyUser: Inputted password does not match saved password",
-          });
+      .then((data: any) => data.rows[0])
+      .then((userInfo: { username: string | undefined; password: string | undefined }) => {
+        if (!userInfo || userInfo.username)  return res.sendStatus(401);
+        if (!passWord || passWord !== userInfo.password) return res.sendStatus(401);
+        // return next({ log: "ERROR in authController.verifyUser: Inputted password does not match saved password", });
         return next();
       })
       .catch((err: any) => {

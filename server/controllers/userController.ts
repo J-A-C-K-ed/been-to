@@ -14,6 +14,12 @@ interface userControllerType {
     res: express.Response,
     next: express.NextFunction
   ) => void;
+
+  getFBUser: (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => void;
 }
 
 // defining our userController object
@@ -33,7 +39,6 @@ const userController: userControllerType = {
     const queryParams = [username, email, password];
     db.query(postQuery, queryParams)
       .then((data: any) => {
-        console.log(data.rows[0]);
         res.locals.newUser = data.rows[0];
         return next();
       })
@@ -53,7 +58,6 @@ const userController: userControllerType = {
     const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        console.log('in get user', data.rows[0]);
         res.locals.countryCodes = data.rows[0];
         return next();
       })
@@ -62,6 +66,31 @@ const userController: userControllerType = {
         next({ log: `userController.getUser ERROR: ${err}` });
       });
   },
+
+  getFBUser: (req, res, next) => {
+    if (!req.user) return res.sendStatus(418)
+
+    // const { userName } = req.body;
+    const getQuery = `
+      SELECT * 
+      FROM users
+      WHERE facebook_id = $1
+    `;
+
+    const queryParams = [(req.user as any)?.facebook_id];
+
+
+    db.query(getQuery, queryParams)
+      .then((data: any) => {
+        res.locals.countryCodes = data.rows[0];
+        return next();
+      })
+      .catch((err: any) => {
+        console.log(err);
+        next({ log: `userController.getUser ERROR: ${err}` });
+      });
+
+  }
 };
 
 module.exports = userController;

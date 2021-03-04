@@ -1,6 +1,6 @@
-import React, { memo } from "react";
-import styled from "styled-components";
-import countryPaths from "./Countries";
+import React, { memo, useState } from 'react';
+import styled from 'styled-components';
+import countryPaths from './Countries';
 
 interface CountryProps {
   country: string;
@@ -25,49 +25,49 @@ interface MapProps {
 }
 
 const Map = ({ visited, setVisited, setCurrentSel, currentUser }: MapProps) => {
-  const createClickHandler = (country: string) => (
-    evt: React.MouseEvent<SVGPathElement>
-  ) => {
+  // const [showLogInWarning, setShowLogInWarning] = useState(false)
+
+  const createClickHandler = (country: string) => (evt: React.MouseEvent<SVGPathElement>) => {
     evt.preventDefault();
-    // evt.stopPropagation();
+    // if (!currentUser) {
+
+    // }
 
     // if country is already marked
+    let newVisited: string[] = [];
     if (visited.includes(country)) {
-      setCurrentSel("");
-      setVisited(visited.filter((code) => code !== country));
+      setCurrentSel('');
+      newVisited = visited.filter((code) => code !== country);
     } else {
-      setVisited(visited.concat(country));
+      newVisited = visited.concat(country);
       setCurrentSel(country);
-      addLocationToDB();
     }
+    addLocationToDB(newVisited);
   };
 
   //Writing to DB to Save Location
-  const addLocationToDB = () => {
-    fetch("/locations/update", {
-      method: "POST",
+  const addLocationToDB = (updatedCountryList: string[]) => {
+    // console.log("🚀 updatingLocation", visited)
+    fetch('/locations/update', {
+      method: 'POST',
       headers: {
-        "Content-Type": "Application/JSON",
+        'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify({
         username: currentUser,
-        countrycodes: visited,
+        countrycodes: updatedCountryList,
       }),
     })
-      .then((data) => data.json())
       .then((res) => {
-        // setVisited(res);
+        if (res.ok) setVisited(updatedCountryList);
       })
       .catch((err) => {
-        console.error(
-          "There was the following error when trying to pin a location",
-          err
-        );
+        console.error('There was the following error when trying to pin a location', err);
       });
   };
 
   return (
-    <StyledMap viewBox='0 0 1778.245691804732 1352'>
+    <StyledMap viewBox="0 0 1778.245691804732 1352">
       <g>
         {Object.keys(countryPaths).map((country) => (
           <Country

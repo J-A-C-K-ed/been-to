@@ -137,7 +137,7 @@ const UserIcon: React.FC<any> = ({
           </>
         ) : null}
         {currentUser && currentUser.length > 1 ? (
-          <Logout currentUser={currentUser} />
+          <Logout currentUser={currentUser} setCurrentUser={setCurrentUser} setVisited={setVisited}/>
         ) : null}
       </StyledPopover>
     </div>

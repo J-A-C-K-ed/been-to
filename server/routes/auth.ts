@@ -25,17 +25,18 @@ app.use('/*', function (req, res, next) {
   next();
 });
 
-passport.serializeUser(function (
-  user: any,
-  done: (arg0: null, arg1: any) => void
-) {
-  done(null, user);
+passport.serializeUser(function (user: any, done: (arg0: null, arg1: any) => void) {
+  done(null, user.facebook_id);
 });
-passport.deserializeUser(function (
-  obj: any,
-  done: (arg0: null, arg1: any) => void
-) {
-  done(null, obj);
+
+passport.deserializeUser(function (facebookId: any, done: (arg0: null, arg1: any) => void) {
+  // done(null, obj);
+  const getUserQuery = 'SELECT * FROM users WHERE facebook_id = $1';
+  db.query(getUserQuery, [facebookId])
+    .then((data: { rows: any[] }) => done(null, data.rows[0]))
+    .catch(() => {
+      done(null, false)
+    });
 });
 
 app.use(
@@ -52,24 +53,6 @@ app.use(passport.session());
 app.get('/user/get', function (req, res) {
   res.render('account', { user: req.user });
 });
-
-app.get('/user', (req: express.Request, res, next) => {
-  console.log('in /user');
-  if (!req.user) {
-    console.log('error ocurred');
-    res.status(300).send('no user found');
-  } else {
-    console.log('no error');
-    res.status(200).json(req.user);
-  }
-});
-
-// let URL: string;
-// if (process.env.NODE_ENV === 'development') {
-//   URL = 'localhost:3000';
-// } else {
-//   URL = 'localhost:8080';
-// }
 
 passport.use(
   new FacebookStrategy(
