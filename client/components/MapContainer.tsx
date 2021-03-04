@@ -21,6 +21,7 @@ interface MapContainerProps {
   visited: string[];
   setCurrentSel: (code: string) => void;
   setVisited: (codes: string[]) => void;
+  currentUser: string;
 }
 
 const MapContainer = ({
