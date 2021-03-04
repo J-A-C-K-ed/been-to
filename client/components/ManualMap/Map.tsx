@@ -26,7 +26,7 @@ interface MapProps {
 const Map = ({ visited, setVisited, setCurrentSel }: MapProps) => {
   const createClickHandler = (country: string) => (evt: React.MouseEvent<SVGPathElement>) => {
     evt.preventDefault();
-    evt.stopPropagation();
+    // evt.stopPropagation();
 
     // if country is already marked
     if (visited.includes(country)) {

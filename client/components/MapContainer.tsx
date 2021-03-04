@@ -25,11 +25,11 @@ interface MapContainerProps {
 }
 
 const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps) => {
-  const handleOceanClick = (evt: React.MouseEvent) => {
-    setCurrentSel('');
+  const handleClick = (evt: React.MouseEvent) => {
+    if (!(evt.target as HTMLElement)?.classList.contains('datamaps-subunit')) setCurrentSel('');
   };
   return (
-    <FullContainer onClick={handleOceanClick}>
+    <FullContainer onClick={handleClick}>
       <TransformWrapper
         wheel={{ step: 100 }}
         options={{ limitToBounds: false }}
