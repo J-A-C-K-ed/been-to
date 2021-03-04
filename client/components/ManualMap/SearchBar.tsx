@@ -2,12 +2,25 @@ import React, { useState, memo } from 'react';
 import { Input, Paper, IconButton } from '@material-ui/core';
 import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 import styled from 'styled-components';
+import Fuse from 'fuse.js';
 
+// Search Indexing
+import SearchSuggestions from './SearchSuggestions';
 import countryTable from '../../countries';
 
 const searchIndex = Object.fromEntries(
   Object.entries(countryTable).map(([code, name]) => [name, code])
 );
+
+const countryObjects = Object.entries(countryTable).map(([code, name]) => ({ code, name })) as CountrySuggestion[];
+
+const fuseOptions = {
+  keys: ['code', 'name'],
+};
+
+const fuse = new Fuse(countryObjects, fuseOptions);
+
+//////////////////////
 
 const BarPaper = styled(Paper)`
   position: fixed;
@@ -26,6 +39,11 @@ const StyledInput = styled(Input)`
   width: clamp(150px, 50vw, 500px);
 `;
 
+interface CountrySuggestion {
+  code: string;
+  name: string;
+}
+
 export interface ZPPState {
   positionX: number;
   positionY: number;
@@ -39,13 +57,11 @@ export interface SearchBarProps {
 
 const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
   const [userInput, setUserInput] = useState('');
+  const [suggestions, setSuggestions] = useState<CountrySuggestion[]>([]);
+  const [isFocused, setFocused] = useState(false)
 
-  const search = () => {
-    if (!searchIndex[userInput]) return;
-    const countryEl = document.querySelector(`.${searchIndex[userInput]}`);
-    if (!countryEl) return;
+  const focusCountry = (countryEl: Element) => {
     const { left, top, bottom, right } = countryEl?.getBoundingClientRect();
-
     const { positionX, positionY, scale } = coords;
 
     const padding = 100;
@@ -53,12 +69,20 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
     const widthAdjust = (window.innerWidth - padding * 2) / (right - left);
     const heightAdjust = (window.innerHeight - padding * 2) / (bottom - top);
 
-    const newScale = Math.min(widthAdjust, heightAdjust);
+    const scaleAdjustment = Math.min(widthAdjust, heightAdjust);
+
     setTransform(
-      (-left + positionX) * newScale + padding,
-      (-top + positionY) * newScale + padding,
-      newScale * scale
+      (-left + positionX) * scaleAdjustment + padding,
+      (-top + positionY) * scaleAdjustment + padding,
+      scaleAdjustment * scale
     );
+  };
+
+  const search = () => {
+    if (!suggestions[0]) return 
+    const countryEl = document.querySelector(`.${suggestions[0].code}`);
+    if (!countryEl) return;
+    focusCountry(countryEl);
   };
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
@@ -70,7 +94,9 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
   };
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInput(evt.target.value);
+    const newInput = evt.target.value
+    setUserInput(newInput);
+    setSuggestions(fuse.search(newInput, { limit: 5 }).map((match) => match.item));
   };
 
   return (
@@ -81,11 +107,14 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
         value={userInput}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         disableUnderline
       />
       <IconButton onClick={search}>
         <LocationSearchingIcon />
       </IconButton>
+      {suggestions.length && isFocused ? <SearchSuggestions suggestions={suggestions.map(sug => sug.name)} /> : null}
     </BarPaper>
   );
 };
