@@ -1,8 +1,8 @@
-import React, { useState, useEffect, memo } from 'react';
+import React from 'react';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import styled from 'styled-components';
 import Map from './ManualMap/Map';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-// import MapTools from './ManualMap/MapTools'
+import MapTools, { MapToolsProps } from './ManualMap/MapTools';
 
 const FullContainer = styled.div`
   position: fixed;
@@ -39,11 +39,13 @@ const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps)
         //   isDragging = true;
         // }}
       >
-        {({ zoomIn }: {zoomIn: any}) => (
-          <TransformComponent>
-            <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
-          </TransformComponent>
-          // <MapTools zoomIn={zoomIn} />
+        {({ zoomIn, zoomOut,resetTransform }: MapToolsProps) => (
+          <>
+            <TransformComponent>
+              <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
+            </TransformComponent>
+            <MapTools zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+          </>
         )}
       </TransformWrapper>
     </FullContainer>
