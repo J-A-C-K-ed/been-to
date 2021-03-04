@@ -26,23 +26,20 @@ const Logout: React.FC<any> = ({
   currentUser,
 }: LogoutProps) => {
   const handleClick = () => {
-    setCurrentUser("");
-    setVisited([]);
-    // fetch(`/user/logout/${currentUser}`, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "Content-Type": "Application/JSON",
-    //   },
-    // })
-    //   .then((data) => data.json())
-    //   .then((res) => {
-    //     console.log("this is the res", res);
-    //     setCurrentUser("");
-    //     setVisited([]);
-    //   })
-    //   .catch((err) => {
-    //     console.log("this is the error from trying to login", err);
-    //   });
+    fetch("/user/logout/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        setCurrentUser("");
+        setVisited([]);
+      })
+      .catch((err) => {
+        console.log("this is the error from trying to log out", err);
+      });
   };
 
   return (

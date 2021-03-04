@@ -16,10 +16,14 @@ const StyledPopover = styled(Popover)`
 
 interface UserBadgeDropdownProps {
   visited: string[];
+  currentUser: string;
+  currentUserID: string;
 }
 
 const UserBadgeDropdown: React.FC<any> = ({
   visited,
+  currentUser,
+  currentUserID,
 }: UserBadgeDropdownProps) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -57,7 +61,11 @@ const UserBadgeDropdown: React.FC<any> = ({
           horizontal: "center",
         }}
       >
-        <CountryList visited={visited} />
+        <CountryList
+          visited={visited}
+          currentUser={currentUser}
+          currentUserID={currentUserID}
+        />
       </StyledPopover>
     </div>
   );
