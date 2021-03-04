@@ -62,7 +62,7 @@ const LoginModal: React.FC<any> = ({
         setCurrentUser(username);
         // setCurrentUserID()
         console.log("this is the res", res);
-        setVisited(res);
+        setVisited(res.countrycodes);
       })
       .catch((err) => {
         console.error(
