@@ -20,7 +20,7 @@ router.post('/details/add', locationController.addCountryDetails, (req, res) =>
 );
 
 // get location details
-router.post('/details/get', locationController.getCountryDetails, (req, res) =>
+router.get('/details/get', locationController.getCountryDetails, (req, res) =>
   res.status(200).json(res.locals.countryDetails)
 );
 

@@ -33,7 +33,7 @@ const userController: userControllerType = {
     const queryParams = [username, email, password];
     db.query(postQuery, queryParams)
       .then((data: any) => {
-        console.log(data.rows[0])
+        console.log(data.rows[0]);
         res.locals.newUser = data.rows[0];
         return next();
       })
@@ -53,7 +53,7 @@ const userController: userControllerType = {
     const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        console.log(data.rows[0])
+        console.log('in get user', data.rows[0]);
         res.locals.countryCodes = data.rows[0];
         return next();
       })
