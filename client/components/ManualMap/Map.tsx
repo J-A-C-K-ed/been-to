@@ -1,6 +1,6 @@
-import React, { memo } from "react";
-import styled from "styled-components";
-import countryPaths from "./Countries";
+import React, { memo, useState } from 'react';
+import styled from 'styled-components';
+import countryPaths from './Countries';
 
 interface CountryProps {
   country: string;
@@ -25,58 +25,56 @@ interface MapProps {
   setShowForm: (data: boolean) => void;
 }
 
-const Map = ({
-  visited,
-  setVisited,
-  setCurrentSel,
-  currentUser,
-  setShowForm,
-}: MapProps) => {
-  const createClickHandler = (country: string) => (
-    evt: React.MouseEvent<SVGPathElement>
-  ) => {
+const Map = ({ visited, setVisited, setCurrentSel, currentUser, setShowForm }: MapProps) => {
+  const createClickHandler = (country: string) => (evt: React.MouseEvent<SVGPathElement>) => {
     evt.preventDefault();
-    // evt.stopPropagation();
+    // if (!currentUser) {
+
+    // }
 
     // if country is already marked
+    let newVisited: string[] = [];
+
+    setCurrentSel('');
+    setShowForm(false);
     if (visited.includes(country)) {
-      setCurrentSel("");
-      setShowForm(false);
-      setVisited(visited.filter((code) => code !== country));
+      newVisited = visited.filter((code) => code !== country);
+      addLocationToDB(newVisited, country, false);
     } else {
-      setVisited(visited.concat(country));
-      setCurrentSel(country);
-      setShowForm(true);
-      addLocationToDB();
+      newVisited = visited.concat(country);
+      addLocationToDB(newVisited, country, true);
     }
   };
 
   //Writing to DB to Save Location
-  const addLocationToDB = () => {
-    fetch("/locations/update", {
-      method: "POST",
+  const addLocationToDB = (updatedCountryList: string[], country: string, isAddition: boolean) => {
+    // console.log("🚀 updatingLocation", visited)
+    fetch('/locations/update', {
+      method: 'POST',
       headers: {
-        "Content-Type": "Application/JSON",
+        'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify({
         username: currentUser,
-        countrycodes: visited,
+        countrycodes: updatedCountryList,
       }),
     })
-      .then((data) => data.json())
       .then((res) => {
-        // setVisited(res);
+        if (res.ok) {
+          setVisited(updatedCountryList);
+          if (isAddition) setCurrentSel(country);
+          if (isAddition) setShowForm(true);
+        } else {
+          window.alert('You must Login before adding countries to your list')
+        }
       })
       .catch((err) => {
-        console.error(
-          "There was the following error when trying to pin a location",
-          err
-        );
+        console.error('There was the following error when trying to pin a location', err);
       });
   };
 
   return (
-    <StyledMap viewBox='0 0 1778.245691804732 1352'>
+    <StyledMap viewBox="0 0 1778.245691804732 1352">
       <g>
         {Object.keys(countryPaths).map((country) => (
           <Country

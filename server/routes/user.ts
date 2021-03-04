@@ -12,10 +12,18 @@ router.post(
   "/get",
   verifyController.verifyUser,
   userController.getUser,
-  (req, res) => res.status(200).json(res.locals.userObj)
+  (req, res) => {
+    res.status(200).json(res.locals.userObj)
+  }
 );
 
 router.post(
+  '/auth',
+  userController.getFBUser,
+  (req, res) => res.status(200).json(res.locals.countryCodes)
+);
+
+router.get(
   '/auth',
   userController.getFBUser,
   (req, res) => res.status(200).json(res.locals.countryCodes)
