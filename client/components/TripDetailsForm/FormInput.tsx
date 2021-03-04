@@ -18,7 +18,11 @@ import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-const FormInput: React.FC<any> = (props) => {
+const FormInput: React.FC<any> = ({
+  currentUser,
+  setShowForm,
+  clickedCountry,
+}) => {
   const [formPhotos, setFormPhotos] = useState<string>("");
   const [formRestaurants, setFormRestaurants] = useState<string>("");
   const [formFriends, setFormFriends] = useState<string>("");
@@ -29,6 +33,38 @@ const FormInput: React.FC<any> = (props) => {
       margin-top: "10%";
     }
   `;
+
+  const fakeCountry = "USA";
+
+  const handleSubmit = () => {
+    fetch("", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify({
+        userName: currentUser,
+        country: fakeCountry,
+        photos: formPhotos,
+        restaurants: formRestaurants,
+        friends: formFriends,
+        notes: formNotes,
+      }),
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        console.log("this is the res", res);
+        setShowForm(false);
+      })
+      .catch((err) => {
+        window.alert("Houston we have a problem");
+        setShowForm(false);
+        console.log(
+          "this is the error from trying to submit trip details",
+          err
+        );
+      });
+  };
 
   // const handleSubmit = () => {
   //   fetch();
@@ -114,7 +150,7 @@ const FormInput: React.FC<any> = (props) => {
         onChange={(event) => setFormNotes(event.target.value)}
       />
 
-      <Button variant='contained' color='primary'>
+      <Button variant='contained' color='primary' onClick={handleSubmit}>
         Submit
       </Button>
     </form>

@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 
 const passport = require('passport');
 
@@ -7,14 +7,17 @@ const verifyController = require('../controllers/verifyController');
 
 const router = express();
 
-// create new user
-router.post('/create', userController.addUser, (req, res) =>
-  res.status(200).json(res.locals.newUser)
+// get user
+router.post(
+  "/get",
+  verifyController.verifyUser,
+  userController.getUser,
+  (req, res) => res.status(200).json(res.locals.countryCodes)
 );
 
-// get user
-router.get('/get', verifyController.verifyUser, userController.getUser, (req, res) =>
-  res.status(200).json(res.locals.countryCodes)
+// create new user
+router.post("/create", userController.addUser, (req, res) =>
+  res.status(200).json(res.locals.newUser)
 );
 
 router.get('/logout', (req, res) => {

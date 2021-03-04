@@ -1,44 +1,33 @@
 import React, { useState } from "react";
 import UserIcon from "./components/UserIcon";
 import UserBadgeDropdown from "./components/UserBadgeDropdown";
-import styled from "styled-components";
+import MapWrapper from "./components/MapContainer";
 import TripDetailsForm from "./components/TripDetailsForm/TripDetailsForm";
-import TopNav from "./components/TopNav";
 
-const StyledUserIcon = styled(UserIcon)`
-   {
-    margin-bottom: 30%;
-  }
-`;
+const App = () => {
+  const [currentSel, setCurrentSel] = useState("");
+  const [visited, setVisited] = useState<string[]>([]);
+  const [currentUser, setCurrentUser] = useState<string>("");
 
-interface AppProps {}
-
-const App: React.FC<any> = () => {
-  const [showForm, setShowForm] = useState<boolean>(false);
-  if (showForm === false) {
-    return (
-      <div>
-        <div style={{ marginLeft: "95%" }}>
-          <StyledUserIcon />
-        </div>
-        <div style={{ marginLeft: "95%", marginTop: "20%" }}>
-          <UserBadgeDropdown />
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <div style={{ marginLeft: "95%" }}>
-          <StyledUserIcon />
-        </div>
-        <div style={{ marginLeft: "95%", marginTop: "20%" }}>
-          <UserBadgeDropdown />
-        </div>
-        <TripDetailsForm />
-      </div>
-    );
-  }
+  return (
+    <>
+      {}
+      <UserIcon
+        setCurrentUser={setCurrentUser}
+        currentUser={currentUser}
+        setVisited={setVisited}
+        visited={visited}
+      />
+      <UserBadgeDropdown visited={visited} />
+      {currentSel ? <TripDetailsForm /> : null}
+      <MapWrapper
+        visited={visited}
+        setVisited={setVisited}
+        currentUser={currentUser}
+        setCurrentSel={setCurrentSel}
+      />
+    </>
+  );
 };
 
 export default App;

@@ -5,9 +5,33 @@ import Popover from "@material-ui/core/Popover";
 import UserModal from "./Login_and_SignUp/UserModal";
 import SignUpModal from "./Login_and_SignUp/SignUpModal";
 import LoginModal from "./Login_and_SignUp/LoginModal";
+import Logout from "./Login_and_SignUp/Logout";
 import styled from "styled-components";
 
-const UserIcon: React.FC<any> = ({ props }) => {
+const StyledPopover = styled(Popover)`
+  & .MuiPopover-paper {
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1%;
+  }
+`;
+
+interface UserIconProps {
+  setCurrentUser: (code: string) => void;
+  setVisited: (codes: string[]) => void;
+  currentUser: string;
+  visited: string[];
+}
+
+const UserIcon: React.FC<any> = ({
+  setCurrentUser,
+  setVisited,
+  currentUser,
+  visited,
+}: UserIconProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       typography: {
@@ -16,16 +40,7 @@ const UserIcon: React.FC<any> = ({ props }) => {
     })
   );
 
-  const StyledPopover = styled(Popover)`
-    & .MuiPopover-paper {
-      background-color: transparent;
-      box-shadow: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-top: 1%;
-    }
-  `;
+  console.log(currentUser);
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -60,8 +75,20 @@ const UserIcon: React.FC<any> = ({ props }) => {
           horizontal: "center",
         }}
       >
-        <SignUpModal />
-        <LoginModal />
+        <>
+          <SignUpModal
+            setCurrentUser={setCurrentUser}
+            setVisited={setVisited}
+          />
+          <LoginModal
+            setCurrentUser={setCurrentUser}
+            setVisited={setVisited}
+            visited={visited}
+          />
+        </>
+        {currentUser && currentUser.length > 1 ? (
+          <Logout currentUser={currentUser} />
+        ) : null}
       </StyledPopover>
     </div>
   );

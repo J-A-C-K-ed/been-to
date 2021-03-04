@@ -6,18 +6,18 @@ import Popover from "@material-ui/core/Popover";
 import styled from "styled-components";
 import React from "react";
 
-const UserBadgeDropdown: React.FC<any> = ({ props }) => {
+const StyledPopover = styled(Popover)`
+  & .MuiPopover-paper {
+    background-color: transparent;
+    box-shadow: none;
+    margin-top: 10%;
+  }
+`;
+
+const UserBadgeDropdown: React.FC<any> = ({ visited }) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-
-  const StyledPopover = styled(Popover)`
-    & .MuiPopover-paper {
-      background-color: transparent;
-      box-shadow: none;
-      margin-top: 10%;
-    }
-  `;
 
   const handleClick = (event: any): void => {
     setAnchorEl(event.currentTarget);
@@ -32,7 +32,11 @@ const UserBadgeDropdown: React.FC<any> = ({ props }) => {
 
   return (
     <div>
-      <UserBadges aria-describedby={id} handleClick={handleClick} />
+      <UserBadges
+        aria-describedby={id}
+        handleClick={handleClick}
+        visited={visited}
+      />
       <StyledPopover
         id={id}
         open={open}
@@ -47,7 +51,7 @@ const UserBadgeDropdown: React.FC<any> = ({ props }) => {
           horizontal: "center",
         }}
       >
-        <CountryList />
+        <CountryList visited={visited} />
       </StyledPopover>
     </div>
   );

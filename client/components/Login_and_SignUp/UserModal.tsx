@@ -9,11 +9,10 @@ const UserModal: React.FC<any> = (props) => {
     createStyles({
       fab: {
         margin: theme.spacing(2),
-      },
-      absolute: {
-        position: "absolute",
-        bottom: theme.spacing(2),
-        right: theme.spacing(3),
+        position: 'fixed',
+        zIndex: 10,
+        top: "15px",
+        right:"15px"
       },
     })
   );
@@ -23,10 +22,8 @@ const UserModal: React.FC<any> = (props) => {
   return (
     <div className='userIcon'>
       <Tooltip title='User' aria-label='add'>
-        <Fab color='primary' className={classes.fab}>
-          <AccountCircleIcon
-            onClick={(event: any) => props.handleClick(event)}
-          />
+        <Fab color='primary' className={classes.fab} onClick={(event: any) => props.handleClick(event)}>
+          <AccountCircleIcon />
         </Fab>
       </Tooltip>
     </div>

@@ -4,7 +4,15 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "globals": { "JSX": "readonly" },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    // "plugin:import/errors",
+    // "plugin:import/warnings",
+    // "plugin:import/typescript",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -24,19 +32,16 @@
       { "js": "never", "jsx": "never", "ts": "never", "tsx": "never" }
     ],
     "jsx-a11y/label-has-associated-control": "off",
-    // prevent wrong warning with typescript overloads
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
     "no-dupe-class-members": "off",
     "@typescript-eslint/no-dupe-class-members": ["error"],
     "lines-between-class-members": "off",
-    "@typescript-eslint/lines-between-class-members": [
-      "error",
-      { "exceptAfterSingleLine": true }
-    ],
+    "@typescript-eslint/lines-between-class-members": ["error", { "exceptAfterSingleLine": true }],
     "react/jsx-curly-newline": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }
