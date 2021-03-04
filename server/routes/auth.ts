@@ -28,7 +28,7 @@ passport.deserializeUser(function (obj: any, done: (arg0: null, arg1: any) => vo
 
 
 app.use(session({ 
-  secret: 'Lets get JACKed',
+  secret: variables.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
  }));
@@ -95,9 +95,10 @@ app.get('/auth/facebook',
 
   app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res: express.Response) {
+  function(req, res) {
     // Successful authentication, redirect home.
-    console.log('req user', req.user)
+    res.locals.user = req.user
+    // console.log('req user', res.locals)
     res.redirect('/');
   });
 
