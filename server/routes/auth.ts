@@ -35,23 +35,23 @@ passport.deserializeUser(function (obj: any, done: any) {
 router.use(passport.initialize());
 router.use(passport.session());
 
-passport.use(
-  new InstagramStrategy(
-    {
-      clientID: variables.INSTAGRAM_CLIENT_ID,
-      clientSecret: variables.INSTAGRAM_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/instagram/callback',
-    },
-    function (accessToken: any, refreshToken: any, profile: any, done: any) {
-      User.findOrCreate(
-        { instagramId: profile.id },
-        function (err: express.ErrorRequestHandler, user: any) {
-          return done(err, user);
-        }
-      );
-    }
-  )
-);
+// passport.use(
+//   new InstagramStrategy(
+//     {
+//       clientID: variables.INSTAGRAM_CLIENT_ID,
+//       clientSecret: variables.INSTAGRAM_CLIENT_SECRET,
+//       callbackURL: 'http://localhost:3000/auth/instagram/callback',
+//     },
+//     function (accessToken: any, refreshToken: any, profile: any, done: any) {
+//       User.findOrCreate(
+//         { instagramId: profile.id },
+//         function (err: express.ErrorRequestHandler, user: any) {
+//           return done(err, user);
+//         }
+//       );
+//     }
+//   )
+// );
 
 router.get('/auth/instagram', passport.authenticate('instagram'));
 
