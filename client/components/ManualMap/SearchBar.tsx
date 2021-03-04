@@ -1,26 +1,28 @@
 import React, { useState, memo } from 'react';
-import { Input, Paper, IconButton } from '@material-ui/core';
+import { Input, Paper, IconButton, ClickAwayListener } from '@material-ui/core';
 import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 import styled from 'styled-components';
 import Fuse from 'fuse.js';
 
-// Search Indexing
 import SearchSuggestions from './SearchSuggestions';
+
 import countryTable from '../../countries';
 
-const searchIndex = Object.fromEntries(
-  Object.entries(countryTable).map(([code, name]) => [name, code])
-);
+interface CountrySuggestion {
+  code: string;
+  name: string;
+}
 
-const countryObjects = Object.entries(countryTable).map(([code, name]) => ({ code, name })) as CountrySuggestion[];
+const countryObjects = Object.entries(countryTable).map(([code, name]) => ({
+  code,
+  name,
+})) as CountrySuggestion[];
 
 const fuseOptions = {
   keys: ['code', 'name'],
 };
 
 const fuse = new Fuse(countryObjects, fuseOptions);
-
-//////////////////////
 
 const BarPaper = styled(Paper)`
   position: fixed;
@@ -39,11 +41,6 @@ const StyledInput = styled(Input)`
   width: clamp(150px, 50vw, 500px);
 `;
 
-interface CountrySuggestion {
-  code: string;
-  name: string;
-}
-
 export interface ZPPState {
   positionX: number;
   positionY: number;
@@ -58,7 +55,7 @@ export interface SearchBarProps {
 const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
   const [userInput, setUserInput] = useState('');
   const [suggestions, setSuggestions] = useState<CountrySuggestion[]>([]);
-  const [isFocused, setFocused] = useState(false)
+  const [isFocused, setFocused] = useState(false);
 
   const focusCountry = (countryEl: Element) => {
     const { left, top, bottom, right } = countryEl?.getBoundingClientRect();
@@ -78,9 +75,19 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
     );
   };
 
-  const search = () => {
-    if (!suggestions[0]) return 
-    const countryEl = document.querySelector(`.${suggestions[0].code}`);
+  const search = (identifier?: string, isCode: boolean = false) => {
+    let searchCode: string | undefined;
+
+    if (identifier) {
+      if (isCode) searchCode = identifier;
+      if (!isCode) searchCode = countryObjects.find(({ name }) => name === identifier)?.code;
+    } else {
+      searchCode = suggestions[0]?.code;
+    }
+
+    if (!searchCode) return;
+
+    const countryEl = document.querySelector(`.${searchCode}`);
     if (!countryEl) return;
     focusCountry(countryEl);
   };
@@ -94,28 +101,39 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
   };
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const newInput = evt.target.value
+    const newInput = evt.target.value;
     setUserInput(newInput);
     setSuggestions(fuse.search(newInput, { limit: 5 }).map((match) => match.item));
   };
 
+  const goToSuggestion = (countryName:string) => {
+    setUserInput(countryName)
+    search(countryName)
+  }
+
   return (
-    <BarPaper elevation={6}>
-      <StyledInput
-        id="search-input"
-        placeholder="Search"
-        value={userInput}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        disableUnderline
-      />
-      <IconButton onClick={search}>
-        <LocationSearchingIcon />
-      </IconButton>
-      {suggestions.length && isFocused ? <SearchSuggestions suggestions={suggestions.map(sug => sug.name)} /> : null}
-    </BarPaper>
+    <ClickAwayListener onClickAway={() => setFocused(false)}>
+      <BarPaper elevation={6}>
+        <StyledInput
+          id="search-input"
+          placeholder="Search"
+          value={userInput}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          onFocus={() => setFocused(true)}
+          disableUnderline
+        />
+        <IconButton onClick={() => search()}>
+          <LocationSearchingIcon />
+        </IconButton>
+        {suggestions.length && isFocused ? (
+          <SearchSuggestions
+            suggestions={suggestions.map((sug) => sug.name)}
+            useSuggestion={goToSuggestion}
+          />
+        ) : null}
+      </BarPaper>
+    </ClickAwayListener>
   );
 };
 
