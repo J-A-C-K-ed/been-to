@@ -25,16 +25,8 @@ interface MapProps {
   setShowForm: (data: boolean) => void;
 }
 
-const Map = ({
-  visited,
-  setVisited,
-  setCurrentSel,
-  currentUser,
-  setShowForm,
-}: MapProps) => {
-  const createClickHandler = (country: string) => (
-    evt: React.MouseEvent<SVGPathElement>
-  ) => {
+const Map = ({ visited, setVisited, setCurrentSel, currentUser, setShowForm }: MapProps) => {
+  const createClickHandler = (country: string) => (evt: React.MouseEvent<SVGPathElement>) => {
     evt.preventDefault();
     // if (!currentUser) {
 
@@ -42,20 +34,20 @@ const Map = ({
 
     // if country is already marked
     let newVisited: string[] = [];
+
+    setCurrentSel('');
+    setShowForm(false);
     if (visited.includes(country)) {
-      setCurrentSel('');
       newVisited = visited.filter((code) => code !== country);
-      setShowForm(false);
+      addLocationToDB(newVisited, country, false);
     } else {
       newVisited = visited.concat(country);
-      setCurrentSel(country);
-      setShowForm(true);
+      addLocationToDB(newVisited, country, true);
     }
-    addLocationToDB(newVisited);
   };
 
   //Writing to DB to Save Location
-  const addLocationToDB = (updatedCountryList: string[]) => {
+  const addLocationToDB = (updatedCountryList: string[], country: string, isAddition: boolean) => {
     // console.log("🚀 updatingLocation", visited)
     fetch('/locations/update', {
       method: 'POST',
@@ -68,7 +60,13 @@ const Map = ({
       }),
     })
       .then((res) => {
-        if (res.ok) setVisited(updatedCountryList);
+        if (res.ok) {
+          setVisited(updatedCountryList);
+          if (isAddition) setCurrentSel(country);
+          if (isAddition) setShowForm(true);
+        } else {
+          window.alert('You must Login before adding countries to your list')
+        }
       })
       .catch((err) => {
         console.error('There was the following error when trying to pin a location', err);
