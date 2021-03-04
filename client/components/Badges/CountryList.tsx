@@ -2,6 +2,7 @@ import CountryListCard from "./CountryListCard";
 import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
 import styled from "styled-components";
+import countriesKey from "../../countries";
 
 interface CountryListProps {
   countries: [];
@@ -12,8 +13,8 @@ const StyledButton = styled(Button)`
     margin-left: 10%;
   }
 `;
-
-const CountryList: React.FC<any> = (props) => {
+console.log(countriesKey);
+const CountryList: React.FC<any> = ({ visited }) => {
   let fakeState = ["England", "Japan", "Germany", "Canada"];
   const [countries, setCountries] = useState<any>(fakeState);
   const [filtered, setFiltered] = useState<string>("");
@@ -95,10 +96,11 @@ const CountryList: React.FC<any> = (props) => {
         </div>
 
         <div>
-          {countries.map((country: string, idx: number) => {
+          {visited.map((country: any, idx: number) => {
+            let countryName = !country ? country : countriesKey[country];
             return (
               <CountryListCard
-                Country={country}
+                Country={countryName}
                 key={`${country}-card-${idx}`}
               />
             );

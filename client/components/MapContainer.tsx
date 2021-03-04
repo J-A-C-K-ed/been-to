@@ -1,7 +1,7 @@
-import React, { useState, useEffect, memo } from 'react';
-import styled from 'styled-components';
-import Map from './ManualMap/Map';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import React, { useState, useEffect, memo } from "react";
+import styled from "styled-components";
+import Map from "./ManualMap/Map";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const FullContainer = styled.div`
   position: fixed;
@@ -19,11 +19,16 @@ interface MapContainerProps {
   visited: string[];
   setCurrentSel: (code: string) => void;
   setVisited: (codes: string[]) => void;
+  currentUser: string;
 }
 
-const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps) => {
+const MapContainer = ({
+  visited,
+  setVisited,
+  setCurrentSel,
+}: MapContainerProps) => {
   const handleOceanClick = (evt: React.MouseEvent) => {
-    setCurrentSel('')
+    setCurrentSel("");
   };
   return (
     <FullContainer onClick={handleOceanClick}>
@@ -38,7 +43,11 @@ const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps)
         // }}
       >
         <TransformComponent>
-          <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
+          <Map
+            visited={visited}
+            setVisited={setVisited}
+            setCurrentSel={setCurrentSel}
+          />
         </TransformComponent>
       </TransformWrapper>
     </FullContainer>

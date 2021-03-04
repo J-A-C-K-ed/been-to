@@ -8,43 +8,42 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styled from "styled-components";
 
+const StyledAccordion = styled(Accordion)`
+{
+ box-shadow: none;
+ background-color: beige;
+
+ }
+}
+`;
+
+const StyledAccordionDetails = styled(AccordionDetails)`
+{
+ box-shadow: none;
+
+ }
+}
+`;
+const StyledAccordionSummary = styled(AccordionSummary)`
+{
+ box-shadow: none;
+ }
+}
+`;
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
+      color: "black",
+    },
+  })
+);
+
 const CountryListCardDropdown: React.FC<any> = () => {
-  const StyledAccordion = styled(Accordion)`
-  {
-   box-shadow: none;
-   background-color: beige;
-
-   }
- }
-`;
-
-  const StyledAccordionDetails = styled(AccordionDetails)`
-  {
-   box-shadow: none;
-
-   }
- }
-`;
-  const StyledAccordionSummary = styled(AccordionSummary)`
-  {
-   box-shadow: none;
-   }
- }
-`;
-
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        width: "100%",
-      },
-      heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-        color: "black",
-      },
-    })
-  );
-
   const classes = useStyles();
 
   return (

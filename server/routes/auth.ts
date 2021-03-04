@@ -1,39 +1,39 @@
-import express from 'express';
+// import express from 'express';
 
-const passport = require('passport');
+// const passport = require('passport');
 
-const InstagramStrategy = require('passport-instagram').Strategy;
+// const InstagramStrategy = require('passport-instagram').Strategy;
 
-const db = require('../models/UserModel.ts');
+// const db = require('../models/UserModel.ts');
 
-const variables = require('../../settings.ts');
+// const variables = require('../../settings.ts');
 
-const router = express();
+// const router = express();
 
-interface authControllerType {
-  addUser: (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => void;
+// interface authControllerType {
+//   addUser: (
+//     req: express.Request,
+//     res: express.Response,
+//     next: express.NextFunction
+//   ) => void;
 
-  getUser: (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => void;
-}
+//   getUser: (
+//     req: express.Request,
+//     res: express.Response,
+//     next: express.NextFunction
+//   ) => void;
+// }
 
-passport.serializeUser(function (user: any, done: any) {
-  done(null, user);
-});
+// passport.serializeUser(function (user: any, done: any) {
+//   done(null, user);
+// });
 
-passport.deserializeUser(function (obj: any, done: any) {
-  done(null, obj);
-});
+// passport.deserializeUser(function (obj: any, done: any) {
+//   done(null, obj);
+// });
 
-router.use(passport.initialize());
-router.use(passport.session());
+// router.use(passport.initialize());
+// router.use(passport.session());
 
 // passport.use(
 //   new InstagramStrategy(
@@ -53,15 +53,15 @@ router.use(passport.session());
 //   )
 // );
 
-router.get('/auth/instagram', passport.authenticate('instagram'));
+// router.get('/auth/instagram', passport.authenticate('instagram'));
 
-router.get(
-  '/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/login' }),
-  function (req: express.Request, res: express.Response) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }
-);
+// router.get(
+//   '/auth/instagram/callback',
+//   passport.authenticate('instagram', { failureRedirect: '/login' }),
+//   function (req: express.Request, res: express.Response) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   }
+// );
 
-module.exports = router;
+// module.exports = router;

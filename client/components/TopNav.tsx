@@ -5,17 +5,18 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
+const StyledTypography = styled(Typography)`
+   {
+    font-size: 20px;
+    font-weight: bold;
+  }
+`;
+
 const TopNav: React.FC<any> = () => {
   const StyledAppBar = styled(AppBar)`
      {
       height: 30px;
       background-color: #90ee90;
-    }
-  `;
-  const StyledTypography = styled(Typography)`
-     {
-      font-size: 20px;
-      font-weight: bold;
     }
   `;
 
