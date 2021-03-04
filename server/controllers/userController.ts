@@ -22,7 +22,7 @@ interface userControllerType {
 
 const userController: userControllerType = {
   addUser: (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { userName, email, passWord } = req.body;
 
     const postQuery = `
     INSERT INTO users (username, email, password)
@@ -30,7 +30,7 @@ const userController: userControllerType = {
     RETURNING *
   `;
 
-    const queryParams = [username, email, password];
+    const queryParams = [userName, email, passWord];
     db.query(postQuery, queryParams)
       .then((data: any) => {
         res.locals.newUser = data.rows[0];
