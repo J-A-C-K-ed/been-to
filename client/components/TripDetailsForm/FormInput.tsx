@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import {
   createStyles,
   fade,
@@ -23,21 +23,30 @@ interface FormInputProps {
   setShowForm: (code: boolean) => void;
   currentSel: string;
   currentUserID: any;
+  currentUser: string;
 }
+
+// const PhotoInputs = () => {
+
+// }
 
 const FormInput: React.FC<any> = ({
   setShowForm,
   currentSel,
+  currentUser,
   currentUserID,
 }: FormInputProps) => {
   const [formPhotos, setFormPhotos] = useState<string>("");
   const [formRestaurants, setFormRestaurants] = useState<string>("");
-  const [formFriends, setFormFriends] = useState<string>("");
+  const [formBuddies, setFormFriends] = useState<string>("");
   const [formNotes, setFormNotes] = useState<string>("");
 
-  const StyledInput = styled(TextField)`
+  const StyledInput = styled.input`
      {
       width: 80%;
+      padding: 1rem;
+      border: none;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
   `;
 
@@ -52,18 +61,21 @@ const FormInput: React.FC<any> = ({
 
   let countryName = countriesKey[currentSel];
 
-  const handleSubmit = () => {
-    fetch("", {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    fetch("/locations/details/add", {
       method: "POST",
       headers: {
         "Content-Type": "Application/JSON",
       },
       body: JSON.stringify({
-        userID: currentUserID,
-        country: countryName,
+        userId: currentUserID,
+        name: currentUser,
+        countrycode: currentSel,
         photos: formPhotos,
         restaurants: formRestaurants,
-        friends: formFriends,
+        buddies: formBuddies,
         notes: formNotes,
       }),
     })
@@ -103,22 +115,22 @@ const FormInput: React.FC<any> = ({
     })
   );
 
-  const ValidationTextField = withStyles({
-    root: {
-      "& input:valid + fieldset": {
-        borderColor: "green",
-        borderWidth: 2,
-      },
-      "& input:invalid + fieldset": {
-        borderColor: "red",
-        borderWidth: 2,
-      },
-      "& input:valid:focus + fieldset": {
-        borderLeftWidth: 6,
-        padding: "4px !important", // override inline-style
-      },
-    },
-  })(TextField);
+  // const ValidationTextField = withStyles({
+  //   root: {
+  //     "& input:valid + fieldset": {
+  //       borderColor: "green",
+  //       borderWidth: 2,
+  //     },
+  //     "& input:invalid + fieldset": {
+  //       borderColor: "red",
+  //       borderWidth: 2,
+  //     },
+  //     "& input:valid:focus + fieldset": {
+  //       borderLeftWidth: 6,
+  //       padding: "4px !important", // override inline-style
+  //     },
+  //   },
+  // })(TextField);
 
   const theme = createMuiTheme({
     palette: {
@@ -130,42 +142,61 @@ const FormInput: React.FC<any> = ({
 
   return (
     <form className={classes.root} noValidate>
-      <StyledInput
-        className={classes.margin}
-        label='Photos'
-        required
-        variant='outlined'
-        defaultValue='My photos link'
-        id='validation-outlined-input'
-        onChange={(event) => setFormPhotos(event.target.value)}
-      />
-      <StyledInput
-        className={classes.margin}
-        label='Restaurants'
-        required
-        variant='outlined'
-        defaultValue='Chipotle'
-        id='validation-outlined-input'
-        onChange={(event) => setFormRestaurants(event.target.value)}
-      />
-      <StyledInput
-        className={classes.margin}
-        label='Travel Buddies'
-        required
-        variant='outlined'
-        defaultValue='Kanye'
-        id='validation-outlined-input'
-        onChange={(event) => setFormFriends(event.target.value)}
-      />
-      <StyledInput
-        className={classes.margin}
-        label='Notes'
-        required
-        variant='outlined'
-        defaultValue='My life is dope and I do dope shit '
-        id='validation-outlined-input'
-        onChange={(event) => setFormNotes(event.target.value)}
-      />
+      <label>
+        Photos
+        <StyledInput
+          className={classes.margin}
+          placeholder='My dropbox link'
+          key='photosInput'
+          type='text'
+          required
+          // variant='outlined'
+          value={formPhotos}
+          id='validation-outlined-input'
+          onChange={(event: any) => setFormPhotos(event.target.value)}
+        />
+      </label>
+      <label>
+        Restaurants
+        <StyledInput
+          className={classes.margin}
+          placeholder='Restaurants'
+          key='restaurantsInput'
+          type='text'
+          required
+          // variant='outlined'
+          value={formRestaurants}
+          id='validation-outlined-input'
+          onChange={(event: any) => setFormRestaurants(event.target.value)}
+        />
+      </label>
+      <label>
+        Travel Buddies
+        <StyledInput
+          className={classes.margin}
+          // label='Travel Buddies'
+          type='text'
+          key='travelInput'
+          required
+          placeholder='Kanye'
+          value={formBuddies}
+          id='validation-outlined-input'
+          onChange={(event: any) => setFormFriends(event.target.value)}
+        />
+      </label>
+      <label>
+        Notes
+        <StyledInput
+          className={classes.margin}
+          type='text'
+          key='notesInput'
+          required
+          placeholder='It was a blast'
+          value={formNotes}
+          id='validation-outlined-input'
+          onChange={(event: any) => setFormNotes(event.target.value)}
+        />
+      </label>
       <StyledButton variant='contained' color='primary' onClick={handleSubmit}>
         Submit
       </StyledButton>

@@ -6,6 +6,8 @@ import countriesKey from "../../countries";
 
 interface CountryListProps {
   visited: string[];
+  currentUser: string;
+  currentUserID: string;
 }
 
 const StyledButton = styled(Button)`
@@ -14,10 +16,14 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const CountryList: React.FC<any> = ({ visited }: CountryListProps) => {
+const CountryList = ({
+  visited,
+  currentUser,
+  currentUserID,
+}: CountryListProps) => {
   const [countries, setCountries] = useState<any>(visited);
   const [filtered, setFiltered] = useState<string>("");
-  console.log(countries);
+
   const handleClick = () => {
     let match = countries.filter((country: any) => {
       country = countriesKey[country];
@@ -52,7 +58,7 @@ const CountryList: React.FC<any> = ({ visited }: CountryListProps) => {
           Filter your trips by country
           <input
             type='text'
-            placeholder='Filter your trips by country'
+            // placeholder='Filter your trips'
             style={{
               border: "none",
               boxShadow:
@@ -103,6 +109,9 @@ const CountryList: React.FC<any> = ({ visited }: CountryListProps) => {
             return (
               <CountryListCard
                 Country={countryName}
+                CountryCode={country}
+                currentUser={currentUser}
+                currentUserID={currentUserID}
                 key={`${country}-card-${idx}`}
               />
             );

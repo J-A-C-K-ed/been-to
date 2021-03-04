@@ -22,9 +22,16 @@ interface MapProps {
   setVisited: (newVisited: string[]) => void;
   setCurrentSel: (country: string) => void;
   currentUser: string;
+  setShowForm: (data: boolean) => void;
 }
 
-const Map = ({ visited, setVisited, setCurrentSel, currentUser }: MapProps) => {
+const Map = ({
+  visited,
+  setVisited,
+  setCurrentSel,
+  currentUser,
+  setShowForm,
+}: MapProps) => {
   const createClickHandler = (country: string) => (
     evt: React.MouseEvent<SVGPathElement>
   ) => {
@@ -34,10 +41,12 @@ const Map = ({ visited, setVisited, setCurrentSel, currentUser }: MapProps) => {
     // if country is already marked
     if (visited.includes(country)) {
       setCurrentSel("");
+      setShowForm(false);
       setVisited(visited.filter((code) => code !== country));
     } else {
       setVisited(visited.concat(country));
       setCurrentSel(country);
+      setShowForm(true);
       addLocationToDB();
     }
   };

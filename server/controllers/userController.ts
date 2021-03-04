@@ -1,6 +1,6 @@
-import express from 'express';
+import express from "express";
 
-const db = require('../models/UserModel.ts');
+const db = require("../models/UserModel.ts");
 
 interface userControllerType {
   addUser: (
@@ -53,8 +53,8 @@ const userController: userControllerType = {
     const queryParams = [userName];
     db.query(getQuery, queryParams)
       .then((data: any) => {
-        console.log('in get user', data.rows[0]);
-        res.locals.countryCodes = data.rows[0];
+        console.log("in get user", data.rows[0]);
+        res.locals.userObj = data.rows[0];
         return next();
       })
       .catch((err: any) => {

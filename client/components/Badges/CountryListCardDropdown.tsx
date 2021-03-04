@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CountryListCardDropdownList from "./CountryListCardDropdownList";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -43,8 +43,43 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CountryListCardDropdown: React.FC<any> = () => {
+const CountryListCardDropdown: React.FC<any> = ({
+  CountryCode,
+  currentUserID,
+  currentUser,
+}) => {
   const classes = useStyles();
+  const [restaurants, setRestaurants] = useState("");
+  const [photos, setPhotos] = useState("");
+  const [buddies, setBuddies] = useState("");
+  const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    fetch("/locations/details/get", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify({
+        name: currentUser,
+        userId: currentUserID,
+        countrycode: CountryCode,
+      }),
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        setPhotos(res.photos);
+        setRestaurants(res.restaurants);
+        setBuddies(res.buddies);
+        setNotes(res.notes);
+      })
+      .catch((err) => {
+        console.error(
+          "There was the following error when trying to login",
+          err
+        );
+      });
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -59,7 +94,12 @@ const CountryListCardDropdown: React.FC<any> = () => {
           </Typography>
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          <CountryListCardDropdownList />
+          <CountryListCardDropdownList
+            photos={photos}
+            restautants={restaurants}
+            notes={notes}
+            buddies={buddies}
+          />
         </StyledAccordionDetails>
       </StyledAccordion>
     </div>
