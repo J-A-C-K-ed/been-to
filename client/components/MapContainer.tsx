@@ -26,6 +26,7 @@ const MapContainer = ({
   visited,
   setVisited,
   setCurrentSel,
+  currentUser,
 }: MapContainerProps) => {
   const handleOceanClick = (evt: React.MouseEvent) => {
     setCurrentSel("");
@@ -47,6 +48,7 @@ const MapContainer = ({
             visited={visited}
             setVisited={setVisited}
             setCurrentSel={setCurrentSel}
+            currentUser={currentUser}
           />
         </TransformComponent>
       </TransformWrapper>

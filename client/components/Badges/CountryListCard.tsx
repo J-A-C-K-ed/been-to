@@ -34,7 +34,7 @@ const StyledCard = styled(Card)`
 interface CountryListCardProps {
   Country: string;
 }
-const CountryListCard: React.FC = ({ Country }: CountryListCardProps) => {
+const CountryListCard: React.FC<any> = ({ Country }) => {
   const classes = useStyles();
 
   return (

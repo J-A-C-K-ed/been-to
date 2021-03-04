@@ -18,9 +18,11 @@ module.exports = {
   devServer: {
     publicPath: "/build/",
     historyApiFallback: true,
+    headers: { "Access-Control-Allow-Origin": "*" },
     hot: true,
     proxy: {
       "/": "http://localhost:3000/",
+      "/auth/facebook": "http://localhost:3000/",
     },
   },
   module: {

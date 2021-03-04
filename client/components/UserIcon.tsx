@@ -60,7 +60,7 @@ const UserIcon: React.FC<any> = ({
   );
 
   const facebookLogin = () => {
-    fetch("/auth/facebook", {
+    fetch("/auth/facebook/", {
       method: "GET",
       headers: {
         "Content-Type": "Application/JSON",
@@ -123,12 +123,14 @@ const UserIcon: React.FC<any> = ({
               setVisited={setVisited}
               visited={visited}
             />
-            <StyledFacebookButton
-              className='loginBtn loginBtn--facebook'
-              onClick={facebookLogin}
-            >
-              Sign in with Facebook
-            </StyledFacebookButton>
+            <a href='/auth/facebook/'>
+              <StyledFacebookButton
+                className='loginBtn loginBtn--facebook'
+                // onClick={facebookLogin}
+              >
+                Sign in with Facebook
+              </StyledFacebookButton>
+            </a>
           </>
         ) : null}
         {currentUser && currentUser.length > 1 ? (
