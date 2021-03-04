@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components';
 import countryPaths from './Countries';
 
@@ -26,7 +26,7 @@ interface MapProps {
 const Map = ({ visited, setVisited, setCurrentSel }: MapProps) => {
   const createClickHandler = (country: string) => (evt: React.MouseEvent<SVGPathElement>) => {
     evt.preventDefault();
-    evt.stopPropagation();
+    // evt.stopPropagation();
 
     // if country is already marked
     if (visited.includes(country)) {
@@ -54,4 +54,4 @@ const Map = ({ visited, setVisited, setCurrentSel }: MapProps) => {
   );
 };
 
-export default Map;
+export default memo(Map);

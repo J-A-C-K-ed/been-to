@@ -13,7 +13,6 @@ const StyledButton = styled(Button)`
     margin-left: 10%;
   }
 `;
-console.log(countriesKey);
 const CountryList: React.FC<any> = ({ visited }) => {
   let fakeState = ["England", "Japan", "Germany", "Canada"];
   const [countries, setCountries] = useState<any>(fakeState);
