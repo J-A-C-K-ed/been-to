@@ -19,11 +19,19 @@ const StyledPopover = styled(Popover)`
   }
 `;
 
+interface UserIconProps {
+  setCurrentUser: (code: string) => void;
+  setVisited: (codes: string[]) => void;
+  currentUser: string;
+  visited: string[];
+}
+
 const UserIcon: React.FC<any> = ({
   setCurrentUser,
   setVisited,
   currentUser,
-}) => {
+  visited,
+}: UserIconProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       typography: {
@@ -31,6 +39,8 @@ const UserIcon: React.FC<any> = ({
       },
     })
   );
+
+  console.log(currentUser);
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -65,16 +75,20 @@ const UserIcon: React.FC<any> = ({
           horizontal: "center",
         }}
       >
-        {currentUser.length < 1 ? (
-          <>
-            <SignUpModal setCurrentUser={setCurrentUser} />
-            <LoginModal
-              setCurrentUser={setCurrentUser}
-              setVisited={setVisited}
-            />
-          </>
+        <>
+          <SignUpModal
+            setCurrentUser={setCurrentUser}
+            setVisited={setVisited}
+          />
+          <LoginModal
+            setCurrentUser={setCurrentUser}
+            setVisited={setVisited}
+            visited={visited}
+          />
+        </>
+        {currentUser && currentUser.length > 1 ? (
+          <Logout currentUser={currentUser} />
         ) : null}
-        {currentUser.length > 1 ? <Logout currentUser={currentUser} /> : null}
       </StyledPopover>
     </div>
   );

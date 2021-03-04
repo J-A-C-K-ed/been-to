@@ -16,8 +16,14 @@ const StyledButton = styled(Button)`
     }
   }
 `;
-
-const SignUpModal: React.FC<any> = ({ setCurrentUser }) => {
+interface signUpModalProps {
+  setCurrentUser: (code: string) => void;
+  setVisited: (codes: string[]) => void;
+}
+const SignUpModal: React.FC<any> = ({
+  setCurrentUser,
+  setVisited,
+}: signUpModalProps) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
@@ -41,8 +47,10 @@ const SignUpModal: React.FC<any> = ({ setCurrentUser }) => {
           password: password,
         }),
       })
+        .then((data) => data.json())
         .then((res) => {
           setCurrentUser(username);
+          setVisited([]);
         })
         .catch((err) => {
           console.log(err);

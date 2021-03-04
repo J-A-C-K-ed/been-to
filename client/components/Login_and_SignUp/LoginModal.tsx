@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import styled from "styled-components";
+import countriesKey from "../../countries";
 
 const StyledButton = styled(Button)`
    {
@@ -20,7 +21,17 @@ const StyledDialog = styled(Dialog)`
   }
 `;
 
-const LoginModal: React.FC<any> = ({ setCurrentUser, setVisited }) => {
+interface LoginModalProps {
+  setCurrentUser: (code: string) => void;
+  setVisited: (codes: string[]) => void;
+  visited: string[];
+}
+
+const LoginModal: React.FC<any> = ({
+  setCurrentUser,
+  setVisited,
+  visited,
+}: LoginModalProps) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
@@ -43,12 +54,15 @@ const LoginModal: React.FC<any> = ({ setCurrentUser, setVisited }) => {
     })
       .then((data) => data.json())
       .then((res) => {
-        console.log("this is the res", res);
         setCurrentUser(username);
-        setVisited(res.countryCodes);
+        console.log("this is the res", res);
+        setVisited(res);
       })
       .catch((err) => {
-        console.log("this is the error from trying to login", err);
+        console.error(
+          "There was the following error when trying to login",
+          err
+        );
       });
   };
 
