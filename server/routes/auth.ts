@@ -64,12 +64,19 @@ app.get("/user", (req: express.Request, res, next) => {
   }
 });
 
+// let URL: string;
+// if (process.env.NODE_ENV === 'development') {
+//   URL = 'localhost:3000';
+// } else {
+//   URL = 'localhost:8080';
+// }
+
 passport.use(
   new FacebookStrategy(
     {
       clientID: variables.FACEBOOK_APP_ID,
       clientSecret: variables.FACEBOOK_APP_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/callback",
+      callbackURL: "http://localhost:8080/auth/facebook/callback",
       profileFields: ["id", "displayName", "email"],
     },
     async function (
@@ -115,8 +122,8 @@ app.get(
   function (req, res) {
     // Successful authentication, redirect home.
     res.locals.user = req.user;
-    // console.log('req user', res.locals)
-    res.redirect("/");
+    console.log("req user", res.locals);
+    res.redirect("http://localhost:8080/");
   }
 );
 

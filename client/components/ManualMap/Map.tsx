@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import countryPaths from "./Countries";
 
@@ -29,7 +29,7 @@ const Map = ({ visited, setVisited, setCurrentSel, currentUser }: MapProps) => {
     evt: React.MouseEvent<SVGPathElement>
   ) => {
     evt.preventDefault();
-    evt.stopPropagation();
+    // evt.stopPropagation();
 
     // if country is already marked
     if (visited.includes(country)) {
@@ -82,4 +82,4 @@ const Map = ({ visited, setVisited, setCurrentSel, currentUser }: MapProps) => {
   );
 };
 
-export default Map;
+export default memo(Map);

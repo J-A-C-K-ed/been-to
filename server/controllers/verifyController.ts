@@ -17,6 +17,7 @@ interface verifyControllerType {
 const verifyController: verifyControllerType = {
   verifyUser: (req, res, next) => {
     const { userName, passWord } = req.body;
+    // console.log(userName, passWord)
     const getQuery = `
       SELECT password 
       FROM users
