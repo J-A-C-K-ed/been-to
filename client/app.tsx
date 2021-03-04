@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import UserIcon from './components/UserIcon';
-import UserBadgeDropdown from './components/UserBadgeDropdown';
-import TripDetailsForm from './components/TripDetailsForm/TripDetailsForm';
-import Map from './components/Map';
-import Hover from './components/Hover';
+import React, { useState } from "react";
+import styled from "styled-components";
+import UserIcon from "./components/UserIcon";
+import UserBadgeDropdown from "./components/UserBadgeDropdown";
+import TripDetailsForm from "./components/TripDetailsForm/TripDetailsForm";
+import Map from "./components/Map";
+import Hover from "./components/Hover";
 
 // alternative: https://www.npmjs.com/package/react-device-detect
 // https://medium.com/simplejs/detect-the-users-device-type-with-a-simple-javascript-check-4fc656b735e1
@@ -34,19 +34,39 @@ const StyledUserIcon = styled(UserIcon)`
 
 const App = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
-  const [hoveredCountry, setHoveredCountry] = useState('');
+  const [hoveredCountry, setHoveredCountry] = useState("");
   const [visited, setVisited] = useState<string[]>([]);
+  const [currentUser, setCurrentUser] = useState<string>("");
+  const [clikedCountry, setClickedCountry] = useState<string>("");
 
+  console.log(currentUser);
   return (
     <>
       {/* <div style={{ marginLeft: '95%' }}> */}
-        <StyledUserIcon />
+      <h4>Current user is: {currentUser}</h4>
+      <StyledUserIcon
+        setCurrentUser={setCurrentUser}
+        setVisited={setVisited}
+        currentUser={currentUser}
+      />
       {/* </div> */}
-      <div style={{ marginLeft: '95%', marginTop: '20%' }}>
-        <UserBadgeDropdown />
+      <div style={{ marginLeft: "95%", marginTop: "20%" }}>
+        <UserBadgeDropdown visited={visited} setShowForm={setShowForm} />
       </div>
-      {showForm ? <TripDetailsForm /> : null}
-      <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} />
+      {showForm ? (
+        <TripDetailsForm
+          currentUser={currentUser}
+          setShowForm={setShowForm}
+          clickedCountry={setClickedCountry}
+        />
+      ) : null}
+      <Map
+        visited={visited}
+        setVisited={setVisited}
+        setHovered={setHoveredCountry}
+        currentUser={currentUser}
+        setShowForm={setShowForm}
+      />
       {!isMobile() ? <Hover country={hoveredCountry} /> : null}
     </>
   );

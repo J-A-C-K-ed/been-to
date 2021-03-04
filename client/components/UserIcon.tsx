@@ -5,9 +5,25 @@ import Popover from "@material-ui/core/Popover";
 import UserModal from "./Login_and_SignUp/UserModal";
 import SignUpModal from "./Login_and_SignUp/SignUpModal";
 import LoginModal from "./Login_and_SignUp/LoginModal";
+import Logout from "./Login_and_SignUp/Logout";
 import styled from "styled-components";
 
-const UserIcon: React.FC<any> = ({ props }) => {
+const StyledPopover = styled(Popover)`
+  & .MuiPopover-paper {
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1%;
+  }
+`;
+
+const UserIcon: React.FC<any> = ({
+  setCurrentUser,
+  setVisited,
+  currentUser,
+}) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       typography: {
@@ -15,17 +31,6 @@ const UserIcon: React.FC<any> = ({ props }) => {
       },
     })
   );
-
-  const StyledPopover = styled(Popover)`
-    & .MuiPopover-paper {
-      background-color: transparent;
-      box-shadow: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-top: 1%;
-    }
-  `;
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -60,8 +65,16 @@ const UserIcon: React.FC<any> = ({ props }) => {
           horizontal: "center",
         }}
       >
-        <SignUpModal />
-        <LoginModal />
+        {currentUser.length < 1 ? (
+          <>
+            <SignUpModal setCurrentUser={setCurrentUser} />
+            <LoginModal
+              setCurrentUser={setCurrentUser}
+              setVisited={setVisited}
+            />
+          </>
+        ) : null}
+        {currentUser.length > 1 ? <Logout currentUser={currentUser} /> : null}
       </StyledPopover>
     </div>
   );

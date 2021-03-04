@@ -1,26 +1,26 @@
-const path = require('path');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const path = require("path");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: './client/index.tsx',
+  entry: "./client/index.tsx",
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
-    publicPath: '/',
+    path: path.resolve(__dirname, "build"),
+    filename: "bundle.js",
+    publicPath: "/",
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: [".ts", ".tsx", ".js"],
   },
   mode: process.env.NODE_ENV,
   devServer: {
-    publicPath: '/build/',
+    publicPath: "/build/",
     historyApiFallback: true,
     hot: true,
     proxy: {
-      '/': 'http://localhost:3000/',
+      "/": "http://localhost:3000/",
     },
   },
   module: {
@@ -29,30 +29,30 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        enforce: 'pre',
+        enforce: "pre",
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'source-map-loader',
+        loader: "source-map-loader",
       },
       {
         test: /\.tsx?$/,
         use: [
-          'babel-loader',
+          "babel-loader",
           {
-            loader: 'ts-loader',
+            loader: "ts-loader",
             options: {
               transpileOnly: true,
             },
@@ -66,5 +66,5 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin({}),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
-  devtool: 'source-map',
+  devtool: "source-map",
 };

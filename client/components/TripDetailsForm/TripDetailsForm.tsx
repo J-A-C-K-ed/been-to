@@ -3,7 +3,11 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import FormInput from "./FormInput";
 
-const TripDetailsForm: React.FC<any> = (props) => {
+const TripDetailsForm: React.FC<any> = ({
+  currentUser,
+  setShowForm,
+  clickedCountry,
+}) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -24,7 +28,11 @@ const TripDetailsForm: React.FC<any> = (props) => {
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
-        <FormInput />
+        <FormInput
+          currentUser={currentUser}
+          setShowForm={setShowForm}
+          clickedCountry={clickedCountry}
+        />
       </Paper>
     </div>
   );

@@ -9,10 +9,19 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import styled from "styled-components";
 
-const SignUpModal: React.FC<any> = (props) => {
+const StyledButton = styled(Button)`
+   {
+    & .MuiButton-containedPrimary {
+      margin-top: 90%;
+    }
+  }
+`;
+
+const SignUpModal: React.FC<any> = ({ setCurrentUser }) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,33 +29,26 @@ const SignUpModal: React.FC<any> = (props) => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const StyledButton = styled(Button)`
-     {
-      & .MuiButton-containedPrimary {
-        margin-top: 90%;
-      }
+    if (username.length > 0 && email.length && password.length > 0) {
+      fetch("/user/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/JSON",
+        },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+        }),
+      })
+        .then((res) => {
+          setCurrentUser(username);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  `;
-  // const handleLogin = (username, password) => {
-  //   if (username.length > 0 && password.length > 0) {
-  //     fetch("___", {
-  //       Method: "POST",
-  //       headers: {
-  //         "Content-Type": "Application/JSON",
-  //       },
-  //       body: JSON.stringify({
-  //         username: username,
-  //         password: password,
-  //       }),
-  //     })
-  //       .then((res) => {})
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  // };
+  };
 
   return (
     <div className='user-option'>
@@ -71,6 +73,15 @@ const SignUpModal: React.FC<any> = (props) => {
             label='Username'
             type='text'
             onChange={(event) => setUsername(event.target.value)}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin='dense'
+            id='name'
+            label='Email'
+            onChange={(event) => setEmail(event.target.value)}
+            type='email'
             fullWidth
           />
           <TextField

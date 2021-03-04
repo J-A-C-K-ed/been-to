@@ -1,9 +1,9 @@
-import React, { useState, useEffect, memo } from 'react';
-import styled from 'styled-components';
-import Datamap from 'react-datamaps';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import React, { useState, useEffect, memo } from "react";
+import styled from "styled-components";
+import Datamap from "react-datamaps";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-import countries from '../countries';
+import countries from "../countries";
 
 const FullContainer = styled.div`
   width: 100vw;
@@ -42,9 +42,9 @@ const isCountryCode = (className: string) => !!countries[className];
  * Returns empty string if not found
  */
 const getCountry = (target: EventTarget | null) => {
-  if (!(target as Element)?.classList) return '';
+  if (!(target as Element)?.classList) return "";
 
-  let country = '';
+  let country = "";
   (target as Element).classList.forEach((className) => {
     if (isCountryCode(className)) country = className;
   });
@@ -59,7 +59,8 @@ const getCountry = (target: EventTarget | null) => {
  */
 const toggleCountryVisited = (visited: string[], country: string) => {
   const newVisited = [...visited];
-  if (newVisited.includes(country)) return newVisited.filter((code) => code !== country);
+  if (newVisited.includes(country))
+    return newVisited.filter((code) => code !== country);
   return newVisited.concat(country);
 };
 
@@ -67,6 +68,8 @@ interface MapProps {
   setHovered: (countryCode: string) => void;
   visited: string[];
   setVisited: (codes: string[]) => void;
+  currentUser: string;
+  setShowForm: (showForm: boolean) => void;
 }
 
 const isSameMap = (prevProps: MapProps, nextProps: MapProps) => {
@@ -84,7 +87,13 @@ const isSameMap = (prevProps: MapProps, nextProps: MapProps) => {
   return true;
 };
 
-const Map = ({ setHovered, visited, setVisited }: MapProps) => {
+const Map = ({
+  setHovered,
+  visited,
+  setVisited,
+  currentUser,
+  setShowForm,
+}: MapProps) => {
   const [winHeight, setHeight] = useState(window.innerHeight);
   const [winWidth, setWidth] = useState(window.innerWidth);
 
@@ -93,8 +102,8 @@ const Map = ({ setHovered, visited, setVisited }: MapProps) => {
       setWidth(window.innerWidth);
       setHeight(window.innerHeight);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   });
 
   useEffect(() => {
@@ -103,14 +112,14 @@ const Map = ({ setHovered, visited, setVisited }: MapProps) => {
       setHovered(country);
     };
 
-    const map = document.getElementById('mapcontainer');
+    const map = document.getElementById("mapcontainer");
     if (map) {
-      map.addEventListener('mouseover', handleHover);
+      map.addEventListener("mouseover", handleHover);
     }
-    return () => map?.removeEventListener('mouseover', handleHover);
+    return () => map?.removeEventListener("mouseover", handleHover);
   });
 
-  const projection = 'mercator';
+  const projection = "mercator";
   const mapRatios = {
     mercator: 568 / 360.94,
   };
@@ -125,14 +134,36 @@ const Map = ({ setHovered, visited, setVisited }: MapProps) => {
   const handleClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
     const country = getCountry(evt.target);
-    if (isDragging || !country) return;
+    if (isDragging || !country) {
+      setShowForm(false);
+      return;
+    }
     setVisited(toggleCountryVisited(visited, country));
+    setShowForm(true);
+    fetch("/locations/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify({
+        countrycodes: visited,
+        username: currentUser,
+      }),
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        console.log("this is the res", res);
+        if (res.countryCodes) setVisited(res.countryCodes);
+      })
+      .catch((err) => {
+        console.log("this is the error from Map", err);
+      });
   };
 
   const mapData = visited.reduce<Record<string, any>>((data, code) => {
     // eslint-disable-next-line no-param-reassign
-    data[code] = { fillKey: 'visited' };
-    return data
+    data[code] = { fillKey: "visited" };
+    return data;
   }, {});
 
   return (
@@ -149,20 +180,20 @@ const Map = ({ setHovered, visited, setVisited }: MapProps) => {
       >
         {/* {({ setPositionY }: TransformWrapperReturns) => ( */}
         <TransformComponent>
-          <MapContainer onMouseUp={handleClick} id="mapcontainer">
+          <MapContainer onMouseUp={handleClick} id='mapcontainer'>
             <Positioner $mapWidth={calculateWidth()}>
               <Datamap
                 projection={projection}
                 fills={{
-                  defaultFill: '#94d2a5',
-                  visited: '#ff0000',
+                  defaultFill: "#94d2a5",
+                  visited: "#ff0000",
                 }}
                 data={mapData}
                 updateChoroplethOptions={{ reset: true }}
                 geographyConfig={{
                   popupOnHover: false,
                   borderWidth: 0.5,
-                  borderColor: '#739c7e',
+                  borderColor: "#739c7e",
                   highlightBorderWidth: 1,
                 }}
                 height={winHeight}

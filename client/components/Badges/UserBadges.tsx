@@ -11,7 +11,7 @@ const StyledExploreIcon = styled(ExploreIcon)`
   }
 `;
 
-const UserBadges: React.FC<any> = (props) => {
+const UserBadges: React.FC<any> = ({ handleClick, visited }) => {
   const StyledBadge = withStyles((theme: Theme) =>
     createStyles({
       badge: {
@@ -23,13 +23,13 @@ const UserBadges: React.FC<any> = (props) => {
       },
     })
   )(Badge);
-
+  let count = !visited ? 0 : visited.length;
   return (
     <IconButton aria-label='past-travel-locations'>
-      <StyledBadge badgeContent={10} color='secondary'>
+      <StyledBadge badgeContent={count} color='secondary'>
         <StyledExploreIcon
           style={{ fontSize: "50px" }}
-          onClick={(event: any) => props.handleClick(event)}
+          onClick={(event: any) => handleClick(event)}
         />
       </StyledBadge>
     </IconButton>
