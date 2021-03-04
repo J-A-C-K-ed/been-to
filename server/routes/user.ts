@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 
 const passport = require('passport');
 
@@ -9,21 +9,21 @@ const router = express();
 
 // get user
 router.post(
-  "/get",
+  '/get',
   verifyController.verifyUser,
   userController.getUser,
   (req, res) => res.status(200).json(res.locals.countryCodes)
 );
 
 // create new user
-router.post("/create", userController.addUser, (req, res) =>
+router.post('/create', userController.addUser, (req, res) =>
   res.status(200).json(res.locals.newUser)
 );
 
 router.get('/logout', (req, res) => {
-  console.log('before', req.user)
+  console.log('before', req.user);
   req.logout();
-  console.log('after', req.user)
+  console.log('after', req.user);
   res.redirect('/');
 });
 

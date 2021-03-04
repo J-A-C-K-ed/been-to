@@ -10,10 +10,18 @@ router.post('/update', locationController.updateLocations, (req, res) =>
 );
 
 // delete a location
-router.delete(
-  '/delete',
-  locationController.deleteLocation,
-  (req, res) => res.status(200).json(res.locals.countryCodes)
+router.delete('/delete', locationController.deleteLocation, (req, res) =>
+  res.status(200).json(res.locals.countryCodes)
+);
+
+// add location details
+router.post('/details/add', locationController.addCountryDetails, (req, res) =>
+  res.status(200).json(res.locals.newCountryDetails)
+);
+
+// get location details
+router.get('/details/get', locationController.getCountryDetails, (req, res) =>
+  res.status(200).json(res.locals.countryDetails)
 );
 
 module.exports = router;
