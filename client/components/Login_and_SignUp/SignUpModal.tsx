@@ -35,6 +35,10 @@ const SignUpModal: React.FC<any> = ({
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    setOpen(false);
     if (username.length > 0 && email.length && password.length > 0) {
       fetch("/user/create", {
         method: "POST",

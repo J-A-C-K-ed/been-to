@@ -1,9 +1,9 @@
-import React from 'react';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import styled from 'styled-components';
-import Map from './ManualMap/Map';
-import MapTools, { MapToolsProps } from './ManualMap/MapTools';
-import SearchBar, { SearchBarProps, ZPPState } from './ManualMap/SearchBar';
+import React from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import styled from "styled-components";
+import Map from "./ManualMap/Map";
+import MapTools, { MapToolsProps } from "./ManualMap/MapTools";
+import SearchBar, { SearchBarProps, ZPPState } from "./ManualMap/SearchBar";
 
 const FullContainer = styled.div`
   position: fixed;
@@ -24,9 +24,15 @@ interface MapContainerProps {
   currentUser: string;
 }
 
-const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps) => {
+const MapContainer = ({
+  visited,
+  setVisited,
+  setCurrentSel,
+  currentUser,
+}: MapContainerProps) => {
   const handleClick = (evt: React.MouseEvent) => {
-    if (!(evt.target as HTMLElement)?.classList.contains('datamaps-subunit')) setCurrentSel('');
+    if (!(evt.target as HTMLElement)?.classList.contains("datamaps-subunit"))
+      setCurrentSel("");
   };
   return (
     <FullContainer onClick={handleClick}>
@@ -46,12 +52,21 @@ const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps)
           resetTransform,
           setTransform,
           ...rest
-        }: MapToolsProps & Pick<SearchBarProps, 'setTransform'> & ZPPState) => (
+        }: MapToolsProps & Pick<SearchBarProps, "setTransform"> & ZPPState) => (
           <>
             <TransformComponent>
-              <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
+              <Map
+                visited={visited}
+                setVisited={setVisited}
+                setCurrentSel={setCurrentSel}
+                currentUser={currentUser}
+              />
             </TransformComponent>
-            <MapTools zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+            <MapTools
+              zoomIn={zoomIn}
+              zoomOut={zoomOut}
+              resetTransform={resetTransform}
+            />
             <SearchBar setTransform={setTransform} coords={rest} />
           </>
         )}
