@@ -20,10 +20,13 @@ interface MapContainerProps {
   visited: string[];
   setCurrentSel: (code: string) => void;
   setVisited: (codes: string[]) => void;
-  currentUser: string;
 }
 
-const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps) => {
+const MapContainer = ({
+  visited,
+  setVisited,
+  setCurrentSel,
+}: MapContainerProps) => {
   const handleOceanClick = (evt: React.MouseEvent) => {
     setCurrentSel('');
   };
@@ -39,9 +42,13 @@ const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps)
         //   isDragging = true;
         // }}
       >
-        {({ zoomIn }: {zoomIn: any}) => (
+        {({ zoomIn }: { zoomIn: any }) => (
           <TransformComponent>
-            <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
+            <Map
+              visited={visited}
+              setVisited={setVisited}
+              setCurrentSel={setCurrentSel}
+            />
           </TransformComponent>
           // <MapTools zoomIn={zoomIn} />
         )}

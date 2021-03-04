@@ -14,4 +14,14 @@ router.delete('/delete', locationController.deleteLocation, (req, res) =>
   res.status(200).json(res.locals.countryCodes)
 );
 
+// add location details
+router.post('/details/add', locationController.addCountryDetails, (req, res) =>
+  res.status(200).json(res.locals.newCountryDetails)
+);
+
+// get location details
+router.post('/details/get', locationController.getCountryDetails, (req, res) =>
+  res.status(200).json(res.locals.countryDetails)
+);
+
 module.exports = router;
