@@ -39,7 +39,6 @@ app.use("*", (req, res) => res.status(404).send("Oops! Wrong page!"));
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 /* global error handler */
-console.log("hello");
 app.use(
   (
     err: express.ErrorRequestHandler,

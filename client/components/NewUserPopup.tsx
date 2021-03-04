@@ -10,26 +10,46 @@ import styled from "styled-components";
 import ExploreIcon from "@material-ui/icons/Explore";
 import Badge from "@material-ui/core/Badge";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import PinDropIcon from "@material-ui/icons/PinDrop";
+import MapIcon from "@material-ui/icons/Map";
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 
 const StyledPaper = styled(Paper)`
   position: fixed;
   z-index: 10;
   bottom: 10px;
-  opacity: 90%;
+  opacity: 80%;
   font-family: "Arial";
+  padding: 1rem;
 `;
 
 const StyledParagraph = styled.p`
    {
     font-family: "Arial";
+    margin-left: 1%;
   }
 `;
 
 const StyledHeader = styled.h2`
    {
     font-family: "Arial";
+    text-align: center;
   }
 `;
+
+const StyledSubHeader = styled.h4`
+   {
+    font-family: "Arial";
+    text-align: center;
+  }
+`;
+
+const StyledDiv = styled.div`{
+  display: flex;
+  flex-direction: column;
+  justify-content: center:
+  align-items: center;
+}`;
 
 const StyledBadge = withStyles((theme: Theme) =>
   createStyles({
@@ -71,25 +91,46 @@ const NewUserPopUp = ({ setShowPopUp }: NewUserPopUpProps) => {
 
   return (
     <div className={classes.root}>
-      <StyledPaper elevation={3}>
+      <StyledPaper elevation={5}>
         <div onClick={() => setShowPopUp(false)}>X</div>
-        <StyledHeader>Welcome to ____</StyledHeader>
-        <StyledHeader>
-          Get start today with pinning your past trips!
-        </StyledHeader>
-        <StyledParagraph>Sign up or login here:</StyledParagraph>
-        <AccountCircleIcon />
-        <ol>
-          <li>Sign up or Login to get started</li>
-          <li>Click a country you've been to on the Map</li>
-          <li>Submit some details on that past trip </li>
-        </ol>
-        <StyledParagraph>
-          Check out your past trips with this icon:
-        </StyledParagraph>
-        <StyledBadge badgeContent={1} color='secondary'>
-          <StyledExploreIcon style={{ fontSize: "50px" }} />
-        </StyledBadge>
+        <StyledDiv>
+          <StyledHeader>
+            <PinDropIcon style={{ fontSize: "30px", color: "#9cc0f9" }} />
+            Welcome to trip-pin
+          </StyledHeader>
+          <StyledSubHeader>Keep track of your past trips</StyledSubHeader>
+
+          <div>
+            <StyledParagraph>
+              {" "}
+              <AccountCircleIcon
+                style={{ fontSize: "30px", color: "#9cc0f9" }}
+              />
+              Sign up or login here
+            </StyledParagraph>
+            <StyledParagraph>
+              <MapIcon
+                style={{ fontSize: "30px", color: "rgb(115, 156, 126)" }}
+              />{" "}
+              Click a country you've been to on the map
+            </StyledParagraph>
+            <StyledParagraph>
+              {" "}
+              <SpeakerNotesIcon
+                style={{ fontSize: "30px", color: "#9cc0f9" }}
+              />
+              Submit some details on that past trip{" "}
+            </StyledParagraph>
+          </div>
+          <StyledParagraph>
+            <StyledBadge badgeContent={1} color='secondary'>
+              <StyledExploreIcon
+                style={{ fontSize: "30px", color: "rgb(115, 156, 126)" }}
+              />
+            </StyledBadge>{" "}
+            Check out your past trips
+          </StyledParagraph>
+        </StyledDiv>
       </StyledPaper>
     </div>
   );

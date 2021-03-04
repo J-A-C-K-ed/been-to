@@ -17,24 +17,40 @@ import { OutlinedInputProps } from "@material-ui/core/OutlinedInput";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import countriesKey from "../../countries";
+
+interface FormInputProps {
+  setShowForm: (code: boolean) => void;
+  currentSel: string;
+  currentUserID: any;
+}
 
 const FormInput: React.FC<any> = ({
-  currentUser,
   setShowForm,
-  clickedCountry,
-}) => {
+  currentSel,
+  currentUserID,
+}: FormInputProps) => {
   const [formPhotos, setFormPhotos] = useState<string>("");
   const [formRestaurants, setFormRestaurants] = useState<string>("");
   const [formFriends, setFormFriends] = useState<string>("");
   const [formNotes, setFormNotes] = useState<string>("");
 
   const StyledInput = styled(TextField)`
-    margin-top: "10%";
+     {
+      width: 80%;
+    }
+  `;
+
+  const StyledButton = styled(Button)`
+     {
+      margin-top: 2%;
+      width: 30%;
+    }
   `;
 
   const [open, setOpen] = React.useState(false);
 
-  const fakeCountry = "USA";
+  let countryName = countriesKey[currentSel];
 
   const handleSubmit = () => {
     fetch("", {
@@ -43,8 +59,8 @@ const FormInput: React.FC<any> = ({
         "Content-Type": "Application/JSON",
       },
       body: JSON.stringify({
-        userName: currentUser,
-        country: fakeCountry,
+        userID: currentUserID,
+        country: countryName,
         photos: formPhotos,
         restaurants: formRestaurants,
         friends: formFriends,
@@ -150,9 +166,9 @@ const FormInput: React.FC<any> = ({
         id='validation-outlined-input'
         onChange={(event) => setFormNotes(event.target.value)}
       />
-      <Button variant='contained' color='primary' onClick={handleSubmit}>
+      <StyledButton variant='contained' color='primary' onClick={handleSubmit}>
         Submit
-      </Button>
+      </StyledButton>
     </form>
   );
 };

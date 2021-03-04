@@ -24,6 +24,7 @@ interface UserIconProps {
   setVisited: (codes: string[]) => void;
   currentUser: string;
   visited: string[];
+  setCurrentUserID: (code: any) => void;
 }
 
 const StyledFacebookButton = styled.button`
@@ -50,6 +51,7 @@ const UserIcon: React.FC<any> = ({
   setVisited,
   currentUser,
   visited,
+  setCurrentUserID,
 }: UserIconProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -122,6 +124,7 @@ const UserIcon: React.FC<any> = ({
               setCurrentUser={setCurrentUser}
               setVisited={setVisited}
               visited={visited}
+              setCurrentUserID={setCurrentUserID}
             />
             <a href='/auth/facebook/'>
               <StyledFacebookButton

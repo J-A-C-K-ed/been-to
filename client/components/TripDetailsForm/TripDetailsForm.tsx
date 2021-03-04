@@ -1,23 +1,46 @@
-import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import styled from 'styled-components';
-import FormInput from './FormInput';
+import React from "react";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import styled from "styled-components";
+import FormInput from "./FormInput";
+import countriesKey from "../../countries";
 
 const StyledPaper = styled(Paper)`
-  position: fixed;
   z-index: 10;
-  bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  opacity: 80%;
+  font-family: "Arial";
+  padding: 1.2rem 1rem 1.2rem 1rem;
 `;
 
-const TripDetailsForm: React.FC<any> = ({ currentUser, setShowForm, clickedCountry }) => {
+const StyledHeader = styled.h3`
+   {
+    font-family: "Arial";
+    margin-left: 1%;
+    font-weight: bold;
+    text-align: center;
+  }
+`;
+
+interface TripDetailsFormProps {
+  setShowForm: (code: boolean) => void;
+  currentSel: string;
+  currentUserID: any;
+}
+
+const TripDetailsForm: React.FC<any> = ({
+  setShowForm,
+  currentSel,
+  currentUserID,
+}: TripDetailsFormProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        '& > *': {
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        "& > *": {
           margin: theme.spacing(1),
           width: theme.spacing(40),
           height: theme.spacing(50),
@@ -31,10 +54,13 @@ const TripDetailsForm: React.FC<any> = ({ currentUser, setShowForm, clickedCount
   return (
     <div className={classes.root}>
       <StyledPaper elevation={3}>
+        <StyledHeader>
+          Save some details about your trip to {countriesKey[currentSel]}!
+        </StyledHeader>
         <FormInput
-          currentUser={currentUser}
           setShowForm={setShowForm}
-          clickedCountry={clickedCountry}
+          currentSel={currentSel}
+          currentUserID={currentUserID}
         />
       </StyledPaper>
     </div>
