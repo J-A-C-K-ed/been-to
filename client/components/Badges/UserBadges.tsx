@@ -9,7 +9,6 @@ const StyledButton = styled(IconButton)`
   position: fixed;
   z-index: 10;
   left: 15px;
-  background: green;
   top: 15px;
 `;
 
@@ -31,12 +30,12 @@ const UserBadges: React.FC<any> = (props) => {
   )(Badge);
 
   return (
-    <StyledButton aria-label="past-travel-locations">
+    <StyledButton
+      aria-label="past-travel-locations"
+      onClick={(event: any) => props.handleClick(event)}
+    >
       <StyledBadge badgeContent={10} color="secondary">
-        <StyledExploreIcon
-          style={{ fontSize: '50px' }}
-          onClick={(event: any) => props.handleClick(event)}
-        />
+        <StyledExploreIcon style={{ fontSize: '50px' }} />
       </StyledBadge>
     </StyledButton>
   );
