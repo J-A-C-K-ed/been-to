@@ -1,20 +1,23 @@
-import React from "react";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import FormInput from "./FormInput";
+import React from 'react';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import styled from 'styled-components';
+import FormInput from './FormInput';
 
-const TripDetailsForm: React.FC<any> = ({
-  currentUser,
-  setShowForm,
-  clickedCountry,
-}) => {
+const StyledPaper = styled(Paper)`
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+`;
+
+const TripDetailsForm: React.FC<any> = ({ currentUser, setShowForm, clickedCountry }) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        display: "flex",
-        alignItems: "center",
-        flexWrap: "wrap",
-        "& > *": {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        '& > *': {
           margin: theme.spacing(1),
           width: theme.spacing(40),
           height: theme.spacing(50),
@@ -27,13 +30,13 @@ const TripDetailsForm: React.FC<any> = ({
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
+      <StyledPaper elevation={3}>
         <FormInput
           currentUser={currentUser}
           setShowForm={setShowForm}
           clickedCountry={clickedCountry}
         />
-      </Paper>
+      </StyledPaper>
     </div>
   );
 };
