@@ -1,9 +1,9 @@
-import React from 'react';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import styled from 'styled-components';
-import Map from './ManualMap/Map';
-import MapTools, { MapToolsProps } from './ManualMap/MapTools';
-import SearchBar, { SearchBarProps, ZPPState } from './ManualMap/SearchBar';
+import React from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import styled from "styled-components";
+import Map from "./ManualMap/Map";
+import MapTools, { MapToolsProps } from "./ManualMap/MapTools";
+import SearchBar, { SearchBarProps, ZPPState } from "./ManualMap/SearchBar";
 
 const FullContainer = styled.div`
   position: fixed;
@@ -22,17 +22,19 @@ interface MapContainerProps {
   setCurrentSel: (code: string) => void;
   setVisited: (codes: string[]) => void;
   currentUser: string;
+  setShowForm: (code: boolean) => void;
 }
 
 const MapContainer = ({
   visited,
   setVisited,
   setCurrentSel,
+  setShowForm,
   currentUser,
 }: MapContainerProps) => {
   const handleClick = (evt: React.MouseEvent) => {
-    if (!(evt.target as HTMLElement)?.classList.contains('datamaps-subunit'))
-      setCurrentSel('');
+    if (!(evt.target as HTMLElement)?.classList.contains("datamaps-subunit"))
+      setCurrentSel("");
   };
   return (
     <FullContainer onClick={handleClick}>
@@ -52,7 +54,7 @@ const MapContainer = ({
           resetTransform,
           setTransform,
           ...rest
-        }: MapToolsProps & Pick<SearchBarProps, 'setTransform'> & ZPPState) => (
+        }: MapToolsProps & Pick<SearchBarProps, "setTransform"> & ZPPState) => (
           <>
             <TransformComponent>
               <Map
@@ -60,6 +62,7 @@ const MapContainer = ({
                 setVisited={setVisited}
                 setCurrentSel={setCurrentSel}
                 currentUser={currentUser}
+                setShowForm={setShowForm}
               />
             </TransformComponent>
             <MapTools

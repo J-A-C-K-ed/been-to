@@ -16,12 +16,13 @@ interface UserInfoPayload {
 }
 
 const App = () => {
-  const [currentSel, setCurrentSel] = useState('');
+  const [currentSel, setCurrentSel] = useState("");
   const [visited, setVisited] = useState<string[]>([]);
-  const [currentUser, setCurrentUser] = useState<string>('');
+  const [currentUser, setCurrentUser] = useState<string>("");
   const [showPopUp, setShowPopUp] = useState<boolean>(true);
   const [currentUserID, setCurrentUserID] = useState('');
   const [userIsUnknown, setUserUnknown] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     if (hasRun) return
@@ -55,15 +56,25 @@ const App = () => {
         setVisited={setVisited}
         visited={visited}
       />
-      <UserBadgeDropdown visited={visited} />
-      {currentSel ? (
-        <TripDetailsForm currentUserID={currentUserID} currentSel={currentSel} />
+      <UserBadgeDropdown
+        visited={visited}
+        currentUser={currentUser}
+        currentUserID={currentUserID}
+      />
+      {currentSel && showForm ? (
+        <TripDetailsForm
+          setShowForm={setShowForm}
+          currentUserID={currentUserID}
+          currentSel={currentSel}
+          currentUser={currentUser}
+        />
       ) : null}
       <MapWrapper
         visited={visited}
         setVisited={setVisited}
         currentUser={currentUser}
         setCurrentSel={setCurrentSel}
+        setShowForm={setShowForm}
       />
     </>
   );

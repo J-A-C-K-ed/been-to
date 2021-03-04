@@ -33,8 +33,16 @@ const StyledCard = styled(Card)`
   `;
 interface CountryListCardProps {
   Country: string;
+  CountryCode: string;
+  currentUser: string;
+  currentUserID: string;
 }
-const CountryListCard: React.FC<any> = ({ Country }) => {
+const CountryListCard = ({
+  Country,
+  CountryCode,
+  currentUser,
+  currentUserID,
+}: CountryListCardProps) => {
   const classes = useStyles();
 
   return (
@@ -49,7 +57,11 @@ const CountryListCard: React.FC<any> = ({ Country }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <CountryListCardDropdown />
+        <CountryListCardDropdown
+          CountryCode={CountryCode}
+          currentUser={currentUser}
+          currentUserID={currentUserID}
+        />
       </CardActions>
     </StyledCard>
   );

@@ -10,7 +10,12 @@ import CommentIcon from "@material-ui/icons/Comment";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 
-const CountryListCardDropdownList: React.FC<any> = () => {
+const CountryListCardDropdownList: React.FC<any> = ({
+  photos,
+  restaurants,
+  notes,
+  buddies,
+}) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -31,7 +36,7 @@ const CountryListCardDropdownList: React.FC<any> = () => {
             <ImageIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary='Photos' secondary='Jan 9, 2014' />
+        <ListItemText primary='Photos' secondary={photos} />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -39,7 +44,7 @@ const CountryListCardDropdownList: React.FC<any> = () => {
             <EmojiPeopleIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary='Companions' secondary='Jan 7, 2014' />
+        <ListItemText primary='Travel buddies' secondary={buddies} />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -47,7 +52,7 @@ const CountryListCardDropdownList: React.FC<any> = () => {
             <FastfoodIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary='Restaurants' secondary='July 20, 2014' />
+        <ListItemText primary='Restaurants' secondary={restaurants} />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -55,7 +60,7 @@ const CountryListCardDropdownList: React.FC<any> = () => {
             <CommentIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary='Notes' secondary='July 20, 2014' />
+        <ListItemText primary='Notes' secondary={notes} />
       </ListItem>
     </List>
   );

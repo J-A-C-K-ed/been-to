@@ -1,6 +1,6 @@
-import express from 'express';
+import express from "express";
 
-const db = require('../models/UserModel.ts');
+const db = require("../models/UserModel.ts");
 
 interface userControllerType {
   addUser: (

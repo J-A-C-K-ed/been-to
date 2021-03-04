@@ -20,10 +20,11 @@ module.exports = {
     historyApiFallback: true,
     headers: { "Access-Control-Allow-Origin": "*" },
     hot: true,
-    port:8080,
+    port: 8080,
     proxy: {
       "/": "http://localhost:3000/",
       "/auth/facebook": "http://localhost:3000/",
+      "/locations/facebook": "http://localhost:3000/",
     },
   },
   module: {

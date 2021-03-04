@@ -21,7 +21,12 @@ interface LoginModalProps {
   visited: string[];
 }
 
-const LoginModal: React.FC<any> = ({ setCurrentUser, setVisited, visited }: LoginModalProps) => {
+const LoginModal: React.FC<any> = ({
+  setCurrentUser,
+  setVisited,
+  setCurrentUserID,
+  visited,
+}: LoginModalProps) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [username, setUsername] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
@@ -55,9 +60,11 @@ const LoginModal: React.FC<any> = ({ setCurrentUser, setVisited, visited }: Logi
         return res.json();
       })
       .then((res) => {
-        setCurrentUser(username);
-        // setCurrentUserID()
-        console.log('this is the res', res);
+        console.log("this is the res", res);
+
+        setCurrentUser(res.username);
+        setCurrentUserID(res.id);
+        console.log("this is the res", res);
         setVisited(res.countrycodes || []);
       })
       .catch((err) => {
