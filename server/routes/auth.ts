@@ -1,27 +1,27 @@
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
-import express from "express";
-const cors = require("cors");
+import express from 'express';
+const cors = require('cors');
 
-const passport = require("passport");
+const passport = require('passport');
 
-const session = require("express-session");
+const session = require('express-session');
 
 // const InstagramStrategy = require('passport-instagram').Strategy;
 
-const FacebookStrategy = require("passport-facebook").Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
-const db = require("../models/UserModel.ts");
+const db = require('../models/UserModel.ts');
 
-const variables = require("../../settings.ts");
+const variables = require('../../settings.ts');
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-app.use("/*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+app.use('/*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 
@@ -49,17 +49,17 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/user/get", function (req, res) {
-  res.render("account", { user: req.user });
+app.get('/user/get', function (req, res) {
+  res.render('account', { user: req.user });
 });
 
-app.get("/user", (req: express.Request, res, next) => {
-  console.log("in /user");
+app.get('/user', (req: express.Request, res, next) => {
+  console.log('in /user');
   if (!req.user) {
-    console.log("error ocurred");
-    res.status(300).send("no user found");
+    console.log('error ocurred');
+    res.status(300).send('no user found');
   } else {
-    console.log("no error");
+    console.log('no error');
     res.status(200).json(req.user);
   }
 });
@@ -76,8 +76,8 @@ passport.use(
     {
       clientID: variables.FACEBOOK_APP_ID,
       clientSecret: variables.FACEBOOK_APP_SECRET,
-      callbackURL: "http://localhost:8080/auth/facebook/callback",
-      profileFields: ["id", "displayName", "email"],
+      callbackURL: 'http://localhost:8080/auth/facebook/callback',
+      profileFields: ['id', 'displayName', 'email'],
     },
     async function (
       accessToken: string,
@@ -86,7 +86,7 @@ passport.use(
       done: (arg0: null, arg1: any) => any
     ) {
       // asynchronous verification, for effect...
-      const findUser = "SELECT * FROM users WHERE facebook_id = $1";
+      const findUser = 'SELECT * FROM users WHERE facebook_id = $1';
       const params = [profile.id];
       let user = await db
         .query(findUser, params)
@@ -114,17 +114,25 @@ passport.use(
   )
 );
 
-app.get("/auth/facebook", passport.authenticate("facebook"));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
   function (req, res) {
-    // Successful authentication, redirect home.
-    res.locals.user = req.user;
-    console.log("req user", res.locals);
-    res.redirect("http://localhost:8080/");
+    res.redirect('http://localhost:8080/');
   }
 );
+
+// app.get(
+//   '/auth/facebook/callback',
+//   passport.authenticate('facebook', { failureRedirect: '/' }),
+//   function (req, res) {
+//     req.login(req.user, (err) => {
+//       if (err) return err;
+//       res.redirect('http://localhost:8080/');
+//     });
+//   }
+// );
 
 module.exports = app;
