@@ -28,6 +28,7 @@ const MapContainer = ({
   visited,
   setVisited,
   setCurrentSel,
+  currentUser,
 }: MapContainerProps) => {
   const handleClick = (evt: React.MouseEvent) => {
     if (!(evt.target as HTMLElement)?.classList.contains("datamaps-subunit"))
@@ -58,6 +59,7 @@ const MapContainer = ({
                 visited={visited}
                 setVisited={setVisited}
                 setCurrentSel={setCurrentSel}
+                currentUser={currentUser}
               />
             </TransformComponent>
             <MapTools
