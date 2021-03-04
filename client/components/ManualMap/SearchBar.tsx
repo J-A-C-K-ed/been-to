@@ -90,6 +90,7 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
     const countryEl = document.querySelector(`.${searchCode}`);
     if (!countryEl) return;
     focusCountry(countryEl);
+    setFocused(false);
   };
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
@@ -106,10 +107,10 @@ const SearchBar = ({ setTransform, coords }: SearchBarProps) => {
     setSuggestions(fuse.search(newInput, { limit: 5 }).map((match) => match.item));
   };
 
-  const goToSuggestion = (countryName:string) => {
-    setUserInput(countryName)
-    search(countryName)
-  }
+  const goToSuggestion = (countryName: string) => {
+    setUserInput(countryName);
+    search(countryName);
+  };
 
   return (
     <ClickAwayListener onClickAway={() => setFocused(false)}>
