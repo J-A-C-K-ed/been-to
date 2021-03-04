@@ -1,19 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Paper } from '@material-ui/core';
 import countryPaths from './Countries';
-
-// interface Position {
-//   x: number;
-//   y: number;
-// }
-
-// const CursorTooltip = styled(Paper)<{ $pos: Position }>`
-//   position: fixed;
-//   top: ${({ $pos: { y } }) => y}px;
-//   left: ${({ $pos: { x } }) => x}px;
-//   padding: 7px;
-// `;
 
 interface CountryProps {
   country: string;
@@ -24,9 +11,11 @@ interface CountryProps {
 const Country = ({ country, isVisited, clickHandler }: CountryProps) =>
   countryPaths[country](isVisited, clickHandler);
 
+const MercatorAspectRatio = 568 / 360.94;
+
 const StyledMap = styled.svg`
-  width: 1778.245691804732;
-  height: 1352;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 `;
 
@@ -41,7 +30,7 @@ interface MapProps {
 }
 
 const Map = ({ visited, setVisited }: MapProps) => (
-  <StyledMap>
+  <StyledMap viewBox="0 0 1778.245691804732 1352">
     <g>
       {Object.keys(countryPaths).map((country) => (
         <Country

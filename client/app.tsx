@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserIcon from './components/UserIcon';
 import UserBadgeDropdown from './components/UserBadgeDropdown';
+import MapWrapper from './components/MapContainer'
 import TripDetailsForm from './components/TripDetailsForm/TripDetailsForm';
-// import Map from './components/Map';
-import ManualMap from './components/ManualMap/Map';
-import Hover from './components/Hover';
 
 // alternative: https://www.npmjs.com/package/react-device-detect
 // https://medium.com/simplejs/detect-the-users-device-type-with-a-simple-javascript-check-4fc656b735e1
@@ -35,7 +33,6 @@ const StyledUserIcon = styled(UserIcon)`
 
 const App = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
-  const [hoveredCountry, setHoveredCountry] = useState('');
   const [visited, setVisited] = useState<string[]>([]);
 
   return (
@@ -47,9 +44,7 @@ const App = () => {
         <UserBadgeDropdown />
       </div>
       {showForm ? <TripDetailsForm /> : null}
-      {/* <Map visited={visited} setVisited={setVisited} setHovered={setHoveredCountry} /> */}
-      <ManualMap visited={visited} setVisited={setVisited} />
-      {!isMobile() ? <Hover country={hoveredCountry} /> : null}
+      <MapWrapper visited={visited} setVisited={setVisited} />
     </>
   );
 };

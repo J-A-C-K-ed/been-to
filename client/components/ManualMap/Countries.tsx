@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import { Tooltip } from '@material-ui/core';
 
 const StyledPath = styled.path<{ $isVisited: boolean }>`
-  fill: ${({ $isVisited }) => ($isVisited ? 'red' : 'rgb(148, 210, 165)')};
+  fill: ${({ $isVisited }) => ($isVisited ? 'orange' : 'rgb(148, 210, 165)')};
   stroke: rgb(115, 156, 126);
   stroke-opacity: 1;
   stroke-width: 0.5;
   cursor: pointer;
 
   &:hover {
-    fill: rgb(80, 155, 100);
     stroke-width: 2;
   }
 `;
