@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserIcon from './components/UserIcon';
 import UserBadgeDropdown from './components/UserBadgeDropdown';
-import MapWrapper from './components/MapContainer'
+import MapWrapper from './components/MapContainer';
 import TripDetailsForm from './components/TripDetailsForm/TripDetailsForm';
 
 // alternative: https://www.npmjs.com/package/react-device-detect
@@ -40,9 +40,9 @@ const App = () => {
       {/* <div style={{ marginLeft: '95%' }}> */}
       <StyledUserIcon />
       {/* </div> */}
-      <div style={{ marginLeft: '95%', marginTop: '20%' }}>
-        <UserBadgeDropdown />
-      </div>
+      {/* <div style={{ marginLeft: '95%', marginTop: '20%' }}> */}
+      <UserBadgeDropdown />
+      {/* </div> */}
       {showForm ? <TripDetailsForm /> : null}
       <MapWrapper visited={visited} setVisited={setVisited} />
     </>

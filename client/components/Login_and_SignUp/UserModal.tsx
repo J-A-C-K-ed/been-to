@@ -22,10 +22,8 @@ const UserModal: React.FC<any> = (props) => {
   return (
     <div className='userIcon'>
       <Tooltip title='User' aria-label='add'>
-        <Fab color='primary' className={classes.fab}>
-          <AccountCircleIcon
-            onClick={(event: any) => props.handleClick(event)}
-          />
+        <Fab color='primary' className={classes.fab} onClick={(event: any) => props.handleClick(event)}>
+          <AccountCircleIcon />
         </Fab>
       </Tooltip>
     </div>
