@@ -10,10 +10,8 @@ router.post('/update', locationController.updateLocations, (req, res) =>
 );
 
 // delete a location
-router.delete(
-  '/delete',
-  locationController.deleteLocation,
-  (req, res) => res.status(200).json(res.locals.countryCodes)
+router.delete('/delete', locationController.deleteLocation, (req, res) =>
+  res.status(200).json(res.locals.countryCodes)
 );
 
 module.exports = router;
