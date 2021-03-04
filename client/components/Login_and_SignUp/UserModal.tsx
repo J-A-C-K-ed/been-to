@@ -10,6 +10,7 @@ const UserModal: React.FC<any> = (props) => {
       fab: {
         margin: theme.spacing(2),
         position: 'fixed',
+        zIndex: 10,
         top: "15px",
         right:"15px"
       },
