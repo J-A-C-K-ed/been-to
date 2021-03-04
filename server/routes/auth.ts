@@ -1,22 +1,32 @@
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
-import express from 'express';
+import express from "express";
+const cors = require("cors");
 
-const passport = require('passport');
+const passport = require("passport");
 
-const session = require('express-session');
+<<<<<<< HEAD
+=======
+const session = require("express-session");
 
+>>>>>>> main
 // const InstagramStrategy = require('passport-instagram').Strategy;
 
-const FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 
-const db = require('../models/UserModel.ts');
+const db = require("../models/UserModel.ts");
 
-const variables = require('../../settings.ts');
+const variables = require("../../settings.ts");
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+
+app.use("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 passport.serializeUser(function (
   user: any,
@@ -46,8 +56,8 @@ app.get('/user/get', function (req, res) {
   res.render('account', { user: req.user });
 });
 
-app.get('/user', (req: express.Request, res, next) => {
-  console.log('in /user');
+app.get("/user", (req: express.Request, res, next) => {
+  console.log("in /user");
   if (!req.user) {
     console.log('error ocurred');
     res.status(300).send('no user found');
@@ -56,6 +66,13 @@ app.get('/user', (req: express.Request, res, next) => {
     res.status(200).json(req.user);
   }
 });
+
+// let URL: string;
+// if (process.env.NODE_ENV === 'development') {
+//   URL = 'localhost:3000';
+// } else {
+//   URL = 'localhost:8080';
+// }
 
 passport.use(
   new FacebookStrategy(

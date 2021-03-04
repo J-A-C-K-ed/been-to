@@ -23,6 +23,7 @@ const StyledDialog = styled(Dialog)`
 
 interface LoginModalProps {
   setCurrentUser: (code: string) => void;
+  setCurrentUserID: (code: any) => void;
   setVisited: (codes: string[]) => void;
   visited: string[];
 }
@@ -42,6 +43,10 @@ const LoginModal: React.FC<any> = ({
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    setOpen(false);
     fetch("/user/get", {
       method: "POST",
       headers: {
@@ -55,8 +60,9 @@ const LoginModal: React.FC<any> = ({
       .then((data) => data.json())
       .then((res) => {
         setCurrentUser(username);
+        // setCurrentUserID()
         console.log("this is the res", res);
-        setVisited(res);
+        setVisited(res.countrycodes);
       })
       .catch((err) => {
         console.error(
@@ -101,7 +107,7 @@ const LoginModal: React.FC<any> = ({
           <Button onClick={handleClose} color='primary'>
             Cancel
           </Button>
-          <Button onClick={handleClose} color='primary'>
+          <Button onClick={handleSubmit} color='primary'>
             Submit
           </Button>
         </DialogActions>
