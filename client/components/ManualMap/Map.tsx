@@ -11,8 +11,6 @@ interface CountryProps {
 const Country = ({ country, isVisited, clickHandler }: CountryProps) =>
   countryPaths[country](isVisited, clickHandler);
 
-const MercatorAspectRatio = 568 / 360.94;
-
 const StyledMap = styled.svg`
   width: 100vw;
   height: 100vh;
@@ -45,4 +43,3 @@ const Map = ({ visited, setVisited }: MapProps) => (
 );
 
 export default Map;
-// transform-origin: 0px 0px;

@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Map from './ManualMap/Map';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
-// import countries from '../countries';
-
 const FullContainer = styled.div`
   position: fixed;
   top: 0;

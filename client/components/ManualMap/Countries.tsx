@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Tooltip } from '@material-ui/core';
 
+import countryNames from '../../countries'
+
 const StyledPath = styled.path<{ $isVisited: boolean }>`
   fill: ${({ $isVisited }) => ($isVisited ? 'orange' : 'rgb(148, 210, 165)')};
   stroke: rgb(115, 156, 126);
@@ -19,7 +21,7 @@ const countryPaths: Record<
   (isVisited: boolean, clickHandler: () => void) => JSX.Element
 > = {
   ALB: (isVisited, clickHandler) => (
-    <Tooltip title="ALB">
+    <Tooltip title={countryNames.ALB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -29,7 +31,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ARE: (isVisited, clickHandler) => (
-    <Tooltip title="ARE">
+    <Tooltip title={countryNames.ARE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -39,7 +41,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ARG: (isVisited, clickHandler) => (
-    <Tooltip title="ARG">
+    <Tooltip title={countryNames.ARG || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -49,7 +51,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ARM: (isVisited, clickHandler) => (
-    <Tooltip title="ARM">
+    <Tooltip title={countryNames.ARM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -59,7 +61,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ATF: (isVisited, clickHandler) => (
-    <Tooltip title="ATF">
+    <Tooltip title={countryNames.ATF || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -69,7 +71,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   AUS: (isVisited, clickHandler) => (
-    <Tooltip title="AUS">
+    <Tooltip title={countryNames.AUS || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -79,7 +81,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   AUT: (isVisited, clickHandler) => (
-    <Tooltip title="AUT">
+    <Tooltip title={countryNames.AUT || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -89,7 +91,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   AZE: (isVisited, clickHandler) => (
-    <Tooltip title="AZE">
+    <Tooltip title={countryNames.AZE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -99,7 +101,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BDI: (isVisited, clickHandler) => (
-    <Tooltip title="BDI">
+    <Tooltip title={countryNames.BDI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -109,7 +111,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BEL: (isVisited, clickHandler) => (
-    <Tooltip title="BEL">
+    <Tooltip title={countryNames.BEL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -119,7 +121,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BEN: (isVisited, clickHandler) => (
-    <Tooltip title="BEN">
+    <Tooltip title={countryNames.BEN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -129,7 +131,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BFA: (isVisited, clickHandler) => (
-    <Tooltip title="BFA">
+    <Tooltip title={countryNames.BFA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -139,7 +141,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BGD: (isVisited, clickHandler) => (
-    <Tooltip title="BGD">
+    <Tooltip title={countryNames.BGD || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -149,7 +151,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BGR: (isVisited, clickHandler) => (
-    <Tooltip title="BGR">
+    <Tooltip title={countryNames.BGR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -159,7 +161,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BHS: (isVisited, clickHandler) => (
-    <Tooltip title="BHS">
+    <Tooltip title={countryNames.BHS || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -169,7 +171,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BIH: (isVisited, clickHandler) => (
-    <Tooltip title="BIH">
+    <Tooltip title={countryNames.BIH || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -179,7 +181,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BLR: (isVisited, clickHandler) => (
-    <Tooltip title="BLR">
+    <Tooltip title={countryNames.BLR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -189,7 +191,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BLZ: (isVisited, clickHandler) => (
-    <Tooltip title="BLZ">
+    <Tooltip title={countryNames.BLZ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -199,7 +201,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BOL: (isVisited, clickHandler) => (
-    <Tooltip title="BOL">
+    <Tooltip title={countryNames.BOL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -209,7 +211,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BRA: (isVisited, clickHandler) => (
-    <Tooltip title="BRA">
+    <Tooltip title={countryNames.BRA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -219,7 +221,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BRN: (isVisited, clickHandler) => (
-    <Tooltip title="BRN">
+    <Tooltip title={countryNames.BRN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -229,7 +231,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BTN: (isVisited, clickHandler) => (
-    <Tooltip title="BTN">
+    <Tooltip title={countryNames.BTN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -239,7 +241,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   BWA: (isVisited, clickHandler) => (
-    <Tooltip title="BWA">
+    <Tooltip title={countryNames.BWA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -249,7 +251,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CAN: (isVisited, clickHandler) => (
-    <Tooltip title="CAN">
+    <Tooltip title={countryNames.CAN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -259,7 +261,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CHE: (isVisited, clickHandler) => (
-    <Tooltip title="CHE">
+    <Tooltip title={countryNames.CHE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -269,7 +271,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CHL: (isVisited, clickHandler) => (
-    <Tooltip title="CHL">
+    <Tooltip title={countryNames.CHL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -279,7 +281,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CIV: (isVisited, clickHandler) => (
-    <Tooltip title="CIV">
+    <Tooltip title={countryNames.CIV || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -289,7 +291,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CMR: (isVisited, clickHandler) => (
-    <Tooltip title="CMR">
+    <Tooltip title={countryNames.CMR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -299,7 +301,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   COL: (isVisited, clickHandler) => (
-    <Tooltip title="COL">
+    <Tooltip title={countryNames.COL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -309,7 +311,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CRI: (isVisited, clickHandler) => (
-    <Tooltip title="CRI">
+    <Tooltip title={countryNames.CRI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -319,7 +321,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CUB: (isVisited, clickHandler) => (
-    <Tooltip title="CUB">
+    <Tooltip title={countryNames.CUB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -329,7 +331,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CYP: (isVisited, clickHandler) => (
-    <Tooltip title="CYP">
+    <Tooltip title={countryNames.CYP || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -339,7 +341,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CZE: (isVisited, clickHandler) => (
-    <Tooltip title="CZE">
+    <Tooltip title={countryNames.CZE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -349,7 +351,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   DEU: (isVisited, clickHandler) => (
-    <Tooltip title="DEU">
+    <Tooltip title={countryNames.DEU || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -359,7 +361,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   DJI: (isVisited, clickHandler) => (
-    <Tooltip title="DJI">
+    <Tooltip title={countryNames.DJI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -369,7 +371,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   DNK: (isVisited, clickHandler) => (
-    <Tooltip title="DNK">
+    <Tooltip title={countryNames.DNK || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -379,7 +381,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   DOM: (isVisited, clickHandler) => (
-    <Tooltip title="DOM">
+    <Tooltip title={countryNames.DOM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -389,7 +391,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ECU: (isVisited, clickHandler) => (
-    <Tooltip title="ECU">
+    <Tooltip title={countryNames.ECU || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -399,7 +401,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   EGY: (isVisited, clickHandler) => (
-    <Tooltip title="EGY">
+    <Tooltip title={countryNames.EGY || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -409,7 +411,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ERI: (isVisited, clickHandler) => (
-    <Tooltip title="ERI">
+    <Tooltip title={countryNames.ERI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -419,7 +421,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ESP: (isVisited, clickHandler) => (
-    <Tooltip title="ESP">
+    <Tooltip title={countryNames.ESP || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -429,7 +431,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   EST: (isVisited, clickHandler) => (
-    <Tooltip title="EST">
+    <Tooltip title={countryNames.EST || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -439,7 +441,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   FIN: (isVisited, clickHandler) => (
-    <Tooltip title="FIN">
+    <Tooltip title={countryNames.FIN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -449,7 +451,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   FJI: (isVisited, clickHandler) => (
-    <Tooltip title="FJI">
+    <Tooltip title={countryNames.FJI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -459,7 +461,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   FLK: (isVisited, clickHandler) => (
-    <Tooltip title="FLK">
+    <Tooltip title={countryNames.FLK || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -469,7 +471,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   FRA: (isVisited, clickHandler) => (
-    <Tooltip title="FRA">
+    <Tooltip title={countryNames.FRA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -479,7 +481,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GUF: (isVisited, clickHandler) => (
-    <Tooltip title="GUF">
+    <Tooltip title={countryNames.GUF || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -489,7 +491,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GBR: (isVisited, clickHandler) => (
-    <Tooltip title="GBR">
+    <Tooltip title={countryNames.GBR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -499,7 +501,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GEO: (isVisited, clickHandler) => (
-    <Tooltip title="GEO">
+    <Tooltip title={countryNames.GEO || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -509,7 +511,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GHA: (isVisited, clickHandler) => (
-    <Tooltip title="GHA">
+    <Tooltip title={countryNames.GHA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -519,7 +521,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GMB: (isVisited, clickHandler) => (
-    <Tooltip title="GMB">
+    <Tooltip title={countryNames.GMB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -529,7 +531,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GNB: (isVisited, clickHandler) => (
-    <Tooltip title="GNB">
+    <Tooltip title={countryNames.GNB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -539,7 +541,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GNQ: (isVisited, clickHandler) => (
-    <Tooltip title="GNQ">
+    <Tooltip title={countryNames.GNQ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -549,7 +551,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GRC: (isVisited, clickHandler) => (
-    <Tooltip title="GRC">
+    <Tooltip title={countryNames.GRC || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -559,7 +561,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GTM: (isVisited, clickHandler) => (
-    <Tooltip title="GTM">
+    <Tooltip title={countryNames.GTM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -569,7 +571,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GUY: (isVisited, clickHandler) => (
-    <Tooltip title="GUY">
+    <Tooltip title={countryNames.GUY || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -579,7 +581,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   HND: (isVisited, clickHandler) => (
-    <Tooltip title="HND">
+    <Tooltip title={countryNames.HND || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -589,7 +591,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   HRV: (isVisited, clickHandler) => (
-    <Tooltip title="HRV">
+    <Tooltip title={countryNames.HRV || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -599,7 +601,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   HTI: (isVisited, clickHandler) => (
-    <Tooltip title="HTI">
+    <Tooltip title={countryNames.HTI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -609,7 +611,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   HUN: (isVisited, clickHandler) => (
-    <Tooltip title="HUN">
+    <Tooltip title={countryNames.HUN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -619,7 +621,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   IDN: (isVisited, clickHandler) => (
-    <Tooltip title="IDN">
+    <Tooltip title={countryNames.IDN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -629,7 +631,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   IRL: (isVisited, clickHandler) => (
-    <Tooltip title="IRL">
+    <Tooltip title={countryNames.IRL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -639,7 +641,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ISL: (isVisited, clickHandler) => (
-    <Tooltip title="ISL">
+    <Tooltip title={countryNames.ISL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -649,7 +651,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ISR: (isVisited, clickHandler) => (
-    <Tooltip title="ISR">
+    <Tooltip title={countryNames.ISR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -659,7 +661,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ITA: (isVisited, clickHandler) => (
-    <Tooltip title="ITA">
+    <Tooltip title={countryNames.ITA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -669,7 +671,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   JAM: (isVisited, clickHandler) => (
-    <Tooltip title="JAM">
+    <Tooltip title={countryNames.JAM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -679,7 +681,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   JOR: (isVisited, clickHandler) => (
-    <Tooltip title="JOR">
+    <Tooltip title={countryNames.JOR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -689,7 +691,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   JPN: (isVisited, clickHandler) => (
-    <Tooltip title="JPN">
+    <Tooltip title={countryNames.JPN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -699,7 +701,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   KEN: (isVisited, clickHandler) => (
-    <Tooltip title="KEN">
+    <Tooltip title={countryNames.KEN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -709,7 +711,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   KHM: (isVisited, clickHandler) => (
-    <Tooltip title="KHM">
+    <Tooltip title={countryNames.KHM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -719,7 +721,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   KOR: (isVisited, clickHandler) => (
-    <Tooltip title="KOR">
+    <Tooltip title={countryNames.KOR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -729,7 +731,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   KWT: (isVisited, clickHandler) => (
-    <Tooltip title="KWT">
+    <Tooltip title={countryNames.KWT || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -739,7 +741,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LAO: (isVisited, clickHandler) => (
-    <Tooltip title="LAO">
+    <Tooltip title={countryNames.LAO || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -749,7 +751,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LBN: (isVisited, clickHandler) => (
-    <Tooltip title="LBN">
+    <Tooltip title={countryNames.LBN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -759,7 +761,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LBR: (isVisited, clickHandler) => (
-    <Tooltip title="LBR">
+    <Tooltip title={countryNames.LBR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -769,7 +771,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LKA: (isVisited, clickHandler) => (
-    <Tooltip title="LKA">
+    <Tooltip title={countryNames.LKA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -779,7 +781,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LSO: (isVisited, clickHandler) => (
-    <Tooltip title="LSO">
+    <Tooltip title={countryNames.LSO || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -789,7 +791,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LTU: (isVisited, clickHandler) => (
-    <Tooltip title="LTU">
+    <Tooltip title={countryNames.LTU || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -799,7 +801,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LUX: (isVisited, clickHandler) => (
-    <Tooltip title="LUX">
+    <Tooltip title={countryNames.LUX || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -809,7 +811,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LVA: (isVisited, clickHandler) => (
-    <Tooltip title="LVA">
+    <Tooltip title={countryNames.LVA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -819,7 +821,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MAR: (isVisited, clickHandler) => (
-    <Tooltip title="MAR">
+    <Tooltip title={countryNames.MAR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -829,7 +831,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MDA: (isVisited, clickHandler) => (
-    <Tooltip title="MDA">
+    <Tooltip title={countryNames.MDA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -839,7 +841,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MDG: (isVisited, clickHandler) => (
-    <Tooltip title="MDG">
+    <Tooltip title={countryNames.MDG || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -849,7 +851,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MEX: (isVisited, clickHandler) => (
-    <Tooltip title="MEX">
+    <Tooltip title={countryNames.MEX || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -859,7 +861,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MKD: (isVisited, clickHandler) => (
-    <Tooltip title="MKD">
+    <Tooltip title={countryNames.MKD || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -869,7 +871,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MMR: (isVisited, clickHandler) => (
-    <Tooltip title="MMR">
+    <Tooltip title={countryNames.MMR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -879,7 +881,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MNE: (isVisited, clickHandler) => (
-    <Tooltip title="MNE">
+    <Tooltip title={countryNames.MNE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -889,7 +891,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MNG: (isVisited, clickHandler) => (
-    <Tooltip title="MNG">
+    <Tooltip title={countryNames.MNG || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -899,7 +901,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MOZ: (isVisited, clickHandler) => (
-    <Tooltip title="MOZ">
+    <Tooltip title={countryNames.MOZ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -909,7 +911,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MWI: (isVisited, clickHandler) => (
-    <Tooltip title="MWI">
+    <Tooltip title={countryNames.MWI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -919,7 +921,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MYS: (isVisited, clickHandler) => (
-    <Tooltip title="MYS">
+    <Tooltip title={countryNames.MYS || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -929,7 +931,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NAM: (isVisited, clickHandler) => (
-    <Tooltip title="NAM">
+    <Tooltip title={countryNames.NAM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -939,7 +941,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NCL: (isVisited, clickHandler) => (
-    <Tooltip title="NCL">
+    <Tooltip title={countryNames.NCL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -949,7 +951,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NIC: (isVisited, clickHandler) => (
-    <Tooltip title="NIC">
+    <Tooltip title={countryNames.NIC || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -959,7 +961,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NLD: (isVisited, clickHandler) => (
-    <Tooltip title="NLD">
+    <Tooltip title={countryNames.NLD || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -969,7 +971,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NOR: (isVisited, clickHandler) => (
-    <Tooltip title="NOR">
+    <Tooltip title={countryNames.NOR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -979,7 +981,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NPL: (isVisited, clickHandler) => (
-    <Tooltip title="NPL">
+    <Tooltip title={countryNames.NPL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -989,7 +991,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NZL: (isVisited, clickHandler) => (
-    <Tooltip title="NZL">
+    <Tooltip title={countryNames.NZL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -999,7 +1001,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PAN: (isVisited, clickHandler) => (
-    <Tooltip title="PAN">
+    <Tooltip title={countryNames.PAN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1009,7 +1011,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PER: (isVisited, clickHandler) => (
-    <Tooltip title="PER">
+    <Tooltip title={countryNames.PER || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1019,7 +1021,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PHL: (isVisited, clickHandler) => (
-    <Tooltip title="PHL">
+    <Tooltip title={countryNames.PHL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1029,7 +1031,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PNG: (isVisited, clickHandler) => (
-    <Tooltip title="PNG">
+    <Tooltip title={countryNames.PNG || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1039,7 +1041,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   POL: (isVisited, clickHandler) => (
-    <Tooltip title="POL">
+    <Tooltip title={countryNames.POL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1049,7 +1051,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PRI: (isVisited, clickHandler) => (
-    <Tooltip title="PRI">
+    <Tooltip title={countryNames.PRI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1059,7 +1061,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PRK: (isVisited, clickHandler) => (
-    <Tooltip title="PRK">
+    <Tooltip title={countryNames.PRK || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1069,7 +1071,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PRT: (isVisited, clickHandler) => (
-    <Tooltip title="PRT">
+    <Tooltip title={countryNames.PRT || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1079,7 +1081,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PRY: (isVisited, clickHandler) => (
-    <Tooltip title="PRY">
+    <Tooltip title={countryNames.PRY || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1089,7 +1091,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   QAT: (isVisited, clickHandler) => (
-    <Tooltip title="QAT">
+    <Tooltip title={countryNames.QAT || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1099,7 +1101,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ROU: (isVisited, clickHandler) => (
-    <Tooltip title="ROU">
+    <Tooltip title={countryNames.ROU || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1109,7 +1111,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   RWA: (isVisited, clickHandler) => (
-    <Tooltip title="RWA">
+    <Tooltip title={countryNames.RWA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1119,7 +1121,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ESH: (isVisited, clickHandler) => (
-    <Tooltip title="ESH">
+    <Tooltip title={countryNames.ESH || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1129,7 +1131,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SEN: (isVisited, clickHandler) => (
-    <Tooltip title="SEN">
+    <Tooltip title={countryNames.SEN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1139,7 +1141,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SLB: (isVisited, clickHandler) => (
-    <Tooltip title="SLB">
+    <Tooltip title={countryNames.SLB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1149,7 +1151,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SLE: (isVisited, clickHandler) => (
-    <Tooltip title="SLE">
+    <Tooltip title={countryNames.SLE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1159,7 +1161,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SLV: (isVisited, clickHandler) => (
-    <Tooltip title="SLV">
+    <Tooltip title={countryNames.SLV || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1169,7 +1171,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SOM: (isVisited, clickHandler) => (
-    <Tooltip title="SOM">
+    <Tooltip title={countryNames.SOM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1179,7 +1181,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SRB: (isVisited, clickHandler) => (
-    <Tooltip title="SRB">
+    <Tooltip title={countryNames.SRB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1189,7 +1191,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SUR: (isVisited, clickHandler) => (
-    <Tooltip title="SUR">
+    <Tooltip title={countryNames.SUR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1199,7 +1201,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SVK: (isVisited, clickHandler) => (
-    <Tooltip title="SVK">
+    <Tooltip title={countryNames.SVK || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1209,7 +1211,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SVN: (isVisited, clickHandler) => (
-    <Tooltip title="SVN">
+    <Tooltip title={countryNames.SVN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1219,7 +1221,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SWE: (isVisited, clickHandler) => (
-    <Tooltip title="SWE">
+    <Tooltip title={countryNames.SWE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1229,7 +1231,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SWZ: (isVisited, clickHandler) => (
-    <Tooltip title="SWZ">
+    <Tooltip title={countryNames.SWZ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1239,7 +1241,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TGO: (isVisited, clickHandler) => (
-    <Tooltip title="TGO">
+    <Tooltip title={countryNames.TGO || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1249,7 +1251,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   THA: (isVisited, clickHandler) => (
-    <Tooltip title="THA">
+    <Tooltip title={countryNames.THA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1259,7 +1261,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TJK: (isVisited, clickHandler) => (
-    <Tooltip title="TJK">
+    <Tooltip title={countryNames.TJK || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1269,7 +1271,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TKM: (isVisited, clickHandler) => (
-    <Tooltip title="TKM">
+    <Tooltip title={countryNames.TKM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1279,7 +1281,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TLS: (isVisited, clickHandler) => (
-    <Tooltip title="TLS">
+    <Tooltip title={countryNames.TLS || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1289,7 +1291,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TTO: (isVisited, clickHandler) => (
-    <Tooltip title="TTO">
+    <Tooltip title={countryNames.TTO || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1299,7 +1301,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TUN: (isVisited, clickHandler) => (
-    <Tooltip title="TUN">
+    <Tooltip title={countryNames.TUN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1309,7 +1311,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TUR: (isVisited, clickHandler) => (
-    <Tooltip title="TUR">
+    <Tooltip title={countryNames.TUR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1319,7 +1321,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TWN: (isVisited, clickHandler) => (
-    <Tooltip title="TWN">
+    <Tooltip title={countryNames.TWN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1329,7 +1331,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TZA: (isVisited, clickHandler) => (
-    <Tooltip title="TZA">
+    <Tooltip title={countryNames.TZA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1339,7 +1341,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   UGA: (isVisited, clickHandler) => (
-    <Tooltip title="UGA">
+    <Tooltip title={countryNames.UGA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1349,7 +1351,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   UKR: (isVisited, clickHandler) => (
-    <Tooltip title="UKR">
+    <Tooltip title={countryNames.UKR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1359,7 +1361,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   URY: (isVisited, clickHandler) => (
-    <Tooltip title="URY">
+    <Tooltip title={countryNames.URY || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1369,7 +1371,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   USA: (isVisited, clickHandler) => (
-    <Tooltip title="USA">
+    <Tooltip title={countryNames.USA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1379,7 +1381,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   VEN: (isVisited, clickHandler) => (
-    <Tooltip title="VEN">
+    <Tooltip title={countryNames.VEN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1389,7 +1391,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   VNM: (isVisited, clickHandler) => (
-    <Tooltip title="VNM">
+    <Tooltip title={countryNames.VNM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1399,7 +1401,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   VUT: (isVisited, clickHandler) => (
-    <Tooltip title="VUT">
+    <Tooltip title={countryNames.VUT || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1409,7 +1411,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PSE: (isVisited, clickHandler) => (
-    <Tooltip title="PSE">
+    <Tooltip title={countryNames.PSE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1419,7 +1421,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   YEM: (isVisited, clickHandler) => (
-    <Tooltip title="YEM">
+    <Tooltip title={countryNames.YEM || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1429,7 +1431,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ZAF: (isVisited, clickHandler) => (
-    <Tooltip title="ZAF">
+    <Tooltip title={countryNames.ZAF || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1439,7 +1441,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ZMB: (isVisited, clickHandler) => (
-    <Tooltip title="ZMB">
+    <Tooltip title={countryNames.ZMB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1449,7 +1451,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ZWE: (isVisited, clickHandler) => (
-    <Tooltip title="ZWE">
+    <Tooltip title={countryNames.ZWE || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1459,7 +1461,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   PAK: (isVisited, clickHandler) => (
-    <Tooltip title="PAK">
+    <Tooltip title={countryNames.PAK || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1469,7 +1471,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   IRQ: (isVisited, clickHandler) => (
-    <Tooltip title="IRQ">
+    <Tooltip title={countryNames.IRQ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1479,7 +1481,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SYR: (isVisited, clickHandler) => (
-    <Tooltip title="SYR">
+    <Tooltip title={countryNames.SYR || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1489,7 +1491,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NGA: (isVisited, clickHandler) => (
-    <Tooltip title="NGA">
+    <Tooltip title={countryNames.NGA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1499,7 +1501,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GAB: (isVisited, clickHandler) => (
-    <Tooltip title="GAB">
+    <Tooltip title={countryNames.GAB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1509,7 +1511,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   COG: (isVisited, clickHandler) => (
-    <Tooltip title="COG">
+    <Tooltip title={countryNames.COG || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1519,7 +1521,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   NER: (isVisited, clickHandler) => (
-    <Tooltip title="NER">
+    <Tooltip title={countryNames.NER || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1529,7 +1531,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   AGO: (isVisited, clickHandler) => (
-    <Tooltip title="AGO">
+    <Tooltip title={countryNames.AGO || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1539,7 +1541,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GIN: (isVisited, clickHandler) => (
-    <Tooltip title="GIN">
+    <Tooltip title={countryNames.GIN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1549,7 +1551,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MRT: (isVisited, clickHandler) => (
-    <Tooltip title="MRT">
+    <Tooltip title={countryNames.MRT || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1559,7 +1561,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   MLI: (isVisited, clickHandler) => (
-    <Tooltip title="MLI">
+    <Tooltip title={countryNames.MLI || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1569,7 +1571,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   DZA: (isVisited, clickHandler) => (
-    <Tooltip title="DZA">
+    <Tooltip title={countryNames.DZA || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1579,7 +1581,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   LBY: (isVisited, clickHandler) => (
-    <Tooltip title="LBY">
+    <Tooltip title={countryNames.LBY || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1589,7 +1591,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   TCD: (isVisited, clickHandler) => (
-    <Tooltip title="TCD">
+    <Tooltip title={countryNames.TCD || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1599,7 +1601,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SDN: (isVisited, clickHandler) => (
-    <Tooltip title="SDN">
+    <Tooltip title={countryNames.SDN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1609,7 +1611,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CAF: (isVisited, clickHandler) => (
-    <Tooltip title="CAF">
+    <Tooltip title={countryNames.CAF || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1619,7 +1621,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   COD: (isVisited, clickHandler) => (
-    <Tooltip title="COD">
+    <Tooltip title={countryNames.COD || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1629,7 +1631,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SSD: (isVisited, clickHandler) => (
-    <Tooltip title="SSD">
+    <Tooltip title={countryNames.SSD || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1639,7 +1641,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   ETH: (isVisited, clickHandler) => (
-    <Tooltip title="ETH">
+    <Tooltip title={countryNames.ETH || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1649,7 +1651,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   SAU: (isVisited, clickHandler) => (
-    <Tooltip title="SAU">
+    <Tooltip title={countryNames.SAU || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1659,7 +1661,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   OMN: (isVisited, clickHandler) => (
-    <Tooltip title="OMN">
+    <Tooltip title={countryNames.OMN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1669,7 +1671,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   IRN: (isVisited, clickHandler) => (
-    <Tooltip title="IRN">
+    <Tooltip title={countryNames.IRN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1679,7 +1681,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   AFG: (isVisited, clickHandler) => (
-    <Tooltip title="AFG">
+    <Tooltip title={countryNames.AFG || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1689,7 +1691,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   UZB: (isVisited, clickHandler) => (
-    <Tooltip title="UZB">
+    <Tooltip title={countryNames.UZB || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1699,7 +1701,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   KAZ: (isVisited, clickHandler) => (
-    <Tooltip title="KAZ">
+    <Tooltip title={countryNames.KAZ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1709,7 +1711,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   KGZ: (isVisited, clickHandler) => (
-    <Tooltip title="KGZ">
+    <Tooltip title={countryNames.KGZ || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1719,7 +1721,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   CHN: (isVisited, clickHandler) => (
-    <Tooltip title="CHN">
+    <Tooltip title={countryNames.CHN || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1729,7 +1731,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   IND: (isVisited, clickHandler) => (
-    <Tooltip title="IND">
+    <Tooltip title={countryNames.IND || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1739,7 +1741,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   GRL: (isVisited, clickHandler) => (
-    <Tooltip title="GRL">
+    <Tooltip title={countryNames.GRL || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
@@ -1749,7 +1751,7 @@ const countryPaths: Record<
     </Tooltip>
   ),
   RUS: (isVisited, clickHandler) => (
-    <Tooltip title="RUS">
+    <Tooltip title={countryNames.RUS || ''}>
       <StyledPath
         onClick={clickHandler}
         $isVisited={isVisited}
