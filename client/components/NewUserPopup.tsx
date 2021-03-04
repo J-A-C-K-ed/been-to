@@ -106,7 +106,7 @@ const NewUserPopUp = ({ setShowPopUp }: NewUserPopUpProps) => {
               <AccountCircleIcon
                 style={{ fontSize: "30px", color: "#9cc0f9" }}
               />
-              Sign up or login here
+              Sign up or login to start pinning trips
             </StyledParagraph>
             <StyledParagraph>
               <MapIcon
@@ -123,11 +123,11 @@ const NewUserPopUp = ({ setShowPopUp }: NewUserPopUpProps) => {
             </StyledParagraph>
           </div>
           <StyledParagraph>
-            <StyledBadge badgeContent={1} color='secondary'>
-              <StyledExploreIcon
-                style={{ fontSize: "30px", color: "rgb(115, 156, 126)" }}
-              />
-            </StyledBadge>{" "}
+            {/* <StyledBadge badgeContent={1} color='secondary'> */}
+            <StyledExploreIcon
+              style={{ fontSize: "30px", color: "rgb(115, 156, 126)" }}
+            />
+            {/* </StyledBadge>{" "} */}
             Check out your past trips
           </StyledParagraph>
         </StyledDiv>

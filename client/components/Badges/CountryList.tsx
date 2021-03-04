@@ -15,19 +15,21 @@ const StyledButton = styled(Button)`
 `;
 
 const CountryList: React.FC<any> = ({ visited }: CountryListProps) => {
-  let fakeState = ["England", "Japan", "Germany", "Canada"];
-  const [countries, setCountries] = useState<any>(fakeState);
+  const [countries, setCountries] = useState<any>(visited);
   const [filtered, setFiltered] = useState<string>("");
+  console.log(countries);
   const handleClick = () => {
-    let match = countries.filter(
-      (country: string) => country.toLowerCase() === filtered.toLowerCase()
-    )[0];
-    if (match.length > 0) {
+    let match = countries.filter((country: any) => {
+      country = countriesKey[country];
+      return country.toLowerCase() === filtered.toLowerCase();
+    })[0];
+    if (match && match.length > 0) {
       setCountries([match]);
     }
   };
+  console.log(countries);
   const handleReset = () => {
-    setCountries(fakeState);
+    setCountries(visited);
   };
   return (
     <>
@@ -96,7 +98,7 @@ const CountryList: React.FC<any> = ({ visited }: CountryListProps) => {
         </div>
 
         <div>
-          {visited.map((country: any, idx: number) => {
+          {countries.map((country: any, idx: number) => {
             let countryName = !country ? country : countriesKey[country];
             return (
               <CountryListCard

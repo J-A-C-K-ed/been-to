@@ -11,7 +11,7 @@ const StyledPaper = styled(Paper)`
   justify-content: center;
   opacity: 80%;
   font-family: "Arial";
-  padding: 1.2rem 1rem 1.2rem 1rem;
+  padding: 2rem 1rem 2rem 1rem;
 `;
 
 const StyledHeader = styled.h3`
