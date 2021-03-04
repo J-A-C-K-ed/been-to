@@ -15,6 +15,12 @@ router.post(
   (req, res) => res.status(200).json(res.locals.countryCodes)
 );
 
+router.post(
+  '/auth',
+  userController.getFBUser,
+  (req, res) => res.status(200).json(res.locals.countryCodes)
+);
+
 // create new user
 router.post('/create', userController.addUser, (req, res) =>
   res.status(200).json(res.locals.newUser)
