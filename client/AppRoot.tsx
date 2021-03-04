@@ -8,6 +8,7 @@ const App = () => {
   const [currentSel, setCurrentSel] = useState('');
   const [visited, setVisited] = useState<string[]>([]);
 
+
   return (
     <>
       <UserIcon />

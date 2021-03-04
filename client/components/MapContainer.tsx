@@ -1,7 +1,8 @@
-import React, { useState, useEffect, memo } from "react";
-import styled from "styled-components";
-import Map from "./ManualMap/Map";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import React, { useState, useEffect, memo } from 'react';
+import styled from 'styled-components';
+import Map from './ManualMap/Map';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+// import MapTools from './ManualMap/MapTools'
 
 const FullContainer = styled.div`
   position: fixed;
@@ -22,13 +23,9 @@ interface MapContainerProps {
   currentUser: string;
 }
 
-const MapContainer = ({
-  visited,
-  setVisited,
-  setCurrentSel,
-}: MapContainerProps) => {
+const MapContainer = ({ visited, setVisited, setCurrentSel }: MapContainerProps) => {
   const handleOceanClick = (evt: React.MouseEvent) => {
-    setCurrentSel("");
+    setCurrentSel('');
   };
   return (
     <FullContainer onClick={handleOceanClick}>
@@ -42,13 +39,12 @@ const MapContainer = ({
         //   isDragging = true;
         // }}
       >
-        <TransformComponent>
-          <Map
-            visited={visited}
-            setVisited={setVisited}
-            setCurrentSel={setCurrentSel}
-          />
-        </TransformComponent>
+        {({ zoomIn }: {zoomIn: any}) => (
+          <TransformComponent>
+            <Map visited={visited} setVisited={setVisited} setCurrentSel={setCurrentSel} />
+          </TransformComponent>
+          // <MapTools zoomIn={zoomIn} />
+        )}
       </TransformWrapper>
     </FullContainer>
   );
