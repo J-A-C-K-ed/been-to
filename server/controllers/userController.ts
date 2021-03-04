@@ -14,6 +14,12 @@ interface userControllerType {
     res: express.Response,
     next: express.NextFunction
   ) => void;
+
+  getFBUser: (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => void;
 }
 
 // defining our userController object
@@ -62,6 +68,28 @@ const userController: userControllerType = {
         next({ log: `userController.getUser ERROR: ${err}` });
       });
   },
+
+  getFBUser: (req, res, next) => {
+    if (!(req as any)?.sessioniD) return next(res.status(418))
+    const { userName } = req.body;
+    const getQuery = `
+      SELECT * 
+      FROM users
+      WHERE username = $1
+    `;
+
+    const queryParams = [userName];
+    db.query(getQuery, queryParams)
+      .then((data: any) => {
+        console.log('in get user', data.rows[0]);
+        res.locals.countryCodes = data.rows[0];
+        return next();
+      })
+      .catch((err: any) => {
+        console.log(err);
+        next({ log: `userController.getUser ERROR: ${err}` });
+      });
+  }
 };
 
 module.exports = userController;

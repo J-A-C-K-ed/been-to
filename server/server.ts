@@ -32,7 +32,16 @@ app.get("/", (req, res) =>
 app.use("/", authRouter);
 app.use("/user", userRouter);
 app.use("/locations", locationsRouter);
-
+app.get('/user', (req: express.Request, res, next) => {
+  console.log('in /user');
+  if (!req.user) {
+    console.log('error ocurred');
+    res.status(300).send('no user found');
+  } else {
+    console.log('no error');
+    res.status(200).json(req.user);
+  }
+});
 /* catch all */
 
 app.use("*", (req, res) => res.status(404).send("Oops! Wrong page!"));
