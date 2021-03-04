@@ -34,11 +34,19 @@ const BarPaper = styled(Paper)`
   &:focus-within {
     opacity: 1;
   }
+
+  @media (max-width: 500px) {
+    top: 100px;
+  }
 `;
 
 const StyledInput = styled(Input)`
   padding: 5px 10px;
   width: clamp(150px, 50vw, 500px);
+
+  @media (max-width: 500px) {
+    width:  calc(100vw - 100px) ;
+  }
 `;
 
 export interface ZPPState {
