@@ -14,7 +14,13 @@ const StyledPopover = styled(Popover)`
   }
 `;
 
-const UserBadgeDropdown: React.FC<any> = ({ visited }) => {
+interface UserBadgeDropdownProps {
+  visited: string[];
+}
+
+const UserBadgeDropdown: React.FC<any> = ({
+  visited,
+}: UserBadgeDropdownProps) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );

@@ -26,6 +26,25 @@ interface UserIconProps {
   visited: string[];
 }
 
+const StyledFacebookButton = styled.button`
+   {
+    width: 165px;
+    height: 35px;
+    border-radius: 4px;
+    background: #3b5998;
+    color: white;
+    border: 0px transparent;
+    text-align: center;
+    margin: 5px;
+    display: inline-block;
+
+    &:hover {
+      background: #3b5998;
+      opacity: 0.6;
+    }
+  }
+`;
+
 const UserIcon: React.FC<any> = ({
   setCurrentUser,
   setVisited,
@@ -40,7 +59,25 @@ const UserIcon: React.FC<any> = ({
     })
   );
 
-  console.log(currentUser);
+  const facebookLogin = () => {
+    fetch("/auth/facebook", {
+      method: "GET",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        setCurrentUser("");
+        setVisited([]);
+      })
+      .catch((err) => {
+        console.error(
+          "this is the error from trying to login with facebook",
+          err
+        );
+      });
+  };
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -75,17 +112,25 @@ const UserIcon: React.FC<any> = ({
           horizontal: "center",
         }}
       >
-        <>
-          <SignUpModal
-            setCurrentUser={setCurrentUser}
-            setVisited={setVisited}
-          />
-          <LoginModal
-            setCurrentUser={setCurrentUser}
-            setVisited={setVisited}
-            visited={visited}
-          />
-        </>
+        {currentUser === "" ? (
+          <>
+            <SignUpModal
+              setCurrentUser={setCurrentUser}
+              setVisited={setVisited}
+            />
+            <LoginModal
+              setCurrentUser={setCurrentUser}
+              setVisited={setVisited}
+              visited={visited}
+            />
+            <StyledFacebookButton
+              className='loginBtn loginBtn--facebook'
+              onClick={facebookLogin}
+            >
+              Sign in with Facebook
+            </StyledFacebookButton>
+          </>
+        ) : null}
         {currentUser && currentUser.length > 1 ? (
           <Logout currentUser={currentUser} />
         ) : null}

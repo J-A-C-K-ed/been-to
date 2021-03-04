@@ -14,7 +14,17 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const Logout: React.FC<any> = ({ setCurrentUser, setVisited, currentUser }) => {
+interface LogoutProps {
+  setCurrentUser: (code: string) => void;
+  setVisited: (code: string[]) => void;
+  currentUser: string;
+}
+
+const Logout: React.FC<any> = ({
+  setCurrentUser,
+  setVisited,
+  currentUser,
+}: LogoutProps) => {
   const handleClick = () => {
     fetch(`/user/logout/${currentUser}`, {
       method: "DELETE",
